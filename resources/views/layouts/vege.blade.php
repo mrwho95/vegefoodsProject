@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+
+    <!-- browser icon -->
+    <link rel="shortcut icon" href="{{ asset('images/product-6.jpg') }}">
 	
     <link rel="stylesheet" href="{{asset('css/open-iconic-bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/animate.css')}}">
@@ -52,7 +55,7 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Vegefoods</a>
+	      <a class="navbar-brand" href="{{route('home')}}">Vegefoods</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -75,8 +78,26 @@
 	          <li class="nav-item {{ Request::is('about*') ? 'active' : '' }}"><a href="{{route('about')}}" class="nav-link">About</a></li>
 	          <li class="nav-item {{ Request::is('blog*') ? 'active' : '' }}"><a href="{{route('blog')}}" class="nav-link">Blog</a></li>
 	          <li class="nav-item {{ Request::is('contact*') ? 'active' : '' }}"><a href="{{route('contact')}}" class="nav-link">Contact</a></li>
+            @guest
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="{{route('login')}}" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Access</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown05">
+                  <a class="dropdown-item {{ Request::is('login*') ? 'active' : '' }}" href="{{route('login')}}">{{ __('Login') }}</a>
+                  @if (Route::has('register'))
+                  <a class="dropdown-item {{ Request::is('Register*') ? 'active' : '' }}" href="{{route('register')}}">{{ __('Register') }}</a>
+                  @endif
+                </div>
+              </li>
+            @else
+               <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="{{route('login')}}" id="dropdown06" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown06">
+                  <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+                </div>
+              </li>
+            @endguest
 	          <li class="nav-item cta cta-colored"><a href="{{route('cart')}}" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-
 	        </ul>
 	      </div>
 	    </div>
@@ -155,7 +176,7 @@
           <div class="col-md-12 text-center">
 
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Dennis Ngu</a>
+						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://github.com/mrwho95" target="_blank">Dennis Ngu</a>
 						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						</p>
           </div>

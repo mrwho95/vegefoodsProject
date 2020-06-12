@@ -36,7 +36,9 @@ Route::get('/wishlist', 'User\ShopController@wishlist')->name('wishlist');
 Route::get('/cart', 'User\ShopController@cart')->name('cart');
 
 Route::get('/product', 'User\ShopController@product')->name('product');
+
 //admin
+Route::get('/adminDashboard', 'Admin\DashboardController@index')->name('adminDashboard');
 
 // Auth::routes();
 
