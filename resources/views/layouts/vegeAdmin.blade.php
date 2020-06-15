@@ -245,6 +245,8 @@
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 
+    @include('sweetalert::alert')
+
   </body>
 </html>
 
@@ -286,5 +288,71 @@
             ]
         });
 
+        var promo_id;
+        var deletePromoUrl = '{{ route("deletePromo", ":id") }}';
+        var fetchPromoUrl = '{{route("fetchPromo", ":id")}}';
+        var updatePromoUrl = '{{route("updatePromo")}}';
+
+        //fetch promotion code into modal form based on id
+        $(document).on('click', '.edit', function(){
+          promo_id = $(this).attr('id');
+          fetchPromoUrl = fetchPromoUrl.replace(':id', promo_id);
+          console.log(fetchPromoUrl);
+          $.ajax({  
+            url:fetchPromoUrl,  
+            method:"GET",  
+            data:{promo_id:promo_id},  
+            dataType:"json",  
+            success:function(data)  
+            {  
+              console.log(data);
+              $('#editPromotionModal').modal('show');
+              $('#name').val(data['name']);  
+              $('#code').val(data['code']);
+              $('#discount').val(data['discount']);
+              $('#availability').val(data['availability']);
+              $('#expired').val(data['expired']);
+              $('#promoId').val(promo_id);    
+            }  
+          })  
+        });
+
+        //update promotion code
+        $(document).on('submit', '#editPromotionForm', function(event){  
+         event.preventDefault(); 
+         console.log(updatePromoUrl);
+         $.ajax({  
+           url:updatePromoUrl,  
+           method:'POST',  
+           data:$(this).serialize(), 
+           dataType:"json", 
+           success:function(data)  
+           {  
+            console.log(data);
+            $('#editPromotionModal').modal('hide');  
+            $('#promo_table').DataTable().ajax.reload();
+            alert('Data Updated');
+          }  
+        });  
+       });  
+
+        // delete promotion code
+        $(document).on('click', '.delete', function(){
+          promo_id = $(this).attr('id');
+          deletePromoUrl = deletePromoUrl.replace(':id', promo_id);
+          $('#deletePromotionModal').modal('show');
+        });
+        $('#deletePromotion').click(function(){
+          $.ajax({
+           url:deletePromoUrl,
+           success:function(data)
+           {
+             $('#deletePromotionModal').modal('hide');
+             $('#promo_table').DataTable().ajax.reload();
+             alert('Data Deleted');
+           }
+         })
+        });
+      
     });
 </script>

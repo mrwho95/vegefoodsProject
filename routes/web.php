@@ -44,6 +44,12 @@ Route::get('/adminPromotion', 'Admin\PromoController@index')->name('adminPromoti
 
 Route::post('/addPromotion', 'Admin\PromoController@addPromo')->name('addPromo');
 
+Route::get('/fetchPromotion/{id}', 'Admin\PromoController@fetchPromo')->name('fetchPromo');
+
+Route::get('/deletePromotion/{id}', 'Admin\PromoController@deletePromo')->name('deletePromo');
+
+Route::post('/updatePromotion', 'Admin\PromoController@updatePromo')->name('updatePromo');
+
 Route::get('/adminCustomer', 'Admin\CustomerController@index')->name('adminCustomer');
 
 Route::resource('/adminProducts', 'Admin\ProductController');
