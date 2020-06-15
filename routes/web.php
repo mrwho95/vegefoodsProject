@@ -40,6 +40,14 @@ Route::get('/product', 'User\ShopController@product')->name('product');
 //admin
 Route::get('/adminDashboard', 'Admin\DashboardController@index')->name('adminDashboard');
 
+Route::get('/adminPromotion', 'Admin\PromoController@index')->name('adminPromotion');
+
+Route::post('/addPromotion', 'Admin\PromoController@addPromo')->name('addPromo');
+
+Route::get('/adminCustomer', 'Admin\CustomerController@index')->name('adminCustomer');
+
+Route::resource('/adminProducts', 'Admin\ProductController');
+
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
