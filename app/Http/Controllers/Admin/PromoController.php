@@ -21,7 +21,7 @@ class PromoController extends Controller
             $data = promotion::all();
             return DataTables::of($data)
                     ->addColumn('action', function($data){
-                        $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-warning btn-sm">Edit</button>';
+                        $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
                         $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
                         return $button;
                     })

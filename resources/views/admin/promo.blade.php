@@ -109,7 +109,7 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				<input type="hidden" name="promoId" id="promoId">
-	        	<button type="submit" class="btn btn-warning">Update</button>
+	        	<button type="submit" class="btn btn-primary">Update</button>
 	        </div>
       	</form>
       </div>
