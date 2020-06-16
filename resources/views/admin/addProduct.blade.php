@@ -46,7 +46,7 @@
 							<option value="fruit juice">Fruit Juice</option>
 							<option value="meat">Meat</option>
 							<option value="bakery">Bakery</option>
-							<option value="fish">Fish</option>
+							<option value="seafood">Seafood</option>
 						</select>
 					</div>
 				</div>

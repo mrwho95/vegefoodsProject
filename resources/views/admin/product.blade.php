@@ -32,7 +32,7 @@
 					<li><a href="{{route('adminVege', ['parameter'=>'fruit juice']) }}" class="{{ Request::is('adminProducts/fruit juice') ? 'active' : '' }}">Fruit Juice</a></li>
 					<li><a href="{{route('adminVege', ['parameter'=>'meat']) }}" class="{{ Request::is('adminProducts/meat') ? 'active' : '' }}">Meat</a></li>
 					<li><a href="{{route('adminVege', ['parameter'=>'bakery']) }}" class="{{ Request::is('adminProducts/bakery') ? 'active' : '' }}">Bakery</a></li>
-					<li><a href="{{route('adminVege', ['parameter'=>'fish']) }}" class="{{ Request::is('adminProducts/fish') ? 'active' : '' }}">Fish</a></li>
+					<li><a href="{{route('adminVege', ['parameter'=>'seafood']) }}" class="{{ Request::is('adminProducts/seafood') ? 'active' : '' }}">Seafood</a></li>
 				</ul>
 			</div>
 		</div>

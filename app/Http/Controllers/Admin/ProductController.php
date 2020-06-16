@@ -103,7 +103,7 @@ class ProductController extends Controller
      */
     public function show($parameter)
     {   
-        $category = ['vegetable', 'fruit', 'fruit juice', 'meat', 'bakery', 'fish'];
+        $category = ['vegetable', 'fruit', 'fruit juice', 'meat', 'bakery', 'seafood'];
         if (in_array($parameter, $category)) {
             $arr['allProduct'] = product::where('category', $parameter)->paginate(8);
             return view('admin.product', $arr); 
