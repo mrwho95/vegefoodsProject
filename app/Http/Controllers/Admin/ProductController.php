@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\product;
 use Validator;
+use DataTables;
 
 class ProductController extends Controller
 {
@@ -20,8 +21,29 @@ class ProductController extends Controller
         $this->middleware('auth');
     }
 
+    public function productTable(Request $request){
+     if($request->ajax())
+     {
+        $data = product::all();
+        return DataTables::of($data)
+        ->addColumn('photo', function ($data) { 
+            $url= asset('uploads/vegeFoodsPhoto/'.$data->photo);
+            return '<img src="'.$url.'" border="0" width="200" class="img-rounded" align="center" />';
+        })
+        ->addColumn('action', function($data){
+            $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
+            $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
+            return $button;
+        })
+        ->rawColumns(['photo','action'])
+        ->make(true);
+    }
+
+        return view('admin.productTable');
+    }
+
     public function index(){
-        $arr['allProduct'] = product::all();
+        $arr['allProduct'] = product::paginate(8);
         return view('admin.product', $arr);
     }
 
@@ -79,10 +101,17 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $arr['singleProduct'] = product::find($id);
-        return view('admin.productSingle', $arr); 
+    public function show($parameter)
+    {   
+        $category = ['vegetable', 'fruit', 'fruit juice', 'meat', 'bakery', 'fish'];
+        if (in_array($parameter, $category)) {
+            $arr['allProduct'] = product::where('category', $parameter)->paginate(8);
+            return view('admin.product', $arr); 
+        }
+        else{
+            $arr['singleProduct'] = product::find($parameter);
+            return view('admin.productSingle', $arr); 
+        }
     }
 
     /**

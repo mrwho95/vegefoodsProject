@@ -54,6 +54,9 @@ Route::get('/adminCustomer', 'Admin\CustomerController@index')->name('adminCusto
 
 Route::resource('/adminProducts', 'Admin\ProductController');
 
+Route::get('/adminProductsTable', 'Admin\ProductController@productTable')->name('productTable');
+
+Route::get('/adminProducts/{parameter}', 'Admin\ProductController@vege')->name('adminVege');
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');

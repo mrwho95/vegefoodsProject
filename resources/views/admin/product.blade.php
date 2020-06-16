@@ -18,15 +18,21 @@
 			</button>
 		</div>
 		@endif
-		<h3>Products</h3>
+		@if(count($allProduct) > 0)
+		<h3>Items</h3>
+		@else
+		<h3>Items Not Found</h3>
+		@endif
 		<div class="row justify-content-center">
 			<div class="col-md-10 mb-5 text-center">
 				<ul class="product-category">
-					<li><a href="#" class="active">All</a></li>
-					<li><a href="#">Vegetables</a></li>
-					<li><a href="#">Fruits</a></li>
-					<li><a href="#">Juice</a></li>
-					<li><a href="#">Dried</a></li>
+					<li><a href="{{route('adminProducts.index')}}" class="{{ Request::is('adminProducts') ? 'active' : '' }}">All</a></li>
+					<li><a href="{{route('adminVege', ['parameter'=>'vegetable']) }}" class="{{ Request::is('adminProducts/vegetable') ? 'active' : '' }}">Vegetables</a></li>
+					<li><a href="{{route('adminVege', ['parameter'=>'fruit']) }}" class="{{ Request::is('adminProducts/fruit') ? 'active' : '' }}">Fruits</a></li>
+					<li><a href="{{route('adminVege', ['parameter'=>'fruit juice']) }}" class="{{ Request::is('adminProducts/fruit juice') ? 'active' : '' }}">Fruit Juice</a></li>
+					<li><a href="{{route('adminVege', ['parameter'=>'meat']) }}" class="{{ Request::is('adminProducts/meat') ? 'active' : '' }}">Meat</a></li>
+					<li><a href="{{route('adminVege', ['parameter'=>'bakery']) }}" class="{{ Request::is('adminProducts/bakery') ? 'active' : '' }}">Bakery</a></li>
+					<li><a href="{{route('adminVege', ['parameter'=>'fish']) }}" class="{{ Request::is('adminProducts/fish') ? 'active' : '' }}">Fish</a></li>
 				</ul>
 			</div>
 		</div>
@@ -60,36 +66,41 @@
 					</div>
 				</div>
 			</div> -->
-			@foreach($allProduct as $data)
-			<div class="col-md-6 col-lg-3 ftco-animate">
-				<div class="product">
-					<a href="{{route('adminProducts.show', $data->id)}}" class="img-prod"><img class="img-fluid" src="{{asset('uploads/vegeFoodsPhoto/'.$data->photo)}}" alt="Colorlib Template">
-						<div class="overlay"></div>
-					</a>
-					<div class="text py-3 pb-4 px-3 text-center">
-						<h3><a href="#">{{$data->name}}</a></h3>
-						<div class="d-flex">
-							<div class="pricing">
-								<p class="price"><span>RM{{$data->price}}</span></p>
-							</div>
-						</div>
-						<div class="bottom-area d-flex px-3">
-							<div class="m-auto d-flex">
-								<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-									<span><i class="ion-ios-menu"></i></span>
-								</a>
-								<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-									<span><i class="ion-ios-cart"></i></span>
-								</a>
-								<a href="#" class="heart d-flex justify-content-center align-items-center ">
-									<span><i class="ion-ios-heart"></i></span>
-								</a>
+			@if(count($allProduct) > 0)
+				@foreach($allProduct as $data)
+					<div class="col-md-6 col-lg-3 ftco-animate">
+						<div class="product">
+							<a href="{{route('adminProducts.show', $data->id)}}" class="img-prod"><img class="img-fluid" src="{{asset('uploads/vegeFoodsPhoto/'.$data->photo)}}" alt="Colorlib Template">
+								<div class="overlay"></div>
+							</a>
+							<div class="text py-3 pb-4 px-3 text-center">
+								<h3><a href="#">{{$data->name}}</a></h3>
+								<div class="d-flex">
+									<div class="pricing">
+										<p class="price"><span>RM{{$data->price}}</span></p>
+									</div>
+								</div>
+								<div class="bottom-area d-flex px-3">
+									<div class="m-auto d-flex">
+										<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+											<span><i class="ion-ios-menu"></i></span>
+										</a>
+										<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+											<span><i class="ion-ios-cart"></i></span>
+										</a>
+										<a href="#" class="heart d-flex justify-content-center align-items-center ">
+											<span><i class="ion-ios-heart"></i></span>
+										</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			@endforeach
+				@endforeach
+				{{ $allProduct->links() }}
+			@else
+				
+			@endif
 			
 			<!-- <div class="row mt-5">
 				<div class="col text-center">

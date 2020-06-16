@@ -71,9 +71,9 @@
 	          <li class="nav-item dropdown {{ Request::is('adminProducts*') ? 'active' : '' }}">
               <a class="nav-link dropdown-toggle" href="{{route('adminProducts.index')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item {{ Request::is('adminProducts*') ? 'active' : '' }}" href="{{route('adminProducts.index')}}">Product</a>
-              	<a class="dropdown-item {{ Request::is('adminProducts*') ? 'active' : '' }}" href="{{route('adminProducts.create')}}">Add Product</a>
-                <a class="dropdown-item {{ Request::is('product*') ? 'active' : '' }}" href="{{route('product')}}">Product List</a>
+              	<a class="dropdown-item " href="{{route('adminProducts.index')}}">Product</a>
+              	<a class="dropdown-item " href="{{route('adminProducts.create')}}">Add Product</a>
+                <a class="dropdown-item " href="{{route('productTable')}}">Product Table</a>
               </div>
             </li>
 	          <li class="nav-item {{ Request::is('adminCustomer*') ? 'active' : '' }}"><a href="{{route('adminCustomer')}}" class="nav-link">Customer</a></li>
@@ -252,6 +252,49 @@
 
 <script>
   $(document).ready(function(){
+
+    $('#product_table').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: {
+        url: "{{ route('productTable') }}",
+      },
+      columns: [
+      {
+        data: 'photo',
+        name: 'photo'
+      },
+      {
+        data: 'name',
+        name: 'name'
+      },
+      {
+        data: 'price',
+        name: 'price'
+      },
+      {
+        data: 'weight',
+        name: 'weight'
+      },
+      {
+        data: 'category',
+        name: 'category'
+      },
+      {
+        data: 'quantity',
+        name: 'quantity'
+      },
+      {
+        data: 'description',
+        name: 'description'
+      },
+      {
+        data: 'action',
+        name: 'action',
+        orderable: false
+      }
+      ]
+    });
 
         $('#promo_table').DataTable({
             processing: true,
