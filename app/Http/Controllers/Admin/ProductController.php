@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\product;
+use Validator;
 
 class ProductController extends Controller
 {
@@ -19,7 +21,8 @@ class ProductController extends Controller
     }
 
     public function index(){
-        return view('admin.product');
+        $arr['allProduct'] = product::all();
+        return view('admin.product', $arr);
     }
 
     /**
@@ -29,7 +32,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.addProduct');
     }
 
     /**
@@ -38,9 +41,36 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, product $product)
     {
-        //
+         $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'price' => 'required',
+            'category' => 'required',
+            'quantity' => 'required',
+            'weight' => 'required',
+            'photo' => 'required',
+            'description' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('warning', $validator->messages()->all()[0])->withInput();
+        }
+
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->category = $request->category;
+        $product->quantity = $request->quantity;
+        $product->weight = $request->weight;
+        $product->description = $request->description;
+        if ($request->hasfile('photo')) {
+            $file = $request->file('photo');
+            $filename = $file->getClientOriginalName();
+            $file->move('public/uploads/vegeFoodsPhoto/', $filename);
+            $product->photo = $filename;
+        }
+        $product->save();
+        return redirect()->route('adminProducts.index')->with('success', 'Product added.');
     }
 
     /**
@@ -51,7 +81,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $arr['singleProduct'] = product::find($id);
+        return view('admin.productSingle', $arr); 
     }
 
     /**

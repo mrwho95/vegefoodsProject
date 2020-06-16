@@ -72,7 +72,7 @@
               <a class="nav-link dropdown-toggle" href="{{route('adminProducts.index')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
               	<a class="dropdown-item {{ Request::is('adminProducts*') ? 'active' : '' }}" href="{{route('adminProducts.index')}}">Product</a>
-              	<a class="dropdown-item {{ Request::is('wishlist*') ? 'active' : '' }}" href="{{route('wishlist')}}">Add Product</a>
+              	<a class="dropdown-item {{ Request::is('adminProducts*') ? 'active' : '' }}" href="{{route('adminProducts.create')}}">Add Product</a>
                 <a class="dropdown-item {{ Request::is('product*') ? 'active' : '' }}" href="{{route('product')}}">Product List</a>
               </div>
             </li>
