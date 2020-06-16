@@ -10,6 +10,14 @@
 			</button>
 		</div><br>
 	@endif
+	@if(session('warning'))
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+			{{session('warning')}}
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			</button>
+		</div><br>
+	@endif
 	<div class="table-responsive">
         <table id="promo_table" class="table table-bordered table-striped" style="width: 100%;">
             <thead>
