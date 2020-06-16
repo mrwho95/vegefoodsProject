@@ -67,7 +67,7 @@
 	        <ul class="navbar-nav ml-auto">
             <!-- request::is('') == url pattern -->
             <!-- request::routeIs('') == route name pattern-->
-	          <li class="nav-item {{ Request::is('home*') ? 'active' : '' }}"><a href="{{route('home')}}" class="nav-link">Home</a></li>
+	          <li class="nav-item {{ Request::is('adminDashboard*') ? 'active' : '' }}"><a href="{{route('adminDashboard')}}" class="nav-link">Home</a></li>
 	          <li class="nav-item dropdown {{ Request::is('adminProducts*') ? 'active' : '' }}">
               <a class="nav-link dropdown-toggle" href="{{route('adminProducts.index')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">

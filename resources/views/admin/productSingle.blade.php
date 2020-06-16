@@ -29,8 +29,9 @@
 				<div class="row mt-4">
 					<div class="w-100"></div>
 					<div class="col-md-12">
-						<p style="color: #000;">{{$singleProduct->weight}} kg available</p>
+						<p style="color: #000;">{{$singleProduct->weight}} kg available in {{$singleProduct->quantity}} quantity</p>
 					</div>
+					
 				</div>
 				<p><a href="{{route('adminProducts.index')}}" class="btn btn-black py-3 px-5">Back</a></p>
 			</div>
