@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\promotion;
 use Carbon\Carbon;
 use DataTables;
+use Validator;
 
 class PromoController extends Controller
 {
@@ -32,6 +33,18 @@ class PromoController extends Controller
     }
 
     public function addPromo(Request $request, promotion $promotion){
+    	 $validator = Validator::make($request->all(), [
+	        'name' => 'required|min:3',
+	        'code' => 'required|min:3',
+	        'discount' => 'required|min:3',
+	        'availability' => 'required|min:3',
+	        'expired' => 'required|min:3',
+	    ]);
+
+	    if ($validator->fails()) {
+	        return back()->with('warning', $validator->messages()->all()[0])->withInput();
+	    }
+
     	$promotion->name = $request->name;
     	$promotion->code = $request->code;
     	$promotion->discount = $request->discount;
@@ -52,13 +65,17 @@ class PromoController extends Controller
 
     public function updatePromo(Request $request, promotion $promotion){
 
-    	// echo json_encode($request->input('name'));
-    	// $promotion->name = $request->name;
-    	// $promotion->code = $request->code;
-    	// $promotion->discount = $request->discount;
-    	// $promotion->availability = $request->availability;
-    	// $promotion->expired = $request->expired;
-    	// $promotion->save();
+    	// $validator = Validator::make($request->all(), [
+	    //     'name' => 'required|min:3',
+	    //     'code' => 'required|min:3',
+	    //     'discount' => 'required|min:3',
+	    //     'availability' => 'required|min:3',
+	    //     'expired' => 'required|min:3',
+	    // ]);
+
+	    // if ($validator->fails()) {
+	    //     return back()->with('warning', $validator->messages()->all()[0])->withInput();
+	    // }
 
     	$form_data = array(
             'name'    =>  $request->name,
