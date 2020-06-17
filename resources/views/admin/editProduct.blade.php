@@ -1,7 +1,14 @@
 @extends('layouts.vegeAdmin')
 @section('content')
 <div class="container">
-	<h3>Edit Product</h3><br>
+	<div class="row">
+		<div class="col-md-6">
+			<h3>Edit Product</h3>
+		</div>
+		<div class="col-md-6">
+			<a href="{{route('productTable')}}" class="btn btn-warning">Cancel Edit</a>
+		</div>
+	</div>
 	@if(session('success'))
 	<div class="alert alert-success alert-dismissible fade show" role="alert">
 		{{session('success')}}
@@ -18,6 +25,7 @@
 		</button>
 	</div>
 	@endif
+	<br>
 	<form action="{{route('adminProducts.update', $data->id)}}" class="billing-form" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		@method('PUT')
