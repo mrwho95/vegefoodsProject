@@ -27,6 +27,8 @@ Route::get('/blog', 'User\BlogController@index')->name('blog');
 
 Route::get('/contact', 'User\ContactController@index')->name('contact');
 
+Route::get('/storeMessage', 'User\ContactController@storeMessage')->name('storeMessage');
+
 Route::get('/shop', 'User\ShopController@index')->name('shop');
 
 Route::get('/checkout', 'User\ShopController@checkout')->name('checkout');
@@ -51,6 +53,10 @@ Route::get('/deletePromotion/{id}', 'Admin\PromoController@deletePromo')->name('
 Route::post('/updatePromotion', 'Admin\PromoController@updatePromo')->name('updatePromo');
 
 Route::get('/adminCustomer', 'Admin\CustomerController@index')->name('adminCustomer');
+
+Route::get('/adminCustomerMessage', 'Admin\CustomerController@message')->name('adminCustomerMessage');
+
+Route::get('/deleteMessage/{id}', 'Admin\CustomerController@deleteMessage')->name('deleteMessage');
 
 Route::resource('/adminProducts', 'Admin\ProductController');
 
