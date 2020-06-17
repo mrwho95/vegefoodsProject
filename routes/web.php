@@ -57,6 +57,8 @@ Route::resource('/adminProducts', 'Admin\ProductController');
 Route::get('/adminProductsTable', 'Admin\ProductController@productTable')->name('productTable');
 
 Route::get('/adminProducts/{parameter}', 'Admin\ProductController@vege')->name('adminVege');
+
+Route::get('adminProducts/delete/{id}', 'Admin\ProductController@destroy')->name('productDestroy');
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');

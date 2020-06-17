@@ -31,8 +31,12 @@ class ProductController extends Controller
             return '<img src="'.$url.'" border="0" width="200" class="img-rounded" align="center" />';
         })
         ->addColumn('action', function($data){
-            $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
-            $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
+            $button = '<a href="'.route('adminProducts.edit', $data->id).'" class="edit btn btn-primary btn-sm">Edit</a>';
+            // $button .= '&nbsp;&nbsp;&nbsp;<a href="javascript::void(0)" onclick="$(this).parent().find("form").submit()" class="btn btn-danger">Delete</a> <form action="'.route('adminProducts.destroy', $data->id).'" method="post">
+            //                 @method("DELETE")
+            //                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            //             </form>';
+            $button .= '&nbsp;&nbsp;&nbsp;<a href="'.route('productDestroy', $data->id).'" class="edit btn btn-danger btn-sm delete-confirm">Delete</a>';
             return $button;
         })
         ->rawColumns(['photo','action'])
@@ -122,7 +126,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $arr['data'] = product::find($id);
+        return view('admin.editProduct', $arr);
     }
 
     /**
@@ -135,6 +140,35 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'price' => 'required',
+            'category' => 'required',
+            'quantity' => 'required',
+            'weight' => 'required',
+            // 'photo' => 'required',
+            'description' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('warning', $validator->messages()->all()[0])->withInput();
+        }
+
+        $product = product::find($id);
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->category = $request->category;
+        $product->quantity = $request->quantity;
+        $product->weight = $request->weight;
+        $product->description = $request->description;
+        if ($request->hasfile('photo')) {
+            $file = $request->file('photo');
+            $filename = $file->getClientOriginalName();
+            $file->move('public/uploads/vegeFoodsPhoto/', $filename);
+            $product->photo = $filename;
+        }
+        $product->save();
+        return redirect()->route('productTable')->with('success', 'Product edited.');
     }
 
     /**
@@ -146,5 +180,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+        product::destroy($id);
+        return redirect()->route('productTable')->with('success', "Product Deleted.");
     }
 }
