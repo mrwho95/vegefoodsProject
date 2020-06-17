@@ -13,7 +13,7 @@
 
 <section class="ftco-section contact-section bg-light">
 	<div class="container">
-		<div class="row d-flex mb-5 contact-info">
+		<!-- <div class="row d-flex mb-5 contact-info">
 			<div class="w-100"></div>
 			<div class="col-md-3 d-flex">
 				<div class="info bg-white p-4">
@@ -35,24 +35,40 @@
 					<p><span>Website</span> <a href="#">yoursite.com</a></p>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="row block-9">
 			<div class="col-md-6 order-md-last d-flex">
-				<form action="#" class="bg-white p-5 contact-form">
+				<form action="{{route('storeMessage')}}" class="bg-white p-5 contact-form">
+					@if(session('success'))
+						<div class="alert alert-success alert-dismissible fade show" role="alert">
+							{{session('success')}}
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+					@endif
+					@if(session('warning'))
+						<div class="alert alert-warning alert-dismissible fade show" role="alert">
+							{{session('warning')}}
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+					@endif
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Your Name">
+						<input type="text" class="form-control" name="name" placeholder="Your Name" required>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Your Email">
+						<input type="text" class="form-control" name="email" placeholder="Your Email" required>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Subject">
+						<input type="text" class="form-control" name="subject" placeholder="Subject" required>
 					</div>
 					<div class="form-group">
-						<textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+						<textarea name="message" cols="30" rows="7" class="form-control" placeholder="Message" required></textarea>
 					</div>
 					<div class="form-group">
-						<input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+						<button type="submit" class="btn btn-primary py-3 px-5">Send Message</button>
 					</div>
 				</form>
 				
