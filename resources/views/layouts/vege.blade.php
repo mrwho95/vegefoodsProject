@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
 
+    <!-- datatables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+
     <!-- browser icon -->
     <link rel="shortcut icon" href="{{ asset('images/product-6.jpg') }}">
 	
@@ -70,7 +73,6 @@
               <div class="dropdown-menu" aria-labelledby="dropdown04">
               	<a class="dropdown-item {{ Request::is('shop*') ? 'active' : '' }}" href="{{route('shop')}}">Shop</a>
               	<a class="dropdown-item {{ Request::is('wishlist*') ? 'active' : '' }}" href="{{route('wishlist')}}">Wishlist</a>
-                <a class="dropdown-item {{ Request::is('product*') ? 'active' : '' }}" href="{{route('product')}}">Single Product</a>
                 <a class="dropdown-item {{ Request::is('cart*') ? 'active' : '' }}" href="{{route('cart')}}">Cart</a>
                 <a class="dropdown-item {{ Request::is('checkout*') ? 'active' : '' }}" href="{{route('checkout')}}">Checkout</a>
               </div>
@@ -125,9 +127,9 @@
               <h2 class="ftco-heading-2">Vegefoods</h2>
               <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                <li class="ftco-animate"><a href="https://twitter.com/explore"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="https://www.facebook.com/"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="https://www.instagram.com/"><span class="icon-instagram"></span></a></li>
               </ul>
             </div>
           </div>
@@ -164,8 +166,8 @@
             	<h2 class="ftco-heading-2">Have a Questions?</h2>
             	<div class="block-23 mb-3">
 	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+	                <li><span class="icon icon-map-marker"></span><span class="text">Jalan Bukit Ria, Taman Bukit Mewah, 43000 Kajang, Selangor</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">03-8741 5736</span></a></li>
 	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
 	              </ul>
 	            </div>
@@ -243,6 +245,10 @@
         
     });
   </script>
+
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+
+    @include('sweetalert::alert')
     
   </body>
 </html>
