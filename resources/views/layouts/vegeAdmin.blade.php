@@ -68,6 +68,7 @@
             <!-- request::is('') == url pattern -->
             <!-- request::routeIs('') == route name pattern-->
 	          <li class="nav-item {{ Request::is('adminDashboard*') ? 'active' : '' }}"><a href="{{route('adminDashboard')}}" class="nav-link">Home</a></li>
+            <li class="nav-item {{ Request::is('adminPromotion*') ? 'active' : '' }}"><a href="{{route('adminPromotion')}}" class="nav-link">Promotion</a></li>
 	          <li class="nav-item dropdown {{ Request::is('adminProducts*') ? 'active' : '' }}">
               <a class="nav-link dropdown-toggle" href="{{route('adminProducts.index')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -76,8 +77,13 @@
                 <a class="dropdown-item " href="{{route('productTable')}}">Product Table</a>
               </div>
             </li>
-	          <li class="nav-item {{ Request::is('adminCustomer*') ? 'active' : '' }}"><a href="{{route('adminCustomer')}}" class="nav-link">Customer</a></li>
-	          <li class="nav-item {{ Request::is('adminPromotion*') ? 'active' : '' }}"><a href="{{route('adminPromotion')}}" class="nav-link">Promotion</a></li>
+            <li class="nav-item dropdown {{ Request::is('adminCustomer*') ? 'active' : '' }}">
+              <a class="nav-link dropdown-toggle" href="{{route('adminCustomer')}}" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customer</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown07">
+                <a class="dropdown-item " href="{{route('adminCustomer')}}">Order</a>
+                <a class="dropdown-item " href="{{route('adminCustomerMessage')}}">Message</a>
+              </div>
+            </li>
             @guest
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="{{route('login')}}" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Access</a>
@@ -295,6 +301,41 @@
       }
       ]
     });
+
+    $('#message_table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "{{ route('adminCustomerMessage') }}",
+            },
+            columns: [
+            {
+                data: 'name',
+                name: 'name'
+            },
+            {
+                data: 'email',
+                name: 'email'
+            },
+            {
+                data: 'subject',
+                name: 'subject'
+            },
+            {
+                data: 'message',
+                name: 'message'
+            },
+            {
+                data: 'created_at',
+                name: 'created_at'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false
+            }
+            ]
+        });
 
         $('#promo_table').DataTable({
             processing: true,
