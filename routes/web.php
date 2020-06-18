@@ -41,6 +41,10 @@ Route::get('/cart', 'User\ShopController@cart')->name('cart');
 
 Route::get('/product/{parameter}', 'User\ShopController@showProduct')->name('product');
 
+Route::get('/order', 'User\OrderController@index')->name('order');
+
+Route::get('/orderProcess', 'User\OrderController@orderProcess')->name('orderProcess');
+
 //admin
 Route::get('/adminDashboard', 'Admin\DashboardController@index')->name('adminDashboard');
 
