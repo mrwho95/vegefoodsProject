@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\user;
+use App\address;
 use Validator, Auth;
 
 class ProfileController extends Controller
@@ -17,6 +18,7 @@ class ProfileController extends Controller
 
     public function index(){
     	$arr['userData'] = user::find(Auth::id());
+        $arr['address'] = address::where([['user_id', Auth::id()], ['defaultaddress', '1']])->first();
     	return view('user.profile', $arr);
     }
 
@@ -26,7 +28,6 @@ class ProfileController extends Controller
             'name' => 'required|min:3',
             'email' => 'required|min:3',
             'phonenumber' => 'required',
-            'address' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -37,7 +38,6 @@ class ProfileController extends Controller
     	$user->name = $request->name;
     	$user->email = $request->email;
         $user->phonenumber = $request->phonenumber;
-        $user->address = $request->address;
         if ($request->hasfile('photo')) {
             $file = $request->file('photo');
             $filename = $file->getClientOriginalName();
