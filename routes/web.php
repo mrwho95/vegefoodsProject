@@ -43,7 +43,17 @@ Route::get('/product/{parameter}', 'User\ShopController@showProduct')->name('pro
 
 Route::get('/order', 'User\OrderController@index')->name('order');
 
-Route::get('/orderProcess', 'User\OrderController@orderProcess')->name('orderProcess');
+Route::post('/orderProcess', 'User\OrderController@orderProcess')->name('orderProcess');
+
+Route::post('/promo', 'User\OrderController@promo')->name('promo');
+
+Route::get('/review', 'User\ReviewController@index')->name('review');
+
+Route::post('/addReview', 'User\ReviewController@addReview')->name('addReview');
+
+Route::get('/profile', 'User\ProfileController@index')->name('profile');
+
+Route::post('/updateProfile', 'User\ProfileController@updateProfile')->name('updateProfile');
 
 //admin
 Route::get('/adminDashboard', 'Admin\DashboardController@index')->name('adminDashboard');
