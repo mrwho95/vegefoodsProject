@@ -72,6 +72,7 @@
               <a class="nav-link dropdown-toggle" href="{{route('shop')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
               	<a class="dropdown-item {{ Request::is('shop*') ? 'active' : '' }}" href="{{route('shop')}}">Shop</a>
+                <a class="dropdown-item {{ Request::is('review*') ? 'active' : '' }}" href="{{route('review')}}">Review</a>
               	<a class="dropdown-item {{ Request::is('wishlist*') ? 'active' : '' }}" href="{{route('wishlist')}}">Wishlist</a>
                 <a class="dropdown-item {{ Request::is('cart*') ? 'active' : '' }}" href="{{route('cart')}}">Cart</a>
                 <a class="dropdown-item {{ Request::is('checkout*') ? 'active' : '' }}" href="{{route('checkout')}}">Checkout</a>
@@ -94,6 +95,7 @@
                <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="{{route('login')}}" id="dropdown06" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown06">
+                  <a class="dropdown-item {{ Request::is('profile') ? 'active' : '' }}" href="{{route('profile')}}">Profile</a>
                   <a class="dropdown-item {{ Request::is('order*') ? 'active' : '' }}" href="{{route('order')}}">Order</a>
                   <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
@@ -126,7 +128,7 @@
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">Vegefoods</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+              <p>Vegefoods mart is a rapidly growing chain of new and improved mini-markets that meets consumers needs for groceries.</p>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                 <li class="ftco-animate"><a href="https://twitter.com/explore"><span class="icon-twitter"></span></a></li>
                 <li class="ftco-animate"><a href="https://www.facebook.com/"><span class="icon-facebook"></span></a></li>
@@ -138,10 +140,10 @@
             <div class="ftco-footer-widget mb-4 ml-md-5">
               <h2 class="ftco-heading-2">Menu</h2>
               <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Shop</a></li>
-                <li><a href="#" class="py-2 d-block">About</a></li>
-                <li><a href="#" class="py-2 d-block">Journal</a></li>
-                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+                <li><a href="{{route('shop')}}" class="py-2 d-block">Shop</a></li>
+                <li><a href="{{route('about')}}" class="py-2 d-block">About</a></li>
+                <li><a href="{{route('review')}}" class="py-2 d-block">Review</a></li>
+                <li><a href="{{route('contact')}}" class="py-2 d-block">Contact Us</a></li>
               </ul>
             </div>
           </div>
@@ -157,7 +159,7 @@
 	              </ul>
 	              <ul class="list-unstyled">
 	                <li><a href="#" class="py-2 d-block">FAQs</a></li>
-	                <li><a href="#" class="py-2 d-block">Contact</a></li>
+	                <li><a href="{{route('contact')}}" class="py-2 d-block">Contact</a></li>
 	              </ul>
 	            </div>
             </div>
@@ -167,9 +169,9 @@
             	<h2 class="ftco-heading-2">Have a Questions?</h2>
             	<div class="block-23 mb-3">
 	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">Jalan Bukit Ria, Taman Bukit Mewah, 43000 Kajang, Selangor</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">03-8741 5736</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+	                <li><span class="icon icon-map-marker"></span><span class="text">Soho Suites KLCC Soho Suites KLCC, 20, Jalan Perak, Kuala Lumpur, 50450 Wilayah Persekutuan</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">03-888 8888</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@vegefood.com</span></a></li>
 	              </ul>
 	            </div>
             </div>
