@@ -19,7 +19,7 @@
 		</div>
 	@endif
 	<div class="row justify-content-center">
-		<div class="col-md-12">
+		<div class="col-md-8">
 			<div class="shadow-lg p-3 mb-5 bg-white rounded">
 				<div class="row">
 					<div class="col-md-4">
@@ -30,10 +30,10 @@
 						@endif
 					</div>
 					<div class="col-md-8">
-						<h5>{{$userData->name}}</h5>
+						<h5><strong>{{$userData->name}}</strong></h5>
 						<p class="card-title">Email: {{$userData->email}}</p>
 						<p class="card-title">Phone Number: {{$userData->phonenumber}}</p>
-						<p class="card-title">Address: {{$userData->address}}</p>
+						<p class="card-title">Address: {{$address->streetaddress1}} {{$address->streetaddress2}}, {{$address->city}}, {{$address->postcode}} {{$address->state}}, {{$address->country}}</p>
 					</div>
 				</div>
 			</div>
@@ -61,26 +61,19 @@
 				<div class="form-group">
 					<div class="form-group">
 						<label for="phonenumber">Phone Number</label>
-						<input type="text" name="phonenumber" class="form-control"  placeholder="Your Phone Number" required>
+						<input type="text" name="phonenumber" class="form-control"  placeholder="Your Phone Number" value="{{$userData->phonenumber}}" required>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
-					<label for="address">Address</label>
-					<input type="text" name="address" class="form-control" placeholder="Your Address" required>
+					<label for="Photo">Photo</label>
+					<input type="file" name="photo" required>
 				</div>
-			</div>
-			<div class="w-100"></div>
-			<div class="col-md-6">
-				<label for="Photo">Photo</label>
-				<input type="file" name="photo" required>
 			</div>
 			<button type="submit" class="btn btn-primary py-3 px-4">Update</button>
 		</div>
 		</form>
-	</div>
-	
-	
+	</div><br>	
 </div>
 @endsection
