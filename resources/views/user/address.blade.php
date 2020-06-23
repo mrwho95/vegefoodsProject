@@ -51,7 +51,7 @@
 								@if($data->defaultaddress == "1")
 									<p class="card-title float-right"><strong>Default Address</strong></p><br>
 								@else
-									<a href="#" class="btn btn-info float-right">Set As Default Address</a><br><br>
+									<a href="{{route('setDefaultAddress', $data->id)}}" class="btn btn-info float-right">Set As Default Address</a><br><br>
 								@endif
 								<a href="{{route('address.edit', $data->id)}}" class="btn btn-warning float-right">Edit Address</a><br><br>
 								<a href="{{route('addressDestroy', $data->id)}}" class="btn btn-danger float-right">Delete Address</a>

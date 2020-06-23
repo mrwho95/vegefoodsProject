@@ -59,6 +59,8 @@ Route::resource('/address', 'User\AddressController');
 
 Route::get('address/delete/{id}', 'User\AddressController@destroy')->name('addressDestroy');
 
+Route::get('address/setDefaultAddress/{id}', 'User\AddressController@setDefaultAddress')->name('setDefaultAddress');
+
 //admin
 Route::get('/adminDashboard', 'Admin\DashboardController@index')->name('adminDashboard');
 

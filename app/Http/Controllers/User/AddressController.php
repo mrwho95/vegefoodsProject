@@ -156,4 +156,16 @@ class AddressController extends Controller
         address::destroy($id);
         return redirect()->route('address.index')->with('success', 'Address Deleted!');
     }
+
+    public function setDefaultAddress($id){
+        $address = address::where([['user_id', Auth::id()], ['defaultaddress', "1"]])->first();
+        $address->defaultaddress = 0;
+        $address->save();
+
+        $address = address::findorfail($id);
+        $address->defaultaddress = 1;
+        $address->save();
+
+        return redirect()->route('address.index')->with('success', 'Set Default Address Successful!');
+    }
 }
