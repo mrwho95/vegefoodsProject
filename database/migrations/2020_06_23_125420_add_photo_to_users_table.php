@@ -16,7 +16,6 @@ class AddPhotoToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             //
             $table->mediumtext('photo')->nullable();
-            $table->string('address')->nullable();
         });
     }
 
@@ -30,7 +29,6 @@ class AddPhotoToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             //
             $table->dropColumn('photo');
-            $table->dropColumn('address');
         });
     }
 }
