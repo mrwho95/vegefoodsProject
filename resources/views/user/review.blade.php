@@ -32,7 +32,15 @@
 						@foreach($reviews as $data)
 							<div class="item">
 								<div class="testimony-wrap p-4 pb-5">
-									<div class="user-img mb-5" style="background-image: url('{{asset('images/person_1.jpg')}}')">
+									 @foreach($user as $key => $value)
+			                            @if($data->user_id == $value['id'])
+			                                @if(empty($value['photo']))
+											<div class="user-img mb-5" style="background-image: url('{{asset('images/user.jpg')}}')">
+											@else
+											<div class="user-img mb-5" style="background-image: url('{{asset('uploads/vegeFoodsPhoto/'.$value['photo'])}}')">
+											@endif
+			                            @endif
+			                        @endforeach
 										<span class="quote d-flex align-items-center justify-content-center">
 											<i class="icon-quote-left"></i>
 										</span>
@@ -47,11 +55,7 @@
 						@endforeach
 					@else
 						<div class="item">
-							<div class="testimony-wrap p-4 pb-5">
-								<div class="text text-center">
-									<p class="mb-5 pl-4 line">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-								</div>
-							</div>
+							No Review
 						</div>
 					@endif
 				</div>

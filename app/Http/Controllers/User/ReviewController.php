@@ -16,6 +16,7 @@ class ReviewController extends Controller
     	if (Auth::check()) {
     		$arr['userData'] = user::find(Auth::id());
     	}
+        $arr['user'] = user::where('is_admin', '0')->get();
     	$arr['reviews'] = review::all();
     	$arr['products'] = product::select('name')->get();
     	return view('user.review', $arr);
