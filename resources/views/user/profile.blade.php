@@ -33,7 +33,12 @@
 						<h5><strong>{{$userData->name}}</strong></h5>
 						<p class="card-title">Email: {{$userData->email}}</p>
 						<p class="card-title">Phone Number: {{$userData->phonenumber}}</p>
-						<p class="card-title">Address: {{$address->streetaddress1}} {{$address->streetaddress2}}, {{$address->city}}, {{$address->postcode}} {{$address->state}}, {{$address->country}}</p>
+						@if(empty($address))
+							<p class="card-title">Address: <strong>No default address</strong></p>
+							<a href="{{route('address.create')}}" class="btn btn-primary">Add Default Address</a>
+						@else
+							<p class="card-title">Default Address: {{$address->streetaddress1}} {{$address->streetaddress2}}, {{$address->city}}, {{$address->postcode}} {{$address->state}}, {{$address->country}}</p>
+						@endif
 					</div>
 				</div>
 			</div>
