@@ -4,6 +4,9 @@
     <title>Vegefoods</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
@@ -11,9 +14,6 @@
 
     <!-- browser icon -->
     <link rel="shortcut icon" href="{{ asset('images/product-6.jpg') }}">
-
-    <!-- datatables -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 	
     <link rel="stylesheet" href="{{asset('css/open-iconic-bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/animate.css')}}">
@@ -33,6 +33,8 @@
     <link rel="stylesheet" href="{{asset('css/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('css/icomoon.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+
+    @yield('styles')
   </head>
   <body class="goto-here">
 		<div class="py-1 bg-primary">
@@ -42,11 +44,11 @@
 		    		<div class="row d-flex">
 		    			<div class="col-md pr-4 d-flex topper align-items-center">
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
-						    <span class="text">+ 1235 2355 98</span>
+						    <span class="text">+03-888 8888</span>
 					    </div>
 					    <div class="col-md pr-4 d-flex topper align-items-center">
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-						    <span class="text">youremail@email.com</span>
+						    <span class="text">info@vegefood.com</span>
 					    </div>
 					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
 						    <span class="text">3-5 Business days delivery &amp; Free Returns</span>
@@ -146,10 +148,10 @@
             <div class="ftco-footer-widget mb-4 ml-md-5">
               <h2 class="ftco-heading-2">Menu</h2>
               <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Shop</a></li>
-                <li><a href="#" class="py-2 d-block">About</a></li>
-                <li><a href="#" class="py-2 d-block">Journal</a></li>
-                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+                <li><a href="{{route('adminDashboard')}}" class="py-2 d-block">Home</a></li>
+                <li><a href="{{route('adminProducts.index')}}" class="py-2 d-block">Product</a></li>
+                <li><a href="{{route('adminPromotion')}}" class="py-2 d-block">Promotion</a></li>
+                <li><a href="{{route('adminCustomer')}}" class="py-2 d-block">Customer</a></li>
               </ul>
             </div>
           </div>
@@ -175,9 +177,9 @@
             	<h2 class="ftco-heading-2">Have a Questions?</h2>
             	<div class="block-23 mb-3">
 	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">Jalan Bukit Ria, Taman Bukit Mewah, 43000 Kajang, Selangor</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+03-8741 5736</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+	                <li><span class="icon icon-map-marker"></span><span class="text">Soho Suites KLCC Soho Suites KLCC, 20, Jalan Perak, Kuala Lumpur, 50450 Wilayah Persekutuan</span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+03-888 8888</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@vegefood.com</span></a></li>
 	              </ul>
 	            </div>
             </div>
@@ -255,295 +257,8 @@
     });
   </script>
 
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-
-    @include('sweetalert::alert')
+  @yield('javascripts')
+  @include('sweetalert::alert')
 
   </body>
 </html>
-
-<script>
-  $(document).ready(function(){
-
-    $('#product_table').DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: {
-        url: "{{ route('productTable') }}",
-      },
-      columns: [
-      {
-        data: 'photo',
-        name: 'photo'
-      },
-      {
-        data: 'name',
-        name: 'name'
-      },
-      {
-        data: 'price',
-        name: 'price'
-      },
-      {
-        data: 'weight',
-        name: 'weight'
-      },
-      {
-        data: 'category',
-        name: 'category'
-      },
-      {
-        data: 'quantity',
-        name: 'quantity'
-      },
-      {
-        data: 'description',
-        name: 'description'
-      },
-      {
-        data: 'action',
-        name: 'action',
-        orderable: false
-      }
-      ]
-    });
-
-    $('#message_table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: "{{ route('adminCustomerMessage') }}",
-            },
-            columns: [
-            {
-                data: 'name',
-                name: 'name'
-            },
-            {
-                data: 'email',
-                name: 'email'
-            },
-            {
-                data: 'subject',
-                name: 'subject'
-            },
-            {
-                data: 'message',
-                name: 'message'
-            },
-            {
-                data: 'created_at',
-                name: 'created_at'
-            },
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false
-            }
-            ]
-        });
-
-        $('#delivery_table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: "{{ route('adminDelivery') }}",
-            },
-            columns: [
-            {
-                data: 'city',
-                name: 'city'
-            },
-            {
-                data: 'state',
-                name: 'state'
-            },
-            {
-                data: 'postcode',
-                name: 'postcode'
-            },
-            {
-                data: 'country',
-                name: 'country'
-            },
-            {
-                data: 'price',
-                name: 'price'
-            },
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false
-            }
-            ]
-        });
-
-        var delivery_id;
-        var deleteDeliveryUrl = '{{ route("deleteDelivery", ":id") }}';
-        var fetchDeliveryUrl = '{{route("fetchDelivery", ":id")}}';
-        var updateDeliveryUrl = '{{route("updateDelivery")}}';
-
-        //fetch delivery data into modal form based on id
-        $(document).on('click', '.editDelivery', function(){
-          delivery_id = $(this).attr('id');
-          fetchDeliveryUrl = fetchDeliveryUrl.replace(':id', delivery_id);
-          console.log(fetchDeliveryUrl);
-          $.ajax({  
-            url:fetchDeliveryUrl,  
-            method:"GET",  
-            data:{delivery_id:delivery_id},  
-            dataType:"json",  
-            success:function(data)  
-            {  
-              console.log(data);
-              $('#editDeliveryModal').modal('show');
-              $('#city').val(data['city']);  
-              $('#state').val(data['state']);
-              $('#postcode').val(data['postcode']);
-              $('#country').val(data['country']);
-              $('#price').val(data['price']);
-              $('#deliveryId').val(delivery_id);    
-            }  
-          })  
-        });
-
-        //update delivery place
-        $(document).on('submit', '#editDeliveryForm', function(event){  
-         event.preventDefault(); 
-         console.log(updateDeliveryUrl);
-         $.ajax({  
-           url:updateDeliveryUrl,  
-           method:'POST',  
-           data:$(this).serialize(), 
-           dataType:"json", 
-           success:function(data)  
-           {  
-            console.log(data);
-            $('#editDeliveryModal').modal('hide');  
-            $('#delivery_table').DataTable().ajax.reload();
-            alert('Data Updated');
-          }  
-        });  
-       });  
-
-        // delete delivery place
-        $(document).on('click', '.deleteDelivery', function(){
-          delivery_id = $(this).attr('id');
-          deleteDeliveryUrl = deleteDeliveryUrl.replace(':id', delivery_id);
-          $('#deleteDeliveryModal').modal('show');
-        });
-        $('#deleteDelivery').click(function(){
-          $.ajax({
-           url:deleteDeliveryUrl,
-           success:function(data)
-           {
-             $('#deleteDeliveryModal').modal('hide');
-             $('#delivery_table').DataTable().ajax.reload();
-             alert('Data Deleted');
-           }
-         })
-        });
-
-        $('#promo_table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: "{{ route('adminPromotion') }}",
-            },
-            columns: [
-            {
-                data: 'name',
-                name: 'name'
-            },
-            {
-                data: 'code',
-                name: 'code'
-            },
-            {
-                data: 'discount',
-                name: 'discount'
-            },
-            {
-                data: 'expired',
-                name: 'expired'
-            },
-            {
-                data: 'availability',
-                name: 'availability'
-            },
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false
-            }
-            ]
-        });
-
-        var promo_id;
-        var deletePromoUrl = '{{ route("deletePromo", ":id") }}';
-        var fetchPromoUrl = '{{route("fetchPromo", ":id")}}';
-        var updatePromoUrl = '{{route("updatePromo")}}';
-
-        //fetch promotion code into modal form based on id
-        $(document).on('click', '.editPromo', function(){
-          promo_id = $(this).attr('id');
-          fetchPromoUrl = fetchPromoUrl.replace(':id', promo_id);
-          console.log(fetchPromoUrl);
-          $.ajax({  
-            url:fetchPromoUrl,  
-            method:"GET",  
-            data:{promo_id:promo_id},  
-            dataType:"json",  
-            success:function(data)  
-            {  
-              console.log(data);
-              $('#editPromotionModal').modal('show');
-              $('#name').val(data['name']);  
-              $('#code').val(data['code']);
-              $('#discount').val(data['discount']);
-              $('#availability').val(data['availability']);
-              $('#expired').val(data['expired']);
-              $('#promoId').val(promo_id);    
-            }  
-          })  
-        });
-
-        //update promotion code
-        $(document).on('submit', '#editPromotionForm', function(event){  
-         event.preventDefault(); 
-         console.log(updatePromoUrl);
-         $.ajax({  
-           url:updatePromoUrl,  
-           method:'POST',  
-           data:$(this).serialize(), 
-           dataType:"json", 
-           success:function(data)  
-           {  
-            console.log(data);
-            $('#editPromotionModal').modal('hide');  
-            $('#promo_table').DataTable().ajax.reload();
-            alert('Data Updated');
-          }  
-        });  
-       });  
-
-        // delete promotion code
-        $(document).on('click', '.deletePromo', function(){
-          promo_id = $(this).attr('id');
-          deletePromoUrl = deletePromoUrl.replace(':id', promo_id);
-          $('#deletePromotionModal').modal('show');
-        });
-        $('#deletePromotion').click(function(){
-          $.ajax({
-           url:deletePromoUrl,
-           success:function(data)
-           {
-             $('#deletePromotionModal').modal('hide');
-             $('#promo_table').DataTable().ajax.reload();
-             alert('Data Deleted');
-           }
-         })
-        });
-      
-    });
-</script>
