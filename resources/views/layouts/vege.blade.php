@@ -9,8 +9,8 @@
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
 
-    <!-- datatables -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- browser icon -->
     <link rel="shortcut icon" href="{{ asset('images/product-6.jpg') }}">
@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="{{asset('css/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('css/icomoon.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    @yield('styles')
   </head>
   <body class="goto-here">
 		<div class="py-1 bg-primary">
@@ -250,9 +251,8 @@
         
     });
   </script>
-
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-
+    
+    @yield('javascripts')
     @include('sweetalert::alert')
     
   </body>
