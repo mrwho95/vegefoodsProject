@@ -87,6 +87,17 @@ Route::get('/adminProductsTable', 'Admin\ProductController@productTable')->name(
 Route::get('/adminProducts/{parameter}', 'Admin\ProductController@vege')->name('adminVege');
 
 Route::get('adminProducts/delete/{id}', 'Admin\ProductController@destroy')->name('productDestroy');
+
+Route::get('/adminDelivery', 'Admin\DeliveryController@index')->name('adminDelivery');
+
+Route::post('/addDelivery', 'Admin\DeliveryController@addDelivery')->name('addDelivery');
+
+Route::get('/fetchDelivery/{id}', 'Admin\DeliveryController@fetchDelivery')->name('fetchDelivery');
+
+Route::post('/updateDelivery', 'Admin\DeliveryController@updateDelivery')->name('updateDelivery');
+
+Route::get('/deleteDelivery/{id}', 'Admin\DeliveryController@deleteDelivery')->name('deleteDelivery');
+
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
