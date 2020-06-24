@@ -68,7 +68,6 @@
             <!-- request::is('') == url pattern -->
             <!-- request::routeIs('') == route name pattern-->
 	          <li class="nav-item {{ Request::is('adminDashboard*') ? 'active' : '' }}"><a href="{{route('adminDashboard')}}" class="nav-link">Home</a></li>
-            <li class="nav-item {{ Request::is('adminPromotion*') ? 'active' : '' }}"><a href="{{route('adminPromotion')}}" class="nav-link">Promotion</a></li>
 	          <li class="nav-item dropdown {{ Request::is('adminProducts*') ? 'active' : '' }}">
               <a class="nav-link dropdown-toggle" href="{{route('adminProducts.index')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -82,6 +81,13 @@
               <div class="dropdown-menu" aria-labelledby="dropdown07">
                 <a class="dropdown-item " href="{{route('adminCustomer')}}">Order</a>
                 <a class="dropdown-item " href="{{route('adminCustomerMessage')}}">Message</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown {{ Request::is('admin*') ? 'active' : '' }}">
+              <a class="nav-link dropdown-toggle" href="{{route('adminPromotion')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+                <a class="dropdown-item " href="{{route('adminPromotion')}}">Promotion</a>
+                <a class="dropdown-item " href="{{route('adminDelivery')}}">Delivery</a>
               </div>
             </li>
             @guest
