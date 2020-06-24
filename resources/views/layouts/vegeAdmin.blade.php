@@ -343,6 +343,107 @@
             ]
         });
 
+        $('#delivery_table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "{{ route('adminDelivery') }}",
+            },
+            columns: [
+            {
+                data: 'city',
+                name: 'city'
+            },
+            {
+                data: 'state',
+                name: 'state'
+            },
+            {
+                data: 'postcode',
+                name: 'postcode'
+            },
+            {
+                data: 'country',
+                name: 'country'
+            },
+            {
+                data: 'price',
+                name: 'price'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false
+            }
+            ]
+        });
+
+        var delivery_id;
+        var deleteDeliveryUrl = '{{ route("deleteDelivery", ":id") }}';
+        var fetchDeliveryUrl = '{{route("fetchDelivery", ":id")}}';
+        var updateDeliveryUrl = '{{route("updateDelivery")}}';
+
+        //fetch delivery data into modal form based on id
+        $(document).on('click', '.editDelivery', function(){
+          delivery_id = $(this).attr('id');
+          fetchDeliveryUrl = fetchDeliveryUrl.replace(':id', delivery_id);
+          console.log(fetchDeliveryUrl);
+          $.ajax({  
+            url:fetchDeliveryUrl,  
+            method:"GET",  
+            data:{delivery_id:delivery_id},  
+            dataType:"json",  
+            success:function(data)  
+            {  
+              console.log(data);
+              $('#editDeliveryModal').modal('show');
+              $('#city').val(data['city']);  
+              $('#state').val(data['state']);
+              $('#postcode').val(data['postcode']);
+              $('#country').val(data['country']);
+              $('#price').val(data['price']);
+              $('#deliveryId').val(delivery_id);    
+            }  
+          })  
+        });
+
+        //update delivery place
+        $(document).on('submit', '#editDeliveryForm', function(event){  
+         event.preventDefault(); 
+         console.log(updateDeliveryUrl);
+         $.ajax({  
+           url:updateDeliveryUrl,  
+           method:'POST',  
+           data:$(this).serialize(), 
+           dataType:"json", 
+           success:function(data)  
+           {  
+            console.log(data);
+            $('#editDeliveryModal').modal('hide');  
+            $('#delivery_table').DataTable().ajax.reload();
+            alert('Data Updated');
+          }  
+        });  
+       });  
+
+        // delete delivery place
+        $(document).on('click', '.deleteDelivery', function(){
+          delivery_id = $(this).attr('id');
+          deleteDeliveryUrl = deleteDeliveryUrl.replace(':id', delivery_id);
+          $('#deleteDeliveryModal').modal('show');
+        });
+        $('#deleteDelivery').click(function(){
+          $.ajax({
+           url:deleteDeliveryUrl,
+           success:function(data)
+           {
+             $('#deleteDeliveryModal').modal('hide');
+             $('#delivery_table').DataTable().ajax.reload();
+             alert('Data Deleted');
+           }
+         })
+        });
+
         $('#promo_table').DataTable({
             processing: true,
             serverSide: true,
@@ -384,7 +485,7 @@
         var updatePromoUrl = '{{route("updatePromo")}}';
 
         //fetch promotion code into modal form based on id
-        $(document).on('click', '.edit', function(){
+        $(document).on('click', '.editPromo', function(){
           promo_id = $(this).attr('id');
           fetchPromoUrl = fetchPromoUrl.replace(':id', promo_id);
           console.log(fetchPromoUrl);
@@ -427,7 +528,7 @@
        });  
 
         // delete promotion code
-        $(document).on('click', '.delete', function(){
+        $(document).on('click', '.deletePromo', function(){
           promo_id = $(this).attr('id');
           deletePromoUrl = deletePromoUrl.replace(':id', promo_id);
           $('#deletePromotionModal').modal('show');
