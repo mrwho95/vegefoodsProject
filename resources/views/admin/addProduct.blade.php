@@ -1,7 +1,15 @@
 @extends('layouts.vegeAdmin')
 @section('content')
 <div class="container">
-	<h3>Add Product</h3><br>
+	<div class="row">
+		<div class="col-md-6">
+			<h3>Add New Product</h3>
+		</div>
+		<div class="col-md-6">
+			<a href="{{route('adminProducts.index')}}" class="btn btn-warning float-right">Cancel Add</a>
+			<a href="{{route('productTable')}}" class="btn btn-info float-right">View Product Table</a>
+		</div>
+	</div>
 	@if(session('success'))
 	<div class="alert alert-success alert-dismissible fade show" role="alert">
 		{{session('success')}}
@@ -18,6 +26,7 @@
 		</button>
 	</div>
 	@endif
+	<br>
 	<form action="{{route('adminProducts.store')}}" class="billing-form" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<h3 class="mb-4 billing-heading">Product Details</h3>

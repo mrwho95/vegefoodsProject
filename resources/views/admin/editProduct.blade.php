@@ -6,7 +6,7 @@
 			<h3>Edit Product</h3>
 		</div>
 		<div class="col-md-6">
-			<a href="{{route('productTable')}}" class="btn btn-warning">Cancel Edit</a>
+			<a href="{{route('productTable')}}" class="btn btn-warning float-right">Cancel Edit</a>
 		</div>
 	</div>
 	@if(session('success'))
