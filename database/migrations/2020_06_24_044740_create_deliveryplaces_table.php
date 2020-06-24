@@ -19,6 +19,7 @@ class CreateDeliveryplacesTable extends Migration
             $table->string('state')->nullable();
             $table->string('postcode')->nullable();
             $table->string('country')->nullable();
+            $table->string('price')->nullable();
             $table->timestamps();
         });
     }
