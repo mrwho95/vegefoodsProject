@@ -72,36 +72,37 @@
 					<p>Enter your destination to get a shipping estimate</p>
 					<form action="{{route('checkDeliveryFee')}}" class="info" method="post">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						<input type="hidden" id="defaultAddress" value="{{$defaultAddress}}" />
 						<div class="form-group">
 							<label for="city">Town/City</label>
 							@if(!empty($address))
-								<input type="text" name="city" class="form-control text-left px-3" placeholder="" value="{{isset($address->city) ? $address->city : $address['city']}}">
+								<input type="text" id="city" name="city" class="form-control text-left px-3" placeholder="" value="{{isset($address->city) ? $address->city : $address['city']}}">
 							@else
-								<input type="text" name="city" class="form-control text-left px-3" placeholder="">
+								<input type="text" id="city" name="city" class="form-control text-left px-3" placeholder="">
 							@endif
 						</div>
 						<div class="form-group">
 							<label for="postcode">Zip/Postal Code</label>
 							@if(!empty($address))
-								<input type="text" name="postcode" class="form-control text-left px-3" placeholder="" value="{{isset($address->postcode) ? $address->postcode : $address['postcode']}}">
+								<input type="text" id="postcode" name="postcode" class="form-control text-left px-3" placeholder="" value="{{isset($address->postcode) ? $address->postcode : $address['postcode']}}">
 							@else
-								<input type="text" name="postcode" class="form-control text-left px-3" placeholder="">
+								<input type="text" id="postcode" name="postcode" class="form-control text-left px-3" placeholder="">
 							@endif
 						</div>
 						<div class="form-group">
 							<label for="state">State/Province</label>
 							@if(!empty($address))
-								<input type="text"name="state" class="form-control text-left px-3" placeholder="" value="{{isset($address->state) ? $address->state : $address['state']}}">
+								<input type="text" id="state" name="state" class="form-control text-left px-3" placeholder="" value="{{isset($address->state) ? $address->state : $address['state']}}">
 							@else
-								<input type="text"name="state" class="form-control text-left px-3" placeholder="">
+								<input type="text" id="state" name="state" class="form-control text-left px-3" placeholder="">
 							@endif
 						</div>
 						<div class="form-group">
 							<label for="country">Country</label>
 							@if(!empty($address))
-								<input type="text" name="country" class="form-control text-left px-3" placeholder="" value="{{isset($address->country) ? $address->country : $address['country']}}">
+								<input type="text" id="country" name="country" class="form-control text-left px-3" placeholder="" value="{{isset($address->country) ? $address->country : $address['country']}}">
 							@else
-								<input type="text" name="country" class="form-control text-left px-3" placeholder="">
+								<input type="text" id="country" name="country" class="form-control text-left px-3" placeholder="">
 							@endif
 						</div>
 						@if(!empty($deliveryfee))
@@ -163,8 +164,21 @@
 <script type="text/javascript">
 
 	console.log("Cart Page running ");
-	let deliveryFee = $('#deliveryFee').val();
+	
+	let defaultAddress = $('#defaultAddress').val();
+	localStorage.setItem("defaultAddress", defaultAddress);
+	defaultAddress = JSON.parse(defaultAddress);
 
+	let city = $('#city').val();
+	let state = $('#state').val();
+	let postcode = $('#postcode').val();
+	let country = $('#country').val();
+	if (city != defaultAddress.city || state != defaultAddress.state || postcode != defaultAddress.postcode || country != defaultAddress.country) {
+		let deliveryPlace = {city: city, postcode: postcode, state: state, country: country};
+		localStorage.setItem("deliveryPlace", JSON.stringify(deliveryPlace));
+	}
+	
+	let deliveryFee = $('#deliveryFee').val();
 	deliveryFee = parseInt(deliveryFee);
 	// console.log(typeof deliveryFee);
 
@@ -177,9 +191,9 @@ function displayCart(){
 	let productContainer = document.querySelector("#body");
 
 	console.log(cartItems);
-	let cartCost = localStorage.getItem('totalCost'); 
+	let cartCost = localStorage.getItem("totalCost"); 
 	cartCost = JSON.parse(cartCost);
-	let deliveryCost = localStorage.getItem('deliveryFee');
+	let deliveryCost = localStorage.getItem("deliveryFee");
 	deliveryCost = JSON.parse(deliveryCost);
 		// console.log(typeof deliveryCost);
 
@@ -268,6 +282,15 @@ function displayCart(){
 		productContainer.innerHTML += `<p>No cart</p>`;
 	}	
 }
+
+function onLoadCartNumbers(){
+	let productNumbers = localStorage.getItem('cartNumbers'); //check localstorage 
+	if (productNumbers) {
+		document.querySelector('.cta a span').textContent = productNumbers; //cart number changed on nav bar
+	}
+}
+
+onLoadCartNumbers();
 displayCart();
 
 </script>
