@@ -10,127 +10,130 @@
 		</div>
 	</div>
 </div>
-
 <section class="ftco-section ftco-cart">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 ftco-animate">
+				@if(session('success'))
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						{{session('success')}}
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				@endif
+				@if(session('warning'))
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						{{session('warning')}}
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				@endif
 				<div class="cart-list">
 					<table class="table">
 						<thead class="thead-primary">
 							<tr class="text-center">
-								<th>&nbsp;</th>
-								<th>&nbsp;</th>
+								<th>Action</th>
+								<th>Image</th>
 								<th>Product name</th>
 								<th>Price</th>
 								<th>Quantity</th>
 								<th>Total</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr class="text-center">
-								<td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-
-								<td class="image-prod"><div class="img" style="background-image:url('{{asset('images/product-3.jpg')}}');"></div></td>
-
-								<td class="product-name">
-									<h3>Bell Pepper</h3>
-									<p>Far far away, behind the word mountains, far from the countries</p>
-								</td>
-
-								<td class="price">$4.90</td>
-
-								<td class="quantity">
-									<div class="input-group mb-3">
-										<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-									</div>
-								</td>
-
-								<td class="total">$4.90</td>
-							</tr><!-- END TR-->
-
-							<tr class="text-center">
-								<td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-
-								<td class="image-prod"><div class="img" style="background-image:url('{{asset('images/product-4.jpg')}}');"></div></td>
-
-								<td class="product-name">
-									<h3>Bell Pepper</h3>
-									<p>Far far away, behind the word mountains, far from the countries</p>
-								</td>
-
-								<td class="price">$15.70</td>
-
-								<td class="quantity">
-									<div class="input-group mb-3">
-										<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-									</div>
-								</td>
-
-								<td class="total">$15.70</td>
-							</tr><!-- END TR-->
+						<tbody id="body">
+							<!-- html from main2.js -->
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
+
+
 		<div class="row justify-content-end">
 			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
 				<div class="cart-total mb-3">
 					<h3>Coupon Code</h3>
-					<p>Enter your coupon code if you have one</p>
-					<form action="#" class="info">
+					<p>Enter your promotion code if you have one</p>
+					<form action="{{route('promo')}}" class="info" method="post">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group">
-							<label for="">Coupon code</label>
+							<label for="">Promotion code</label>
 							<input type="text" class="form-control text-left px-3" placeholder="">
 						</div>
+						<button type="submit" class="btn btn-primary py-3 px-4">Apply Promotion Code</button>
 					</form>
 				</div>
-				<p><a href="checkout.html" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
 			</div>
 			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
 				<div class="cart-total mb-3">
 					<h3>Estimate shipping and tax</h3>
 					<p>Enter your destination to get a shipping estimate</p>
-					<form action="#" class="info">
+					<form action="{{route('checkDeliveryFee')}}" class="info" method="post">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group">
-							<label for="">Country</label>
-							<input type="text" class="form-control text-left px-3" placeholder="">
+							<label for="city">Town/City</label>
+							@if(!empty($address))
+								<input type="text" name="city" class="form-control text-left px-3" placeholder="" value="{{isset($address->city) ? $address->city : $address['city']}}">
+							@else
+								<input type="text" name="city" class="form-control text-left px-3" placeholder="">
+							@endif
 						</div>
 						<div class="form-group">
-							<label for="country">State/Province</label>
-							<input type="text" class="form-control text-left px-3" placeholder="">
+							<label for="postcode">Zip/Postal Code</label>
+							@if(!empty($address))
+								<input type="text" name="postcode" class="form-control text-left px-3" placeholder="" value="{{isset($address->postcode) ? $address->postcode : $address['postcode']}}">
+							@else
+								<input type="text" name="postcode" class="form-control text-left px-3" placeholder="">
+							@endif
 						</div>
 						<div class="form-group">
-							<label for="country">Zip/Postal Code</label>
-							<input type="text" class="form-control text-left px-3" placeholder="">
+							<label for="state">State/Province</label>
+							@if(!empty($address))
+								<input type="text"name="state" class="form-control text-left px-3" placeholder="" value="{{isset($address->state) ? $address->state : $address['state']}}">
+							@else
+								<input type="text"name="state" class="form-control text-left px-3" placeholder="">
+							@endif
 						</div>
+						<div class="form-group">
+							<label for="country">Country</label>
+							@if(!empty($address))
+								<input type="text" name="country" class="form-control text-left px-3" placeholder="" value="{{isset($address->country) ? $address->country : $address['country']}}">
+							@else
+								<input type="text" name="country" class="form-control text-left px-3" placeholder="">
+							@endif
+						</div>
+						@if(!empty($deliveryfee))
+							<input type="hidden" id="deliveryFee" value="{{$deliveryfee}}" />
+						@endif
+						<button type="submit" class="btn btn-primary py-3 px-4">Estimate</button>
 					</form>
 				</div>
-				<p><a href="checkout.html" class="btn btn-primary py-3 px-4">Estimate</a></p>
 			</div>
 			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-				<div class="cart-total mb-3">
+				<div id="cartTotal" class="cart-total mb-3">
+					<!-- html from main2.js -->
 					<h3>Cart Totals</h3>
 					<p class="d-flex">
 						<span>Subtotal</span>
-						<span>$20.60</span>
+						<span>RM0.00</span>
 					</p>
 					<p class="d-flex">
 						<span>Delivery</span>
-						<span>$0.00</span>
+						<span>RM0.00</span>
 					</p>
 					<p class="d-flex">
 						<span>Discount</span>
-						<span>$3.00</span>
+						<span>RM0.00</span>
 					</p>
 					<hr>
 					<p class="d-flex total-price">
 						<span>Total</span>
-						<span>$17.60</span>
+						<span>RM0.00</span>
 					</p>
 				</div>
-				<p><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+				<p><a href="{{route('checkout')}}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
 			</div>
 		</div>
 	</div>
@@ -154,4 +157,118 @@
 		</div>
 	</div>
 </section>
+@endsection
+
+@section('javascripts')
+<script type="text/javascript">
+
+	console.log("Cart Page running ");
+	let deliveryFee = $('#deliveryFee').val();
+
+	deliveryFee = parseInt(deliveryFee);
+	// console.log(typeof deliveryFee);
+
+	localStorage.setItem("deliveryFee", deliveryFee);
+
+
+function displayCart(){
+	let cartItems = localStorage.getItem("productsInCart");
+	cartItems = JSON.parse(cartItems);
+	let productContainer = document.querySelector("#body");
+
+	console.log(cartItems);
+	let cartCost = localStorage.getItem('totalCost'); 
+	cartCost = JSON.parse(cartCost);
+	let deliveryCost = localStorage.getItem('deliveryFee');
+	deliveryCost = JSON.parse(deliveryCost);
+		// console.log(typeof deliveryCost);
+
+	let overallCost = cartCost + deliveryCost;
+	localStorage.setItem("overallCost", overallCost);
+	
+	let cartTotal = document.querySelector("#cartTotal");
+	if (cartItems && cartTotal) {
+		cartTotal.innerHTML = '';
+		Object.values(cartItems).map(item => {
+			cartTotal.innerHTML = `
+				<h3>Cart Totals</h3>
+					<p class="d-flex">
+						<span>Subtotal</span>
+						<span>RM${cartCost}</span>
+					</p>
+					<p class="d-flex">
+						<span>Delivery</span>
+						<span>RM${deliveryCost}</span>
+					</p>
+					<p class="d-flex">
+						<span>Discount</span>
+						<span>RM0.00</span>
+					</p>
+					<hr>
+					<p class="d-flex total-price">
+						<span>Total</span>
+						<span>RM${overallCost}</span>
+					</p>
+			`;
+		});
+	}else{
+		cartTotal.innerHTML = '';
+		cartTotal.innerHTML = `
+				<h3>Cart Totals</h3>
+					<p class="d-flex">
+						<span>Subtotal</span>
+						<span>RM0.00</span>
+					</p>
+					<p class="d-flex">
+						<span>Delivery</span>
+						<span>RM0.00</span>
+					</p>
+					<p class="d-flex">
+						<span>Discount</span>
+						<span>RM0.00</span>
+					</p>
+					<hr>
+					<p class="d-flex total-price">
+						<span>Total</span>
+						<span>RM0.00</span>
+					</p>
+			`;
+	}
+
+	if (cartItems && productContainer) {
+		// console.log('abc');
+		productContainer.innerHTML ='';
+		Object.values(cartItems).map(item => {
+			productContainer.innerHTML += `
+				<tr class="text-center">
+					<td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+					<td><img src="./public/uploads/vegeFoodsPhoto/${item.photo}" style="width:150px; display=block;"></td>
+					<td class="product-name">
+						<h3>${item.name}</h3>
+					</td>
+					<td class="price">RM${item.price}</td>
+					<td class="quantity">
+						<div class="input-group mb-3">
+							<button type="button" id="quantity-left-minus" class="quantity-left-minus btn"  data-type="minus" data-field="">
+								<i class="ion-ios-remove"></i>
+							</button>
+							<input type="text" name="quantity" id="quantity" class="quantity form-control input-number" value="${item.inCart}" min="1" max="100">
+							<button type="button" id="quantity-right-plus" class="quantity-right-plus btn" data-type="plus" data-field="">
+								<i class="ion-ios-add"></i>
+							</button>
+						</div>
+					</td>
+
+					<td class="total">RM${item.price * item.inCart}</td>
+				</tr>
+			`;
+		});
+	}else{
+		productContainer.innerHTML ='';
+		productContainer.innerHTML += `<p>No cart</p>`;
+	}	
+}
+displayCart();
+
+</script>
 @endsection
