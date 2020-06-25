@@ -30,8 +30,8 @@
 			<thead>
 				<tr>
 					<th>City / Town</th>
-					<th>State / Province</th>
 					<th>Zip / Postal Code</th>
+					<th>State / Province</th>
 					<th>Country</th>
 					<th>Price (RM)</th>
 					<th>Action</th>
@@ -150,12 +150,12 @@
 				name: 'city'
 			},
 			{
-				data: 'state',
-				name: 'state'
-			},
-			{
 				data: 'postcode',
 				name: 'postcode'
+			},
+			{
+				data: 'state',
+				name: 'state'
 			},
 			{
 				data: 'country',
