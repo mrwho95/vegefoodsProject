@@ -63,6 +63,8 @@ Route::get('address/delete/{id}', 'User\AddressController@destroy')->name('addre
 
 Route::get('address/setDefaultAddress/{id}', 'User\AddressController@setDefaultAddress')->name('setDefaultAddress');
 
+Route::get('/delivery', 'User\DeliveryController@index')->name('delivery');
+
 //admin
 Route::get('/adminDashboard', 'Admin\DashboardController@index')->name('adminDashboard');
 
