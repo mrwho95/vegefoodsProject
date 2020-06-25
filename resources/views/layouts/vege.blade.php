@@ -43,11 +43,11 @@
 		    		<div class="row d-flex">
 		    			<div class="col-md pr-4 d-flex topper align-items-center">
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
-						    <span class="text">+ 1235 2355 98</span>
+						    <span class="text">+03-888 8888</span>
 					    </div>
 					    <div class="col-md pr-4 d-flex topper align-items-center">
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-						    <span class="text">youremail@email.com</span>
+						    <span class="text">info@vegefood.com</span>
 					    </div>
 					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
 						    <span class="text">3-5 Business days delivery &amp; Free Returns</span>
@@ -69,19 +69,25 @@
             <!-- request::is('') == url pattern -->
             <!-- request::routeIs('') == route name pattern-->
 	          <li class="nav-item {{ Request::is('home*') ? 'active' : '' }}"><a href="{{route('home')}}" class="nav-link">Home</a></li>
-	          <li class="nav-item dropdown {{ Request::is('shop*') ? 'active' : '' }}">
+	          <li class="nav-item {{ Request::is('about*') ? 'active' : '' }}"><a href="{{route('about')}}" class="nav-link">About</a></li>
+	          <li class="nav-item {{ Request::is('contact*') ? 'active' : '' }}"><a href="{{route('contact')}}" class="nav-link">Contact</a></li>
+            <li class="nav-item dropdown {{ Request::is('shop*') ? 'active' : '' }}">
               <a class="nav-link dropdown-toggle" href="{{route('shop')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item {{ Request::is('shop*') ? 'active' : '' }}" href="{{route('shop')}}">Shop</a>
+                <a class="dropdown-item {{ Request::is('shop*') ? 'active' : '' }}" href="{{route('shop')}}">Shop</a>
                 <a class="dropdown-item {{ Request::is('review*') ? 'active' : '' }}" href="{{route('review')}}">Review</a>
-              	<a class="dropdown-item {{ Request::is('wishlist*') ? 'active' : '' }}" href="{{route('wishlist')}}">Wishlist</a>
+                <a class="dropdown-item {{ Request::is('wishlist*') ? 'active' : '' }}" href="{{route('wishlist')}}">Wishlist</a>
                 <a class="dropdown-item {{ Request::is('cart*') ? 'active' : '' }}" href="{{route('cart')}}">Cart</a>
                 <a class="dropdown-item {{ Request::is('checkout*') ? 'active' : '' }}" href="{{route('checkout')}}">Checkout</a>
               </div>
             </li>
-	          <li class="nav-item {{ Request::is('about*') ? 'active' : '' }}"><a href="{{route('about')}}" class="nav-link">About</a></li>
-	          <li class="nav-item {{ Request::is('blog*') ? 'active' : '' }}"><a href="{{route('blog')}}" class="nav-link">Blog</a></li>
-	          <li class="nav-item {{ Request::is('contact*') ? 'active' : '' }}"><a href="{{route('contact')}}" class="nav-link">Contact</a></li>
+            <li class="nav-item dropdown {{ Request::is('blog*') ? 'active' : '' }}">
+              <a class="nav-link dropdown-toggle" href="{{route('blog')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+                <a class="dropdown-item {{ Request::is('blog*') ? 'active' : '' }}" href="{{route('blog')}}">Blog</a>
+                <a class="dropdown-item {{ Request::is('delivery*') ? 'active' : '' }}" href="{{route('delivery')}}">Delivery</a>
+              </div>
+            </li>
             @guest
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="{{route('login')}}" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Access</a>
@@ -213,7 +219,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="{{asset('js/google-map.js')}}"></script>
   <script src="{{asset('js/main.js')}}"></script>
-  <script src="{{asset('js/main2.js')}}"></script>
+  <!-- <script src="{{asset('js/main2.js')}}"></script> -->
 
   <script>
     $(document).ready(function(){
