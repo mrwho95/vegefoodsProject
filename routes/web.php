@@ -39,6 +39,8 @@ Route::get('/wishlist', 'User\ShopController@wishlist')->name('wishlist');
 
 Route::get('/cart', 'User\ShopController@cart')->name('cart');
 
+Route::post('/cart', 'User\ShopController@checkDeliveryFee')->name('checkDeliveryFee');
+
 Route::get('/product/{parameter}', 'User\ShopController@showProduct')->name('product');
 
 Route::get('/order', 'User\OrderController@index')->name('order');
