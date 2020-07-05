@@ -11,7 +11,7 @@ class order extends Model
     //eloquent relationship
     //model method
 
-    protected $fillable = ['user_id', 'fullname', 'address', 'amount', 'delivery', 'totalprice'];
+    protected $fillable = ['user_id', 'orderunique_id', 'fullname', 'address', 'amount', 'delivery', 'totalprice', 'status'];
 
     public function orderdetails()
 	{
