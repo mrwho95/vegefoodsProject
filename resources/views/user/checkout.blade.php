@@ -240,6 +240,8 @@
         			localStorage.clear();
         		},
         		error: function(data) {
+        			sweetAlert("Error", "Error occurs!", "error");
+
         			console.log("error" + JSON.stringify(data));
         		}
         	});  
