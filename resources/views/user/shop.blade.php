@@ -47,7 +47,7 @@
 						</div>
 						<div class="bottom-area d-flex px-3">
 							<div class="m-auto d-flex">
-								<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+								<a href="#" class="d-flex justify-content-center align-items-center text-center">
 									<span><i class="ion-ios-menu"></i></span>
 								</a>
 								<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
@@ -69,23 +69,24 @@
 								<div class="overlay"></div>
 							</a>
 							<div class="text py-3 pb-4 px-3 text-center">
-								<h3><a href="#">{{$data->name}}</a></h3>
+								<h3><a href="{{route('product', $data->id)}}" id="name">{{$data->name}}</a></h3>
 								<div class="d-flex">
 									<div class="pricing">
-										<p class="price"><span>RM{{$data->price}}</span></p>
+										<p class="price">RM<span id="price">{{$data->price}}</span></p>
 									</div>
 								</div>
 								<div class="bottom-area d-flex px-3">
-									<div class="m-auto d-flex">
-										<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-											<span><i class="ion-ios-menu"></i></span>
-										</a>
-										<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+									<div class="m-auto d-flex" id="parent_id">
+										<div id="testing"></div>
+										<button id="{{$data}}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
 											<span><i class="ion-ios-cart"></i></span>
-										</a>
-										<a href="#" class="heart d-flex justify-content-center align-items-center ">
+										</button>
+										<!-- <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+											<span><i class="ion-ios-menu"></i></span>
+										</a> -->
+										<button class="heart d-flex justify-content-center align-items-center ">
 											<span><i class="ion-ios-heart"></i></span>
-										</a>
+										</button>
 									</div>
 								</div>
 							</div>
@@ -118,4 +119,112 @@
 		</div>
 	</div>
 </section>
+@endsection
+
+@section('javascripts')
+<script type="text/javascript">
+
+console.log('Running');
+
+// let carts = document.querySelectorAll('.add-to-cart');
+// console.log(carts.length);
+$('.add-to-cart').click(function(){
+
+	// var product_id = $(this).attr('id');
+	var productData = $(this).attr('id');
+	productData = JSON.parse(productData);
+	// var testing_id = $(this).prev().attr('id');
+	// var parent_id = $(this).closest('div').attr('id');
+	console.log("product:" + productData);
+	// console.log("testing_id:" + testing_id);
+	// console.log("parent_id:" + parent_id);
+	//console.log(this); //show tag and attribute information
+	//insert data into localstorage
+	var product = {id: productData.id, name: productData.name, price: productData.price, inCart: 0, photo: productData.photo};
+	console.log("product selected:" + JSON.stringify(product));
+	cartNumbers();
+	totalCost(product.price);
+	setItems(product);
+})
+
+// for (let i = 0; i < carts.length; i++){
+// 	// console.log('Looping');
+// 	carts[i].addEventListener('click', () => {
+// 		// console.log("added to cart");
+// 		cartNumbers(products[i]);
+// 		totalCost(products[i]);
+// 	})
+// }
+
+function onLoadCartNumbers(){
+	let productNumbers = localStorage.getItem('cartNumbers'); //check localstorage 
+	if (productNumbers) {
+		document.querySelector('.cta a span').textContent = productNumbers; //cart number changed on nav bar
+	}
+}
+
+function cartNumbers(){
+	// console.log("the product is ", product);
+	let productNumbers = localStorage.getItem('cartNumbers');
+	productNumbers = parseInt(productNumbers);
+
+	if (productNumbers) {
+		localStorage.setItem('cartNumbers', productNumbers + 1);
+		document.querySelector('.cta a span').textContent = productNumbers + 1;
+	}else{
+		localStorage.setItem('cartNumbers', 1);
+		document.querySelector('.cta a span').textContent = 1;
+	}	
+
+}
+
+function setItems(product){
+	console.log("Inside of set items function");
+	console.log("this product is ",product);
+	let cartItems = localStorage.getItem('productsInCart');
+	// JSON.parse = data become javaScript object
+	cartItems = JSON.parse(cartItems);
+
+	if (cartItems != null) {
+
+		if (cartItems[product.name] == undefined) {
+			cartItems ={
+				...cartItems,
+				[product.name]: product
+			}
+		}else{
+			cartItems[product.name].price += product.price;
+		}
+		cartItems[product.name].inCart += 1;
+	}else{
+		product.inCart = 1;
+		cartItems = {
+			[product.name]: product
+		}
+	}
+	// json.stringtify = javaScript object become string
+	localStorage.setItem("productsInCart", JSON.stringify(cartItems));
+	
+}
+
+function totalCost(productPrice){
+	// console.log("The product price is", product.price);
+	let cartCost = localStorage.getItem('totalCost');
+	let price = parseInt(productPrice);
+	
+	// console.log("my cart cost is", cartCost);
+	// console.log(typeof cartCost); //show datatype
+
+	if (cartCost != null) {
+		cartCost = parseInt(cartCost);
+		localStorage.setItem("totalCost", cartCost + price);
+	}else{
+		localStorage.setItem("totalCost", price);
+	}
+	
+}
+
+onLoadCartNumbers();
+
+</script>
 @endsection
