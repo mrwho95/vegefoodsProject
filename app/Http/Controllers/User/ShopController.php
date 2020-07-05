@@ -69,8 +69,6 @@ class ShopController extends Controller
     }
 
     public function checkout(){
-        // $order = order::with('orderdetails')->get();
-        //  return response()->json(['data' => $order]);
 
         if (Auth::check()) {
             $arr['user'] = user::find(Auth::id());
