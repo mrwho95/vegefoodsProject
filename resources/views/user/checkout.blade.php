@@ -236,8 +236,12 @@
         			// $('#promo_table').DataTable().ajax.reload();
         			// alert('Data Updated');
         			sweetAlert("Congratulation", "Your order is taken place!", "success");
-        			window.location.href = orderPage;
+        			
         			localStorage.clear();
+
+        			setTimeout(function(){
+					  window.location.href = orderPage;
+					 },3000);
         		},
         		error: function(data) {
         			sweetAlert("Error", "Error occurs!", "error");
