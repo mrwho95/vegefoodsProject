@@ -8780,6 +8780,17 @@ h1, h2, h3, h4, h5,
         -moz-border-radius: 50%;
         -ms-border-radius: 50%;
         border-radius: 50%; }
+      .product .text .bottom-area button {
+        color: #fff;
+        width: 100%;
+        background: #82ae46;
+        width: 40px;
+        height: 40px;
+        margin: 0 auto;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        border-radius: 50%; }
       .product .text .bottom-area .m-auto {
         margin: 0 auto; }
   .product:hover {
