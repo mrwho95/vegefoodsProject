@@ -68,7 +68,7 @@
 					</div>
 					<div class="w-100"></div>
 					<div class="col-md-12">
-						<p style="color: #000;">{{$singleProduct->weight}} kg available in {{$singleProduct->quantity}} quantity</p>
+						<p style="color: #000;">{{$singleProduct->weight}} kg available in {{$singleProduct->quantity}} <strong>Stocks</strong></p>
 						<input type="hidden" id="quantityRemain" value="{{$singleProduct->quantity}}">
 					</div>
 				</div>
@@ -140,7 +140,7 @@
 								<p class="price"><span>RM{{$data->price}}</span></p>
 							</div>
 						</div>
-						<div class="bottom-area d-flex px-3">
+						<!-- <div class="bottom-area d-flex px-3">
 							<div class="m-auto d-flex">
 								<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
 									<span><i class="ion-ios-menu"></i></span>
@@ -152,7 +152,7 @@
 									<span><i class="ion-ios-heart"></i></span>
 								</a>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>

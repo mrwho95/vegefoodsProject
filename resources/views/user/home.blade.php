@@ -195,7 +195,7 @@
 										<p class="price"><span>RM{{$data->price}}</span></p>
 									</div>
 								</div>
-								<div class="bottom-area d-flex px-3">
+								<!-- <div class="bottom-area d-flex px-3">
 									<div class="m-auto d-flex">
 										<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
 											<span><i class="ion-ios-cart"></i></span>
@@ -207,7 +207,7 @@
 											<span><i class="ion-ios-heart"></i></span>
 										</a>
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
@@ -369,4 +369,17 @@
 		</div>
 	</div>
 </section>
+@endsection
+
+@section('javascripts')
+<script type="text/javascript">
+	function onLoadCartNumbers(){
+		let productNumbers = localStorage.getItem('cartNumbers'); //check localstorage 
+		if (productNumbers) {
+			document.querySelector('.cta a span').textContent = productNumbers; //cart number changed on nav bar
+		}
+	}
+
+	onLoadCartNumbers();
+</script>
 @endsection
