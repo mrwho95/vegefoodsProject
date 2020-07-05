@@ -41,5 +41,16 @@
 	$(document).ready( function () {
             $('#delivery_table').DataTable();
         });
+
+
+	function onLoadCartNumbers(){
+		let productNumbers = localStorage.getItem('cartNumbers'); //check localstorage 
+		if (productNumbers) {
+			document.querySelector('.cta a span').textContent = productNumbers; //cart number changed on nav bar
+		}
+	}
+
+	onLoadCartNumbers();
+
 </script>
 @endsection
