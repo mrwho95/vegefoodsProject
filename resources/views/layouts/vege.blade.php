@@ -102,9 +102,9 @@
                <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="{{route('login')}}" id="dropdown06" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown06">
-                  <a class="dropdown-item {{ Request::is('profile') ? 'active' : '' }}" href="{{route('profile')}}">Profile</a>
-                  <a class="dropdown-item {{ Request::is('address') ? 'active' : '' }}" href="{{route('address.index')}}">Address</a>
-                  <a class="dropdown-item {{ Request::is('order*') ? 'active' : '' }}" href="{{route('order')}}">Order</a>
+                  <a class="dropdown-item {{ Request::is('profile') ? 'active' : '' }}" href="{{route('profile')}}">My profile</a>
+                  <a class="dropdown-item {{ Request::is('address') ? 'active' : '' }}" href="{{route('address.index')}}">My address</a>
+                  <a class="dropdown-item {{ Request::is('order*') ? 'active' : '' }}" href="{{route('order')}}">My purchase</a>
                   <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
                 </div>
