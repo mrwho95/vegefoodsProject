@@ -57,6 +57,8 @@ class OrderController extends Controller
                 'wishQuantity' => $data['inCart']
             ]);
 
+            product::where(['id' => $data['id']])->update(['sell' => $data['inCart']]);
+
             $productStock = product::where(['id' => $data['id']])->value('quantity');
             if ($productStock >= $data['inCart'] ) {
                 $productStock = bcsub($productStock, $data['inCart']);
