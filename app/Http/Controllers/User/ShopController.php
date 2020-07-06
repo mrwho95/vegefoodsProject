@@ -22,6 +22,9 @@ class ShopController extends Controller
     public function cart(){
         if (Auth::check()) {
             $arr['address'] = address::where([['user_id', Auth::id()], ['defaultaddress', '1']])->first();
+            if (empty($arr['address'])) {
+                return redirect()->route('address.create')->with('warning', "Sorry, your default address not found. Please create an address.");
+            }
             $arr['defaultAddress'] = address::where([['user_id', Auth::id()], ['defaultaddress', '1']])->first();
             $address = json_decode(json_encode($arr['address']), true);
             $arr['deliveryfee'] = deliveryplace::where('state', $address['state'])->value('price');
