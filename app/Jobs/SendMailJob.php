@@ -34,7 +34,7 @@ class SendMailJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to("test@gmail.com")->send(new OrderPlacedMail($this->message));
+        Mail::to($this->email)->send(new OrderPlacedMail($this->message));
         
     }
 }
