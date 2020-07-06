@@ -8,6 +8,7 @@ use App\order;
 use App\orderdetails;
 use App\product;
 use Auth;
+use App\Jobs\SendMailJob;
 
 class OrderController extends Controller
 {
@@ -69,6 +70,12 @@ class OrderController extends Controller
             }
             
         }
+
+        //dispatch job email
+        $message = "Congratulation, your order is taken place!";
+        $email = $userDetails[3]['value'];
+        SendMailJob::dispatch($message, $email)->delay(now()->addSeconds(3));;
+        // return 'mail sent successfully';
 
         return response()->json(['success' => 'Data is successfully updated', 'data'=>"sucesss"]);    
     }
