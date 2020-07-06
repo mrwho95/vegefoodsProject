@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\customermessage;
 use DataTables;
+use App\order;
 
 class CustomerController extends Controller
 {
@@ -15,7 +16,8 @@ class CustomerController extends Controller
     }
 
     public function index(){
-    	return view('admin.customer');
+        $arr['order'] = order::with('orderdetails')->get();
+    	return view('admin.customer', $arr);
     }
 
     public function message(Request $request){
