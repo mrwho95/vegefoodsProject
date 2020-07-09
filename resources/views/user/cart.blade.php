@@ -42,14 +42,13 @@
 								<th>Total</th>
 							</tr>
 						</thead>
-						<tbody id="body">
+						<tbody class="body">
 							<!-- html from main2.js -->
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
-
 
 		<div class="row justify-content-end">
 			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
@@ -163,7 +162,9 @@
 @section('javascripts')
 <script type="text/javascript">
 
+
 	console.log("Cart Page running ");
+	
 	
 	let defaultAddress = $('#defaultAddress').val();
 	localStorage.setItem("defaultAddress", defaultAddress);
@@ -184,11 +185,10 @@
 
 	localStorage.setItem("deliveryFee", deliveryFee);
 
-
 function displayCart(){
 	let cartItems = localStorage.getItem("productsInCart");
 	cartItems = JSON.parse(cartItems);
-	let productContainer = document.querySelector("#body");
+	let productContainer = $(".body");
 
 	console.log(cartItems);
 	let cartCost = localStorage.getItem("totalCost"); 
@@ -251,23 +251,23 @@ function displayCart(){
 
 	if (cartItems && productContainer) {
 		// console.log('abc');
-		productContainer.innerHTML ='';
+		productContainer.html('');
 		Object.values(cartItems).map(item => {
-			productContainer.innerHTML += `
+			productContainer.append(`
 				<tr class="text-center">
-					<td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+					<td id="${item.name}" class="product-remove"><a><span class="ion-ios-close"></span></a></td>
 					<td><img src="./public/uploads/vegeFoodsPhoto/${item.photo}" style="width:150px; display=block;"></td>
 					<td class="product-name">
-						<h3>${item.name}</h3>
+						<h3 id="productName">${item.name}</h3>
 					</td>
 					<td class="price">RM${item.price}</td>
 					<td class="quantity">
 						<div class="input-group mb-3">
-							<button type="button" id="quantity-left-minus" class="quantity-left-minus btn"  data-type="minus" data-field="">
+							<button type="button" id="${item.name}minus" class="quantity-left-minus btn"  data-type="minus" data-field="">
 								<i class="ion-ios-remove"></i>
 							</button>
-							<input type="text" name="quantity" id="quantity" class="quantity form-control input-number" value="${item.inCart}" min="1" max="100">
-							<button type="button" id="quantity-right-plus" class="quantity-right-plus btn" data-type="plus" data-field="">
+							<input type="text" name="quantity" id="${item.name}quantity" class="quantity form-control input-number" value="${item.inCart}" min="1" max="100">
+							<button type="button" id="${item.name}plus" class="quantity-right-plus btn" data-type="plus" data-field="">
 								<i class="ion-ios-add"></i>
 							</button>
 						</div>
@@ -275,7 +275,7 @@ function displayCart(){
 
 					<td class="total">RM${item.price * item.inCart}</td>
 				</tr>
-			`;
+			`);
 		});
 	}else{
 		productContainer.innerHTML ='';
@@ -290,8 +290,172 @@ function onLoadCartNumbers(){
 	}
 }
 
+function cartNumbers(){
+	// console.log("the product is ", product);
+	let productNumbers = localStorage.getItem('cartNumbers');
+	productNumbers = parseInt(productNumbers);
+
+	if (productNumbers) {
+
+		localStorage.setItem('cartNumbers', productNumbers + 1);
+		document.querySelector('.cta a span').textContent = productNumbers + 1;
+	}else{
+		localStorage.setItem('cartNumbers', 1);
+		document.querySelector('.cta a span').textContent = 1;
+	}	
+
+}
+
+
 onLoadCartNumbers();
 displayCart();
+
+
+// $('.testing').click(function(){
+// 	console.log('okkkkk');
+// });
+
+
+//remove product when click
+//generate from javascript innerhtml or jquery append function will no have event
+//code html will have event when the tag ready to create event
+$('.body').on('click','.product-remove',function(){
+	console.log('test')
+	var products = localStorage.getItem("productsInCart");
+	products = JSON.parse(products);
+		//console.log(products);
+		var productNamefromIdAttr = $(this).attr('id');
+
+		//console.log("remove product " + productNamefromIdAttr);
+
+		// var productName = $('#productName').text();
+		// console.log("remove product 2 " + productName);
+		// localStorage.removeItem('productsInCart');
+
+		if (products != null) {
+			if (products[productNamefromIdAttr] != null) {
+
+				let productNumbers = localStorage.getItem('cartNumbers');
+				productNumbers = parseInt(productNumbers);
+				if (productNumbers) {
+					productNumbers = productNumbers - products[productNamefromIdAttr].inCart;
+					localStorage.setItem('cartNumbers', productNumbers);
+				}
+
+				delete products[productNamefromIdAttr];
+				localStorage.setItem("productsInCart", JSON.stringify(products));
+				//console.log("delete successful " + products[productNamefromIdAttr]);
+				console.log(products);
+				displayCart();
+				onLoadCartNumbers();
+			}else{
+				console.log("delete unsuccessful");
+			}
+		}
+
+	});
+
+
+$('.body').on('click','.quantity-right-plus',function(e){
+	// Stop acting like a button
+	e.preventDefault();
+		console.log('plus');
+		var command = "plus";
+
+		var products = localStorage.getItem("productsInCart");
+		products = JSON.parse(products);
+
+		var productNamefromIdAttr = $(this).attr('id');
+		var productName = productNamefromIdAttr.replace('plus','');
+		console.log(productName);
+		if (products != null) {
+			if (products[productName] != null) {
+				// Get the field name
+				// var quantity = parseInt($('#productNamefromIdAttrquantity').val());
+				// console.log("abc0" + quantity);
+				// // If is not undefined
+				// $('#productNamefromIdAttrquantity').val(quantity + 1);
+				    // Increment
+				products[productName].inCart += 1;
+				localStorage.setItem("productsInCart", JSON.stringify(products));
+				
+				console.log('plusend');
+			}
+
+			let productNumbers = localStorage.getItem('cartNumbers');
+			productNumbers = parseInt(productNumbers);
+
+			if (productNumbers) {
+				localStorage.setItem('cartNumbers', productNumbers + 1);
+				document.querySelector('.cta a span').textContent = productNumbers + 1;
+			}
+			totalCost(products[productName].price, command);
+			displayCart();
+			onLoadCartNumbers();
+		}else{
+			console.log("plus unsuccessful");
+		}
+
+	
+});
+
+$('.body').on('click','.quantity-left-minus',function(e){
+    // Stop acting like a button
+    var command = "minus";
+    e.preventDefault();
+    	var products = localStorage.getItem("productsInCart");
+		products = JSON.parse(products);
+
+		var productNamefromIdAttr = $(this).attr('id');
+		var productName = productNamefromIdAttr.replace('minus','');
+		if (products != null) {
+			console.log("abc");
+			if (products[productName] != null) {
+
+	        	products[productName].inCart -= 1;
+	        	if (products[productName].inCart == 0) {
+	        		delete products[productName];
+	        		localStorage.setItem("productsInCart", JSON.stringify(products));
+	        		displayCart();
+	        	}
+	        	localStorage.setItem("productsInCart", JSON.stringify(products));
+
+	        	let productNumbers = localStorage.getItem('cartNumbers');
+				productNumbers = parseInt(productNumbers);
+
+				if (productNumbers) {
+					localStorage.setItem('cartNumbers', productNumbers - 1);
+					document.querySelector('.cta a span').textContent = productNumbers - 1;
+				}
+				totalCost(products[productName].price, command);
+				displayCart();
+				onLoadCartNumbers();
+			}
+
+
+		}else{
+			console.log("minus unsuccessful");
+		}
+});
+
+function totalCost(productPrice, command){
+	// console.log("The product price is", product.price);
+	let cartCost = localStorage.getItem('totalCost');
+	cartCost = parseInt(cartCost);
+
+	let price = parseInt(productPrice);
+	
+	// console.log("my cart cost is", cartCost);
+	// console.log(typeof cartCost); //show datatype
+
+	if (cartCost != null) {
+		if (command == "minus") {
+			localStorage.setItem("totalCost", cartCost - price);
+		}else if(command == "plus"){
+			localStorage.setItem("totalCost", cartCost + price);
+		}
+	}
+}
 
 </script>
 @endsection
