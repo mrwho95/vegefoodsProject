@@ -15,7 +15,7 @@ class OrderController extends Controller
     //
 	public function index(){
         if (Auth::check()) {
-            $arr['order'] = order::where('user_id', Auth::id())->with('orderdetails')->get();
+            $arr['order'] = order::where('user_id', Auth::id())->with('orderdetails')->orderBy('created_at', 'DESC')->get();
             $arr['product'] = product::all();
         }else{
             $arr = '';
