@@ -85,43 +85,14 @@
 							<div class="form-group">
 								<label for="state">State / Federal Territories</label>
 								<div class="select-wrap">
-									<div class="icon"><span class="ion-ios-arrow-down"></span></div>
-									<select name="country" class="form-control">
-										<option value="Johor">Johor</option>
-										<option value="Kedah">Kedah</option>
-										<option value="Kelantan">Kelantan</option>
-										<option value="Malacca">Malacca</option>
-										<option value="Negeri Sembilan">Negeri Sembilan</option>
-										<option value="Pahang">Pahang</option>
-										<option value="Penang">Penang</option>
-										<option value="Perak">Perak</option>
-										<option value="Perlis">Perlis</option>
-										<option value="Sabah">Sabah</option>
-										<option value="Sarawak">Sarawak</option>
-										<option value="Selangor">Selangor</option>
-										<option value="Terengganu">Terengganu</option>
-										<option value="Kuala Lumpur">Kuala Lumpur</option>
-										<option value="Labuan">Labuan</option>
-										<option value="Putrajaya">Putrajaya</option>
-									</select>
+									<input type="text" id="state" name="state" class="form-control" placeholder="" required>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="country">Country</label>
-								<div class="select-wrap">
-									<div class="icon"><span class="ion-ios-arrow-down"></span></div>
-										<select name="country" id="country" class="form-control">
-										<option value="Malaysia">Malaysia</option>
-										<!-- <option value="France">France</option>
-										<option value="Italy">Italy</option>
-										<option value="Philippines">Philippines</option>
-										<option value="South Korea">South Korea</option>
-										<option value="Hongkong">Hongkong</option>
-										<option value="Japan">Japan</option> -->
-									</select>
-								</div>
+								<input type="text" id="country" name="country" class="form-control" placeholder="" required>
 							</div>
 						</div>
 						<button  type="submit" class="btn btn-primary py-3 px-4">Place an order</button>
