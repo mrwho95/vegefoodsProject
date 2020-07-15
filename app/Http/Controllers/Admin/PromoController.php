@@ -37,7 +37,7 @@ class PromoController extends Controller
 	        'name' => 'required|min:3',
 	        'code' => 'required|min:3',
 	        'discount' => 'required|min:3',
-	        'availability' => 'required|min:3',
+	        'availability' => 'required',
 	        'expired' => 'required|min:3',
 	    ]);
 
