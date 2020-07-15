@@ -172,12 +172,11 @@
 		});
 
 		var promo_id;
-		var deletePromoUrl = '{{ route("deletePromo", ":id") }}';
-		var fetchPromoUrl = '{{route("fetchPromo", ":id")}}';
 		var updatePromoUrl = '{{route("updatePromo")}}';
 
         //fetch promotion code into modal form based on id
         $(document).on('click', '.editPromo', function(){
+        	var fetchPromoUrl = '{{route("fetchPromo", ":id")}}';
         	promo_id = $(this).attr('id');
         	fetchPromoUrl = fetchPromoUrl.replace(':id', promo_id);
         	console.log(fetchPromoUrl);
@@ -221,6 +220,7 @@
 
         // delete promotion code
         $(document).on('click', '.deletePromo', function(){
+        	var deletePromoUrl = '{{ route("deletePromo", ":id") }}';
         	promo_id = $(this).attr('id');
         	deletePromoUrl = deletePromoUrl.replace(':id', promo_id);
         	$('#deletePromotionModal').modal('show');

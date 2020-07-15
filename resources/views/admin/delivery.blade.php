@@ -174,12 +174,11 @@
 		});
 
 		var delivery_id;
-		var deleteDeliveryUrl = '{{ route("deleteDelivery", ":id") }}';
-		var fetchDeliveryUrl = '{{route("fetchDelivery", ":id")}}';
 		var updateDeliveryUrl = '{{route("updateDelivery")}}';
 
         //fetch delivery data into modal form based on id
         $(document).on('click', '.editDelivery', function(){
+        	var fetchDeliveryUrl = '{{route("fetchDelivery", ":id")}}';
         	delivery_id = $(this).attr('id');
         	fetchDeliveryUrl = fetchDeliveryUrl.replace(':id', delivery_id);
         	console.log(fetchDeliveryUrl);
@@ -223,6 +222,7 @@
 
         // delete delivery place
         $(document).on('click', '.deleteDelivery', function(){
+        	var deleteDeliveryUrl = '{{ route("deleteDelivery", ":id") }}';
         	delivery_id = $(this).attr('id');
         	deleteDeliveryUrl = deleteDeliveryUrl.replace(':id', delivery_id);
         	$('#deleteDeliveryModal').modal('show');
