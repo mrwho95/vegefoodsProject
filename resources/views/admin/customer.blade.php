@@ -23,6 +23,7 @@
 					<th>Discount</th>
 					<th>Total Cost</th>
 					<th>Status</th>
+                    <th>Created At</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -58,6 +59,7 @@
                 	</td>
                     <td>{{ $elements['totalprice'] }}</td>
                     <td>{{ $elements['status'] }}</td>
+                    <td>{{ $elements['created_at']}}</td>
 					<td><button class="btn btn-warning btn-sm">Update</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-danger btn-sm">Delete</button></td>
                 </tr>
             @endforeach
