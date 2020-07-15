@@ -1,4 +1,9 @@
 @extends('layouts.vege')
+
+@section('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+@endsection
+
 @section('content')
 <div class="hero-wrap hero-bread" style="background-image: url('{{asset('images/bg_1.jpg')}}');">
 	<div class="container">
@@ -183,6 +188,8 @@
 @endsection
 
 @section('javascripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
 <script>
 	console.log("single product page running");
 
@@ -212,6 +219,7 @@
 		cartNumbers(productQuantity);
 		totalCost(specificTotalProductPrice);
 		setItems(product)
+		sweetAlert("Successful", "Item is added into cart!", "success");
 	});
 
 	function setItems(product){

@@ -1,4 +1,9 @@
 @extends('layouts.vege')
+
+@section('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+@endsection
+
 @section('content')
 <div class="hero-wrap hero-bread" style="background-image: url('{{asset('images/bg_1.jpg')}}');">
 	<div class="container">
@@ -122,6 +127,7 @@
 @endsection
 
 @section('javascripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script type="text/javascript">
 
 console.log('Running');
@@ -145,6 +151,7 @@ $('.add-to-cart').click(function(){
 	cartNumbers();
 	totalCost(product.price);
 	setItems(product);
+	sweetAlert("Successful", "Item is added into cart!", "success");
 })
 
 // for (let i = 0; i < carts.length; i++){
