@@ -28,10 +28,11 @@ class ShopController extends Controller
             $arr['defaultAddress'] = address::where([['user_id', Auth::id()], ['defaultaddress', '1']])->first();
             $address = json_decode(json_encode($arr['address']), true);
             $arr['deliveryfee'] = deliveryplace::where('state', $address['state'])->value('price');
+            return view('user.cart', $arr);
         }else{
-            $arr = '';
+            return redirect()->route('register')->with('warning', "Recommend to register an new account first.");
         }
-    	return view('user.cart', $arr);
+    	
     }
 
     public function checkDeliveryFee(Request $request){
