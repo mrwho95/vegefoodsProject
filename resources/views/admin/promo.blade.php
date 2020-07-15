@@ -3,6 +3,10 @@
 @section('styles')
 <!-- datatables -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+
+<!-- sweetAlert2 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+
 @endsection
 
 @section('content')
@@ -133,6 +137,7 @@
 @endsection
 
 @section('javascripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 <script>
 	$(document).ready(function (){
@@ -213,14 +218,16 @@
         			console.log(data);
         			$('#editPromotionModal').modal('hide');  
         			$('#promo_table').DataTable().ajax.reload();
-        			alert('Data Updated');
+        			sweetAlert("Data Edited", "Data is edited successfully!", "success");
+        			// alert('Data Updated');
         		}  
         	});  
         });  
 
         // delete promotion code
+        var deletePromoUrl; 
         $(document).on('click', '.deletePromo', function(){
-        	var deletePromoUrl = '{{ route("deletePromo", ":id") }}';
+        	deletePromoUrl = '{{ route("deletePromo", ":id") }}';
         	promo_id = $(this).attr('id');
         	deletePromoUrl = deletePromoUrl.replace(':id', promo_id);
         	$('#deletePromotionModal').modal('show');
@@ -232,7 +239,8 @@
         		{
         			$('#deletePromotionModal').modal('hide');
         			$('#promo_table').DataTable().ajax.reload();
-        			alert('Data Deleted');
+        			sweetAlert("Data Deleted", "Data is deleted successfully!", "success");
+        			// alert('Data Deleted');
         		}
         	})
         });
