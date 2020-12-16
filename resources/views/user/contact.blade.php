@@ -75,8 +75,7 @@
 			</div>
 
 			<div class="col-md-6 d-flex">
-				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.7753931271527!2d101.70778751444668!3d3.1538394540040637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc37e14b0574d3%3A0x8937035ed7cfab33!2sSoho%20Suites%20KLCC!5e0!3m2!1sen!2smy!4v1592662395588!5m2!1sen!2smy" width="100%" height="600" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
-                </iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.91414419078!2d101.67586581540995!3d3.117412654214684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc498db308ba75%3A0x285d21e8b6f1735e!2sMenara%20Mbmr!5e0!3m2!1sen!2smy!4v1608138194173!5m2!1sen!2smy" width="600" height="600" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 			</div>
 		</div>
 	</div>
