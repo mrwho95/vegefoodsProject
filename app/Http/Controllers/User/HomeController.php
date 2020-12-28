@@ -30,7 +30,7 @@ class HomeController extends Controller
                 order::where('id', $elements['id'])->update(['status' => "Prepare for delivery"]);
             }elseif($day4 == $today){
                 order::where('id', $elements['id'])->update(['status' => "Out to delivery"]);
-            }elseif($day5 == $today){
+            }elseif($day5 <= $today){
                 order::where('id', $elements['id'])->update(['status' => "Completed"]);
             }
         }
