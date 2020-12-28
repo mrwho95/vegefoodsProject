@@ -27,6 +27,8 @@ Route::get('/about', 'User\AboutController@index')->name('about');
 
 Route::get('/blog', 'User\BlogController@index')->name('blog');
 
+Route::get('/singleBlog', 'User\BlogController@singleBlog')->name('singleBlog');
+
 Route::get('/contact', 'User\ContactController@index')->name('contact');
 
 Route::get('/storeMessage', 'User\ContactController@storeMessage')->name('storeMessage');
