@@ -14,7 +14,10 @@ class HomeController extends Controller
     public function index(){
     	$arr['allProduct'] = product::all()->random(8);
 
-    	$today = Carbon::now()->format('Y-m-d');
+    	// $today = Carbon::now()->format('Y-m-d');
+        $today = now()->format('Y-m-d');
+        // info($today); store info at storage / logs/ laravel.log
+
             // return $day;
     	$orderData = order::where('user_id', Auth::id())->with('orderdetails')->get();
         foreach ($orderData as $key => $elements) {
