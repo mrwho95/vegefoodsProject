@@ -57,9 +57,7 @@ class ShopController extends Controller
 
         $arr['deliveryfee'] = deliveryplace::where([['city', $city], ['state', $state], ['postcode', $postcode], ['country', $country]])->value('price');
 
-        if (empty($arr['deliveryfee'])) {
-            return redirect()->route('cart')->with('warning', "delivery fee of that place not found.");
-        }
+        if (empty($arr['deliveryfee'])) return redirect()->route('cart')->with('warning', "delivery fee of that place not found.");
 
         $arr['address'] = array(
             'city' => $city,
@@ -73,12 +71,10 @@ class ShopController extends Controller
     }
 
     public function checkout(){
-
+        $arr = '';
         if (Auth::check()) {
             $arr['user'] = user::find(Auth::id());
             $arr['receiver'] = address::where([['defaultaddress', 1], ['user_id', Auth::id()]])->first();
-        }else{
-            $arr = '';
         }
     	return view('user.checkout', $arr);
     }
@@ -89,8 +85,7 @@ class ShopController extends Controller
             $arr['allProduct'] = product::where('category', $parameter)->paginate(8);
             $arr['allProductData'] = product::all();
             return view('user.shop', $arr); 
-        }
-        else{
+        } else {
             $arr['singleProduct'] = product::find($parameter);
             $category = product::where('id', $parameter)->value('category');
             // $arr['relatedProduct'] = product::where('category', $category)->get()->random(4);
