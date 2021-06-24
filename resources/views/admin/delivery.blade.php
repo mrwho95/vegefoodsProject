@@ -42,7 +42,7 @@
 			</thead>
 		</table><br>    
 	</div>
-	<div class="shadow-lg p-3 mb-5 bg-white rounded" style="padding: 5%;">
+	<div class="shadow-lg p-3 mb-5 bg-white rounded" style="padding: 5%; margin-top:5%;">
 		<h4>New Delivery Place</h4>
 		<form action="{{route('addDelivery')}}" class="bg-white p-5 contact-form" method="POST">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
