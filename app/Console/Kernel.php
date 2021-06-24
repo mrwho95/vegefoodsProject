@@ -24,7 +24,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call('App\Http\Controllers\HomeController@index')->everyMinute();
+        $schedule->command('minute:update')->everyMinute(); // call command can refer to php artisan list (commands folder with every minutes file)
+
+        
+
     }
 
     /**
