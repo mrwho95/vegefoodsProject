@@ -70,6 +70,8 @@ Route::get('/delivery', 'User\DeliveryController@index')->name('delivery');
 //admin
 Route::get('/adminDashboard', 'Admin\DashboardController@index')->name('adminDashboard');
 
+Route::get('/admin/calender', 'Admin\calenderController@index')->name('adminCalender');
+
 Route::get('/adminPromotion', 'Admin\PromoController@index')->name('adminPromotion');
 
 Route::post('/addPromotion', 'Admin\PromoController@addPromo')->name('addPromo');
@@ -105,5 +107,3 @@ Route::post('/updateDelivery', 'Admin\DeliveryController@updateDelivery')->name(
 Route::get('/deleteDelivery/{id}', 'Admin\DeliveryController@deleteDelivery')->name('deleteDelivery');
 
 // Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
