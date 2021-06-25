@@ -63,7 +63,7 @@ class HomeController extends Controller
                     $orderData = ['status' => "Completed"];
                     break;
             }
-            order::where('id', $v['id'])->update($order);
+            order::where('id', $v['id'])->update($orderData);
 
         }
 
