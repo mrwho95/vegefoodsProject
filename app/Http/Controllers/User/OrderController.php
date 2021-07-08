@@ -49,25 +49,22 @@ class OrderController extends Controller
 
         // Create method you are passing an array, setting properties in model and persists in the database in one shot.
         $product = json_decode($request['product'],true);
-        foreach ($product as $key => $data) {
+        foreach ($product as $v) {
             $orderDetails->create([
                 'order_id' => $order->id, 
-                'product_id' => $data['id'],
-                'productName' => $data['name'],
-                'productPrice' => $data['price'],
-                'wishQuantity' => $data['inCart']
+                'product_id' => $v['id'],
+                'productName' => $v['name'],
+                'productPrice' => $v['price'],
+                'wishQuantity' => $v['inCart']
             ]);
 
-            product::where(['id' => $data['id']])->update(['sell' => $data['inCart']]);
+            product::where(['id' => $v['id']])->update(['sell' => $v['inCart']]);
 
-            $productStock = product::where(['id' => $data['id']])->value('quantity');
-            if ($productStock >= $data['inCart'] ) {
-                $productStock = bcsub($productStock, $data['inCart']);
-                $update = product::where('id',  $data['id'])->update(['quantity' => $productStock]);
-            }else{
-                //error
-                 return response()->json(['error' => 'Failed to order', 'data'=>"product stock not enough."]);
-            }
+            $productStock = product::where(['id' => $v['id']])->value('quantity');
+            if ($productStock < $v['inCart']) return response()->json(['error' => 'Failed to order', 'data'=>"product stock not enough."]);
+
+            $productStock = bcsub($productStock, $v['inCart']);
+            $update = product::where('id',  $v['id'])->update(['quantity' => $productStock]);
             
         }
 
