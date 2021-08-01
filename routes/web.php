@@ -68,6 +68,10 @@ Route::get('address/setDefaultAddress/{id}', 'User\AddressController@setDefaultA
 Route::get('/delivery', 'User\DeliveryController@index')->name('delivery');
 
 //admin
+Route::get('/adminNews', 'Admin\newsController@index')->name('adminNews');
+
+Route::post('/addNews', 'Admin\newsController@addNews')->name('addNews');
+
 Route::get('/adminDashboard', 'Admin\DashboardController@index')->name('adminDashboard');
 
 Route::get('/admin/calender', 'Admin\calenderController@index')->name('adminCalender');
