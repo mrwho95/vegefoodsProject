@@ -89,6 +89,8 @@
               <a class="nav-link dropdown-toggle" href="{{route('adminPromotion')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item " href="{{route('adminPromotion')}}">Promotion</a>
+                <a class="dropdown-item " href="{{route('adminNews')}}">News</a>
+                <a class="dropdown-item " href="{{route('adminCalender')}}">Calender</a>
                 <a class="dropdown-item " href="{{route('adminDelivery')}}">Delivery</a>
               </div>
             </li>
@@ -220,7 +222,7 @@
   <script src="{{asset('js/google-map.js')}}"></script>
   <script src="{{asset('js/main.js')}}"></script>
 
-  <script>
+ {{--  <script>
     $(document).ready(function(){
 
     var quantitiy=0;
@@ -255,7 +257,7 @@
         });
         
     });
-  </script>
+  </script> --}}
 
   @yield('javascripts')
   @include('sweetalert::alert')

@@ -71,6 +71,55 @@
 	</div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="deleteNewsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Delete News / Blogs</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p align="center" style="margin:0;">Are you sure you want to remove this News / Blogs?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" id="deleteNews">Delete</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="editNewsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Edit News / Blogs</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form method="POST" id="editNewsForm" enctype="multipart/form-data">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					@method('PUT')
+					<input type="text" name="title" class="form-control title" placeholder="Title" required><br>
+					<textarea type="text" class="description" placeholder="News / Blogs Description" name="description" style="width: 100%; height: 150px;" required></textarea>
+					<label for="newsPhoto">Picture</label>
+					<input type="file" name="newsPhoto"><br>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Update</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						{{-- <input type="hidden" name="promoId" id="promoId"> --}}
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
 @endsection
 
 @section('javascripts')
@@ -113,70 +162,88 @@
 		// var updatePromoUrl = '{{route("updatePromo")}}';
 
         //fetch promotion code into modal form based on id
-        // $(document).on('click', '.editPromo', function(){
-        // 	var fetchPromoUrl = '{{route("fetchPromo", ":id")}}';
-        // 	promo_id = $(this).attr('id');
-        // 	fetchPromoUrl = fetchPromoUrl.replace(':id', promo_id);
-        // 	console.log(fetchPromoUrl);
-        // 	$.ajax({  
-        // 		url:fetchPromoUrl,  
-        // 		method:"GET",  
-        // 		data:{promo_id:promo_id},  
-        // 		dataType:"json",  
-        // 		success:function(data)  
-        // 		{  
-        // 			console.log(data);
-        // 			$('#editPromotionModal').modal('show');
-        // 			$('#name').val(data['name']);  
-        // 			$('#code').val(data['code']);
-        // 			$('#discount').val(data['discount']);
-        // 			$('#availability').val(data['availability']);
-        // 			$('#expired').val(data['expired']);
-        // 			$('#promoId').val(promo_id);    
-        // 		}  
-        // 	})  
-        // });
+        $(document).on('click', '.editNews', function(){
+        	var url = '{{route("fetchNews", ":id")}}';
+        	var news_id = $(this).attr('id');
+        	url = url.replace(':id', news_id);
+        	// console.log(fetchPromoUrl);
+        	$.ajax({  
+        		url:url,  
+        		method:"GET",  
+        		data:{id:news_id},  
+        		dataType:"json",  
+        		success:function(data)  
+        		{  
+        			console.log("data",data);
+        			$('#editNewsModal').modal('show').attr('data-info',news_id);
+        			$('#editNewsForm').find('.title').val(data['title']);  
+        			$('#editNewsForm').find('.description').val(data['description']);
+        			// $('#discount').val(data['discount']);
+        			// $('#availability').val(data['availability']);
+        			// $('#expired').val(data['expired']);
+        			// $('#promoId').val(promo_id);    
+        		},
+        		error: function (request, status, error) {
+			        sweetAlert(request.responseText, "", 'error');
+			    }
+        	})  
+        });
 
         //update promotion code
-        // $(document).on('submit', '#editPromotionForm', function(event){  
-        // 	event.preventDefault(); 
-        // 	console.log(updatePromoUrl);
-        // 	$.ajax({  
-        // 		url:updatePromoUrl,  
-        // 		method:'POST',  
-        // 		data:$(this).serialize(), 
-        // 		dataType:"json", 
-        // 		success:function(data)  
-        // 		{  
-        // 			console.log(data);
-        // 			$('#editPromotionModal').modal('hide');  
-        // 			$('#promo_table').DataTable().ajax.reload();
-        // 			sweetAlert("Data Edited", "Data is edited successfully!", "success");
-        // 			// alert('Data Updated');
-        // 		}  
-        // 	});  
-        // });  
+        $(document).on('submit', '#editNewsForm', function(event){  
+        	event.preventDefault(); 
+        	// console.log(updatePromoUrl);
+        	var id = $(this).parents('#editNewsModal').data('info');
+        	if (!id) { 
+        		sweetAlert("No Data Found", "", "error");
+        		$('#editNewsForm').modal('hide');
+        		return;
+        	}
+        	var url = '{{ route("updateNews", ":id") }}';
+        	url = url.replace(':id', id);
+        	$.ajax({  
+        		url:url,  
+        		method:'PUT',  
+        		data:$(this).serialize(), 
+        		dataType:"json", 
+        		success:function(data)  
+        		{  
+        			console.log("data",data);
+        			$('#editNewsModal').modal('hide');  
+        			$('#news_table').DataTable().ajax.reload();
+        			sweetAlert("News / Blogs Updated", "", "success");
+        			// alert('Data Updated');
+        		}  
+        	});  
+        });  
 
-        // delete promotion code
-        // var deletePromoUrl; 
-        // $(document).on('click', '.deletePromo', function(){
-        // 	deletePromoUrl = '{{ route("deletePromo", ":id") }}';
-        // 	promo_id = $(this).attr('id');
-        // 	deletePromoUrl = deletePromoUrl.replace(':id', promo_id);
-        // 	$('#deletePromotionModal').modal('show');
-        // });
-        // $('#deletePromotion').click(function(){
-        // 	$.ajax({
-        // 		url:deletePromoUrl,
-        // 		success:function(data)
-        // 		{
-        // 			$('#deletePromotionModal').modal('hide');
-        // 			$('#promo_table').DataTable().ajax.reload();
-        // 			sweetAlert("Data Deleted", "Data is deleted successfully!", "success");
-        // 			// alert('Data Deleted');
-        // 		}
-        // 	})
-        // });
+        // get id and show delete modal
+        $(document).on('click', '.deleteNews', function(){
+        	var news_id = $(this).attr('id');
+        	$('#deleteNewsModal').modal('show').attr('data-info',news_id);
+        });
+
+        // delete news / blog code
+        $('#deleteNews').click(function(){
+        	var id = $(this).parents('#deleteNewsModal').data('info');
+        	if (!id) { 
+        		sweetAlert("No Data Found", "", "error");
+        		$('#deleteNewsModal').modal('hide');
+        		return;
+        	}
+        	var url = '{{ route("deleteNews", ":id") }}';
+        	url = url.replace(':id', id);
+        	$.ajax({
+        		url:url,
+        		success:function(data)
+        		{
+        			$('#deleteNewsModal').modal('hide');
+        			$('#news_table').DataTable().ajax.reload();
+        			sweetAlert("Data Deleted", "Deleted successfully!", "success");
+        			// alert('Data Deleted');
+        		}
+        	})
+        });
     });
 </script>
 @endsection

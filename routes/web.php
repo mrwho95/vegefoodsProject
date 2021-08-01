@@ -72,6 +72,12 @@ Route::get('/adminNews', 'Admin\newsController@index')->name('adminNews');
 
 Route::post('/addNews', 'Admin\newsController@addNews')->name('addNews');
 
+Route::get('/fetchNews/{id}', 'Admin\newsController@fetchNews')->name('fetchNews');
+
+Route::get('/deleteNews/{id}', 'Admin\newsController@deleteNews')->name('deleteNews');
+
+Route::put('/updateNews/{id}', 'Admin\newsController@updateNews')->name('updateNews');
+
 Route::get('/adminDashboard', 'Admin\DashboardController@index')->name('adminDashboard');
 
 Route::get('/admin/calender', 'Admin\calenderController@index')->name('adminCalender');
