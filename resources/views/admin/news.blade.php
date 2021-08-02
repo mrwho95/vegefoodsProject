@@ -103,12 +103,12 @@
 			</div>
 			<div class="modal-body">
 				<form method="POST" id="editNewsForm" enctype="multipart/form-data">
+					<input type="hidden" name="newsid" class="newsid">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
-					@method('PUT')
 					<input type="text" name="title" class="form-control title" placeholder="Title" required><br>
 					<textarea type="text" class="description" placeholder="News / Blogs Description" name="description" style="width: 100%; height: 150px;" required></textarea>
-					<label for="newsPhoto">Picture</label>
-					<input type="file" name="newsPhoto"><br>
+					<label for="newsPhoto">News / Blogs Picture</label>
+					<input type="file" class="newsPhoto" class="form-control" name="newsPhoto"><br>
 					<div class="modal-footer">
 						<button type="submit" class="btn btn-primary">Update</button>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -147,8 +147,8 @@
 				name: 'description'
 			},
 			{
-				data: 'created_at',
-				name: 'created_at'
+				data: 'updated_at',
+				name: 'updated_at'
 			},
 			{
 				data: 'action',
@@ -161,10 +161,10 @@
 		// var promo_id;
 		// var updatePromoUrl = '{{route("updatePromo")}}';
 
-        //fetch promotion code into modal form based on id
+        //fetch news into modal form based on id
         $(document).on('click', '.editNews', function(){
         	var url = '{{route("fetchNews", ":id")}}';
-        	var news_id = $(this).attr('id');
+        	var news_id = $(this).data('id');
         	url = url.replace(':id', news_id);
         	// console.log(fetchPromoUrl);
         	$.ajax({  
@@ -175,9 +175,10 @@
         		success:function(data)  
         		{  
         			console.log("data",data);
-        			$('#editNewsModal').modal('show').attr('data-info',news_id);
+        			$('#editNewsModal').modal('show');
         			$('#editNewsForm').find('.title').val(data['title']);  
         			$('#editNewsForm').find('.description').val(data['description']);
+        			$('#editNewsForm').find('.newsid').val(news_id);
         			// $('#discount').val(data['discount']);
         			// $('#availability').val(data['availability']);
         			// $('#expired').val(data['expired']);
@@ -189,43 +190,72 @@
         	})  
         });
 
-        //update promotion code
+        //update news
         $(document).on('submit', '#editNewsForm', function(event){  
-        	event.preventDefault(); 
-        	// console.log(updatePromoUrl);
-        	var id = $(this).parents('#editNewsModal').data('info');
-        	if (!id) { 
-        		sweetAlert("No Data Found", "", "error");
-        		$('#editNewsForm').modal('hide');
-        		return;
-        	}
-        	var url = '{{ route("updateNews", ":id") }}';
-        	url = url.replace(':id', id);
+        	event.preventDefault();
+        	// var fd = new FormData();		    
+		    // var title = $(this).find('.title').val();
+		    // var description = $(this).find('.description').val();
+
+		    // console.log("file",newsPhoto);
+
+		    
+		    // var newsPhoto = $(this).find('.newsPhoto')[0].files[0].name;
+		    // if (newsPhoto) {
+		    // 	fd.append('newsPhoto',newsPhoto);
+		    // }
+		    // fd.append('title',title);
+		    // fd.append('description',description);
+		    // console.log("fd",newsPhoto);
+		    // console.log("fd",title);
+
+
+        	// var id = $(this).parents('#editNewsModal').data('id');
+        	// // console.log("id",id);
+        	// if (!id) { 
+        	// 	sweetAlert("No Data Found", "", "error");
+        	// 	$('#editNewsForm').modal('hide');
+        	// 	return;
+        	// }
+        	// fd.append('id',id);
+        	// console.log($(this).serializeArray());
+        	// The serialize() method creates a URL encoded text string by serializing form values.
+        	// The .serializeArray() method creates a JavaScript array of objects, ready to be encoded as a JSON string.
         	$.ajax({  
-        		url:url,  
-        		method:'PUT',  
-        		data:$(this).serialize(), 
-        		dataType:"json", 
+        		url:'{{ route("updateNews") }}',  
+        		method:'POST',  
+        		data:new FormData(this), 
+        		dataType:'JSON',
+			   	contentType: false,
+			   	cache: false,
+			   	processData: false,
         		success:function(data)  
         		{  
-        			console.log("data",data);
+        			console.log("data1111",data);
         			$('#editNewsModal').modal('hide');  
         			$('#news_table').DataTable().ajax.reload();
         			sweetAlert("News / Blogs Updated", "", "success");
         			// alert('Data Updated');
-        		}  
+        		},
+        		error: function (request, status, error) {
+        			console.log("request",request);
+        			console.log("status",status);
+        			console.log("error",error);
+
+			        sweetAlert(status, "", 'error');
+			    }
         	});  
         });  
 
         // get id and show delete modal
         $(document).on('click', '.deleteNews', function(){
-        	var news_id = $(this).attr('id');
-        	$('#deleteNewsModal').modal('show').attr('data-info',news_id);
+        	var news_id = $(this).data('id');
+        	$('#deleteNewsModal').modal('show').attr('data-id',news_id);
         });
 
         // delete news / blog code
         $('#deleteNews').click(function(){
-        	var id = $(this).parents('#deleteNewsModal').data('info');
+        	var id = $(this).parents('#deleteNewsModal').data('id');
         	if (!id) { 
         		sweetAlert("No Data Found", "", "error");
         		$('#deleteNewsModal').modal('hide');

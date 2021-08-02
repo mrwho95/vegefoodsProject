@@ -76,7 +76,7 @@ Route::get('/fetchNews/{id}', 'Admin\newsController@fetchNews')->name('fetchNews
 
 Route::get('/deleteNews/{id}', 'Admin\newsController@deleteNews')->name('deleteNews');
 
-Route::put('/updateNews/{id}', 'Admin\newsController@updateNews')->name('updateNews');
+Route::post('/updateNews', 'Admin\newsController@updateNews')->name('updateNews');
 
 Route::get('/adminDashboard', 'Admin\DashboardController@index')->name('adminDashboard');
 

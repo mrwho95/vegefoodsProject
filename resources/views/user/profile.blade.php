@@ -1,7 +1,7 @@
 @extends('layouts.vege')
 @section('content')
 <div class="container">
-	<h3>User's Profile</h3>
+	<h3>Customer's Profile</h3>
 	@if(session('success'))
 		<div class="alert alert-success alert-dismissible fade show" role="alert">
 			{{session('success')}}
@@ -44,7 +44,7 @@
 			</div>
 		</div>
 	</div>
-	<h4>Edit User's Profile</h4>
+	<h4>Edit Customer's Profile</h4>
 	<div class="card" style="padding: 5%;">
 		<form action="{{route('updateProfile')}}" class="billing-form" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">

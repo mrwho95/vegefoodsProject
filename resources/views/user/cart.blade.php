@@ -71,7 +71,9 @@
 					<p>Enter your destination to get a shipping estimate</p>
 					<form action="{{route('checkDeliveryFee')}}" class="info" method="post">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+						@if(!empty($defaultAddress))
 						<input type="hidden" id="defaultAddress" value="{{$defaultAddress}}" />
+						@endif
 						<div class="form-group">
 							<label for="city">Town/City</label>
 							@if(!empty($address))

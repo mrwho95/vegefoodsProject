@@ -71,7 +71,7 @@ class ShopController extends Controller
     }
 
     public function checkout(){
-        $arr = '';
+        $arr = [];
         if (Auth::check()) {
             $arr['user'] = user::find(Auth::id());
             $arr['receiver'] = address::where([['defaultaddress', 1], ['user_id', Auth::id()]])->first();

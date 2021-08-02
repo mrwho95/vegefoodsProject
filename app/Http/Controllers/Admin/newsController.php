@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\news;
 use Validator;
 use DataTables;
-
+use Carbon\Carbon;
 
 class newsController extends Controller
 {
@@ -26,11 +26,12 @@ class newsController extends Controller
                 return '<img src="'.$url.'" border="0" width="100" height="150" class="img-rounded" align="center" />';
             })
                 ->addColumn('action', function($data){
-                    $button = '<button type="button" name="edit" id="'.$data->id.'" class="editNews btn btn-primary btn-sm">Edit</button>';
-                    $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="'.$data->id.'" class="deleteNews btn btn-danger btn-sm">Delete</button>';
+                    $button = '<button type="button" name="edit" data-id="'.$data->id.'" class="editNews btn btn-primary btn-sm">Edit</button>';
+                    $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" data-id="'.$data->id.'" class="deleteNews btn btn-danger btn-sm">Delete</button>';
                     return $button;
             })
             ->rawColumns(['News / Blogs','action'])
+            ->editColumn('updated_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->updated_at); return $formatedDate; })
             ->make(true);
         }
         return view('admin.news');
@@ -66,19 +67,18 @@ class newsController extends Controller
         echo json_encode($data); 
     }
 
-    public function updateNews($id, Request $request, news $news) {
+    public function updateNews(Request $request, news $news) {
         
-        // $validator = Validator::make($request->all(), [
-        //     'name' => 'required|min:3',
-        //     'code' => 'required|min:3',
-        //     'discount' => 'required|min:3',
-        //     'availability' => 'required|min:3',
-        //     'expired' => 'required|min:3',
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|min:3',
+            'description' => 'required|min:3',
+        ]);
+        // dd($request->newsid);
+        // exit();
+        if ($validator->fails()) {
+            return back()->with('warning', $validator->messages()->all()[0])->withInput();
+        }
 
-        // if ($validator->fails()) {
-        //     return back()->with('warning', $validator->messages()->all()[0])->withInput();
-        // }
         $form_data = [            
             'title'    =>  $request->title,
             'description'     =>  $request->description,
@@ -92,8 +92,8 @@ class newsController extends Controller
             $file->move('public/uploads/vegeFoodsPhoto/', $filename);
             $form_data['news_photo'] = $filename;
         }
-        news::whereId($id)->update($form_data);
-        $news = news::find($id);
+        news::whereId($request->newsid)->update($form_data);
+        $news = news::find($request->newsid);
         return $news;
     }
 
