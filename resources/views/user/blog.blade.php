@@ -4,8 +4,8 @@
 	<div class="container">
 		<div class="row no-gutters slider-text align-items-center justify-content-center">
 			<div class="col-md-9 ftco-animate text-center">
-				<p class="breadcrumbs"><span class="mr-2"><a href="{{route('home')}}">Home</a></span> <span>Blog</span></p>
-				<h1 class="mb-0 bread">Blog</h1>
+				<p class="breadcrumbs"><span class="mr-2"><a href="{{route('home')}}">Home</a></span></p>
+				<h1 class="mb-0 bread">News / Blog</h1>
 			</div>
 		</div>
 	</div>
@@ -16,102 +16,28 @@
 		<div class="row">
 			<div class="col-lg-8 ftco-animate">
 				<div class="row">
-					<div class="col-md-12 d-flex ftco-animate">
-						<div class="blog-entry align-self-stretch d-md-flex">
-							<a href="{{route('singleBlog')}}" class="block-20" style="background-image: url('{{asset('images/image_1.jpg')}}');">
-							</a>
-							<div class="text d-block pl-md-4">
-								<div class="meta mb-3">
-									<div><a href="#">July 20, 2019</a></div>
-									<div><a href="#">Admin</a></div>
-									<div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+					@if(count($blogs) > 0)
+						@foreach($blogs as $blog)
+							<div class="col-md-12 d-flex ftco-animate">
+								<div class="blog-entry align-self-stretch d-md-flex">
+									<a href="{{route('singleBlog')}}" class="block-20" style="background-image: url('{{asset('uploads/vegeFoodsPhoto/'.$blog->news_photo)}}');">
+									</a>
+									<div class="text d-block pl-md-4">
+										<div class="meta mb-3">
+											<div><p>{{$blog->created_at}}</p></div>
+											<div><p>Admin</p></div>
+											{{-- <div><p class="meta-chat"><span class="icon-chat"></span> 3</p></div> --}}
+										</div>
+										<h3 class="heading"><p>{{$blog->title}}</p></h3>
+										<p>{{$blog->description}}</p>
+										<p><a href="{{route('singleBlog')}}" class="btn btn-primary py-2 px-3">Read more</a></p>
+									</div>
 								</div>
-								<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-								<p><a href="{{route('singleBlog')}}" class="btn btn-primary py-2 px-3">Read more</a></p>
 							</div>
-						</div>
-					</div>
-					<div class="col-md-12 d-flex ftco-animate">
-						<div class="blog-entry align-self-stretch d-md-flex">
-							<a href="{{route('singleBlog')}}" class="block-20" style="background-image: url('{{asset('images/image_2.jpg')}}');">
-							</a>
-							<div class="text d-block pl-md-4">
-								<div class="meta mb-3">
-									<div><a href="#">July 20, 2019</a></div>
-									<div><a href="#">Admin</a></div>
-									<div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-								</div>
-								<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-								<p><a href="{{route('singleBlog')}}" class="btn btn-primary py-2 px-3">Read more</a></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12 d-flex ftco-animate">
-						<div class="blog-entry align-self-stretch d-md-flex">
-							<a href="{{route('singleBlog')}}" class="block-20" style="background-image: url('{{asset('images/image_3.jpg')}}');">
-							</a>
-							<div class="text d-block pl-md-4">
-								<div class="meta mb-3">
-									<div><a href="#">July 20, 2019</a></div>
-									<div><a href="#">Admin</a></div>
-									<div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-								</div>
-								<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-								<p><a href="{{route('singleBlog')}}" class="btn btn-primary py-2 px-3">Read more</a></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12 d-flex ftco-animate">
-						<div class="blog-entry align-self-stretch d-md-flex">
-							<a href="{{route('singleBlog')}}" class="block-20" style="background-image: url('{{asset('images/image_4.jpg')}}');">
-							</a>
-							<div class="text d-block pl-md-4">
-								<div class="meta mb-3">
-									<div><a href="#">July 20, 2019</a></div>
-									<div><a href="#">Admin</a></div>
-									<div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-								</div>
-								<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-								<p><a href="{{route('singleBlog')}}" class="btn btn-primary py-2 px-3">Read more</a></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12 d-flex ftco-animate">
-						<div class="blog-entry align-self-stretch d-md-flex">
-							<a href="{{route('singleBlog')}}" class="block-20" style="background-image: url('{{asset('images/image_5.jpg')}}');">
-							</a>
-							<div class="text d-block pl-md-4">
-								<div class="meta mb-3">
-									<div><a href="#">July 20, 2019</a></div>
-									<div><a href="#">Admin</a></div>
-									<div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-								</div>
-								<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-								<p><a href="{{route('singleBlog')}}" class="btn btn-primary py-2 px-3">Read more</a></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12 d-flex ftco-animate">
-						<div class="blog-entry align-self-stretch d-md-flex">
-							<a href="{{route('singleBlog')}}" class="block-20" style="background-image: url('{{asset('images/image_6.jpg')}}');">
-							</a>
-							<div class="text d-block pl-md-4">
-								<div class="meta mb-3">
-									<div><a href="#">July 20, 2019</a></div>
-									<div><a href="#">Admin</a></div>
-									<div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-								</div>
-								<h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-								<p><a href="{{route('singleBlog')}}" class="btn btn-primary py-2 px-3">Read more</a></p>
-							</div>
-						</div>
-					</div>
+						@endforeach
+					@else
+						<h3>No News / blogs Recently</h3>
+					@endif
 				</div>
 			</div> <!-- .col-md-8 -->
 			<div class="col-lg-4 sidebar ftco-animate">
@@ -126,51 +52,37 @@
 				<div class="sidebar-box ftco-animate">
 					<h3 class="heading">Categories</h3>
 					<ul class="categories">
-						<li><a href="#">Vegetables <span>(12)</span></a></li>
-						<li><a href="#">Fruits <span>(22)</span></a></li>
-						<li><a href="#">Juice <span>(37)</span></a></li>
-						<li><a href="#">Dries <span>(42)</span></a></li>
+						<li><a href="{{route('product', ['parameter'=>'vegetable']) }}" class="{{ Request::is('product/vegetable') ? 'active' : '' }}">Vegetables <span>(12)</span></a></li>
+						<li><a href="{{route('product', ['parameter'=>'fruit']) }}" class="{{ Request::is('product/fruit') ? 'active' : '' }}">Fruits <span>(22)</span></a></li>
+						<li><a href="{{route('product', ['parameter'=>'fruit juice']) }}" class="{{ Request::is('product/fruit juice') ? 'active' : '' }}">Fruit Juice <span>(22)</span></a></li>
+						<li><a href="{{route('product', ['parameter'=>'meat']) }}" class="{{ Request::is('product/meat') ? 'active' : '' }}">Meat <span>(37)</span></a></li>
+						<li><a  href="{{route('product', ['parameter'=>'bakery']) }}" class="{{ Request::is('product/bakery') ? 'active' : '' }}">Bakery <span>(42)</span></a></li>
+						<li><a href="{{route('product', ['parameter'=>'seafood']) }}" class="{{ Request::is('product/seafood') ? 'active' : '' }}">Seafood <span>(42)</span></a></li>
 					</ul>
 				</div>
 
 				<div class="sidebar-box ftco-animate">
-					<h3 class="heading">Recent Blog</h3>
-					<div class="block-21 mb-4 d-flex">
-						<a class="blog-img mr-4" style="background-image: url('{{asset('images/image_1.jpg')}}');"></a>
-						<div class="text">
-							<h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-							<div class="meta">
-								<div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-								<div><a href="#"><span class="icon-person"></span> Admin</a></div>
-								<div><a href="#"><span class="icon-chat"></span> 19</a></div>
+					@if(count($blogs) > 0) 
+						<h3 class="heading">Recent News / Blog</h3>
+						@foreach($blogs as $blog)
+							<div class="block-21 mb-4 d-flex">
+								<a class="blog-img mr-4" style="background-image: url('{{asset('uploads/vegeFoodsPhoto/'.$blog->news_photo)}}');"></a>
+								<div class="text">
+									<h3 class="heading-1"><p>{{$blog->title}}</p></h3>
+									<div class="meta">
+										<div><p><span class="icon-calendar"></span>{{$blog->created_at}}</p></div>
+										<div><p><span class="icon-person"></span> Admin</p></div>
+										{{-- <div><a href="#"><span class="icon-chat"></span> 19</a></div> --}}
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
-					<div class="block-21 mb-4 d-flex">
-						<a class="blog-img mr-4" style="background-image: url('{{asset('images/image_2.jpg')}}');"></a>
-						<div class="text">
-							<h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-							<div class="meta">
-								<div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-								<div><a href="#"><span class="icon-person"></span> Admin</a></div>
-								<div><a href="#"><span class="icon-chat"></span> 19</a></div>
-							</div>
-						</div>
-					</div>
-					<div class="block-21 mb-4 d-flex">
-						<a class="blog-img mr-4" style="background-image: url('{{asset('images/image_3.jpg')}}');"></a>
-						<div class="text">
-							<h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-							<div class="meta">
-								<div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-								<div><a href="#"><span class="icon-person"></span> Admin</a></div>
-								<div><a href="#"><span class="icon-chat"></span> 19</a></div>
-							</div>
-						</div>
-					</div>
+						@endforeach
+					@else
+						<h3 class="heading">No Recent News / Blog</h3>
+					@endif
+					
 				</div>
-
-				<div class="sidebar-box ftco-animate">
+				{{-- <div class="sidebar-box ftco-animate">
 					<h3 class="heading">Tag Cloud</h3>
 					<div class="tagcloud">
 						<a href="#" class="tag-cloud-link">fruits</a>
@@ -188,8 +100,7 @@
 					<h3 class="heading">Paragraph</h3>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
 				</div>
-			</div>
-
+			</div> --}}
 		</div>
 	</div>
 </section> <!-- .section -->

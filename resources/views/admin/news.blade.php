@@ -158,15 +158,12 @@
 			]
 		});
 
-		// var promo_id;
-		// var updatePromoUrl = '{{route("updatePromo")}}';
 
         //fetch news into modal form based on id
         $(document).on('click', '.editNews', function(){
         	var url = '{{route("fetchNews", ":id")}}';
         	var news_id = $(this).data('id');
         	url = url.replace(':id', news_id);
-        	// console.log(fetchPromoUrl);
         	$.ajax({  
         		url:url,  
         		method:"GET",  
@@ -178,11 +175,7 @@
         			$('#editNewsModal').modal('show');
         			$('#editNewsForm').find('.title').val(data['title']);  
         			$('#editNewsForm').find('.description').val(data['description']);
-        			$('#editNewsForm').find('.newsid').val(news_id);
-        			// $('#discount').val(data['discount']);
-        			// $('#availability').val(data['availability']);
-        			// $('#expired').val(data['expired']);
-        			// $('#promoId').val(promo_id);    
+        			$('#editNewsForm').find('.newsid').val(news_id);  
         		},
         		error: function (request, status, error) {
 			        sweetAlert(request.responseText, "", 'error');
@@ -238,10 +231,6 @@
         			// alert('Data Updated');
         		},
         		error: function (request, status, error) {
-        			console.log("request",request);
-        			console.log("status",status);
-        			console.log("error",error);
-
 			        sweetAlert(status, "", 'error');
 			    }
         	});  
