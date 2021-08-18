@@ -221,11 +221,6 @@
 				contentType: false, 
         		success:function(data)  
         		{  
-        			console.log((data));
-        			///console.log("after success: " + JSON.stringify(data));
-        			// $('#editPromotionModal').modal('hide');  
-        			// $('#promo_table').DataTable().ajax.reload();
-        			// alert('Data Updated');
         			sweetAlert("Congratulation", "Your order is taken place!", "success");
         			
         			localStorage.clear();
@@ -235,9 +230,7 @@
 					 },3000);
         		},
         		error: function(data) {
-        			sweetAlert("Error", "Error occurs!", "error");
-
-        			console.log("error" + JSON.stringify(data));
+        			sweetAlert("Error", data.msg, "error");
         		}
         	});  
         });  
