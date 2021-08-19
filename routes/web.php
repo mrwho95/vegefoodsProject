@@ -82,6 +82,8 @@ Route::get('/adminDashboard', 'Admin\DashboardController@index')->name('adminDas
 
 Route::get('/admin/calender', 'Admin\calenderController@index')->name('adminCalender');
 
+Route::post('/admin/calender/crud', 'Admin\calenderController@calenderCRUD')->name('calenderCRUD');
+
 Route::get('/adminPromotion', 'Admin\PromoController@index')->name('adminPromotion');
 
 Route::post('/addPromotion', 'Admin\PromoController@addPromo')->name('addPromo');
