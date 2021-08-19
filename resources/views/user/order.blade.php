@@ -1,7 +1,7 @@
 @extends('layouts.vege')
 @section('content')
 <div class="container">
-	<h3>My Purchase</h3><br>
+	<h3>My Purchases</h3><br>
 	@if(count($order) > 0)
 		@foreach($order as $elements)
 		<div class="shadow-lg p-3 mb-5 bg-white rounded">
@@ -24,7 +24,7 @@
 						@endforeach
 					</div>
 					<div class="col-lg-3">
-						<h5 class="card-title">Name:</h5>
+						<h5 class="card-title">Item:</h5>
 						<h5 class="card-title">Quantity:</h5>
 					</div>
 					<div class="col-lg-3">
@@ -45,13 +45,12 @@
 					</div>
 				</div>
 				<div class="row justify-content-between">
-					<div class="col-lg-4">
-
+					<div class="col-lg-8">
+						 <a href="{{route('shop')}}" class="btn btn-primary py-2 px-3">Buy Again</a>
+						 <a href="{{route('shop')}}" class="btn btn-primary py-2 px-3">Check Delivery</a>
 					</div>
 					<div class="col-lg-4">
 						 <strong style="font-size: 20pt; color: #1f7a1f">Total Cost: RM{{$elements['totalprice']}}</strong><br>
-						 <a href="{{route('shop')}}" class="btn btn-primary py-2 px-3">Buy Again</a>
-						 <a href="{{route('shop')}}" class="btn btn-primary py-2 px-3">Check Delivery</a>
 					</div>
 				</div>
 			</div>
