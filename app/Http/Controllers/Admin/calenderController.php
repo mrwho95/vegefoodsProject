@@ -17,9 +17,9 @@ class calenderController extends Controller
 
     public function index(Request $request) {
         if($request->ajax()) {  
-            $data = CrudEvents::whereDate('event_start', '>=', $request->start)
-                ->whereDate('event_end',   '<=', $request->end)
-                ->get(['id', 'event_name', 'event_start', 'event_end']);
+            $data = CrudEvents::whereDate('start', '>=', $request->start)
+                ->whereDate('end',   '<=', $request->end)
+                ->get(['id', 'name', 'start', 'end']);
             return response()->json($data);
         }
         return view('admin.calender');
@@ -41,9 +41,9 @@ class calenderController extends Controller
                 }
 
                 $event = CrudEvents::create([
-                    'event_name' => $request->eventName,
-                    'event_start' => $request->eventStart,
-                    'event_end' => $request->eventEnd,
+                    'name' => $request->eventName,
+                    'start' => ($request->eventStart)." 00:00:00",
+                    'end' => ($request->eventStart)." 23:59:59",
                 ]);
  
               return response()->json($event);
@@ -69,9 +69,9 @@ class calenderController extends Controller
                     return $validator->messages()->all()[0];
                 }
 
-                $event = CrudEvents::find($request->id)->update([
-                    'event_start' => $request->eventStart,
-                    'event_end' => $request->eventEnd,
+                $event = CrudEvents::find($request->eventID)->update([
+                    'start' => ($request->eventStart)." 00:00:00",
+                    'end' => ($request->eventStart)." 23:59:59",
                 ]);
  
                 return response()->json($event);

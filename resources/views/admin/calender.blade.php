@@ -56,8 +56,8 @@
 	        select: function (event_start, event_end, allDay) {
                 var eventName = prompt('Event Name:');
                 if (eventName) {
-                    var eventStart = moment(event_start).format("Y-MM-DD hh:mm:ss");
-                    var eventEnd = moment(event_end).format("Y-MM-DD hh:mm:ss");
+                    var eventStart = moment(event_start).format("Y-MM-DD");
+                    var eventEnd = moment(event_end).format("Y-MM-DD");
                     // var eventStart = $.fullCalendar().formatDate(event_start, "Y-MM-DD HH:mm:ss");
                     // var eventEnd = $.fullCalendar().formatDate(event_end, "Y-MM-DD HH:mm:ss");
                     $.ajax({
@@ -94,8 +94,8 @@
             editable: true,
             eventDrop: function (event, delta) {
             	console.log("event",event);
-	            var eventStart = moment(event.start).format("Y-MM-DD hh:mm:ss");
-                var eventEnd = moment(event.end).format("Y-MM-DD hh:mm:ss");
+	            var eventStart = moment(event.start).format("Y-MM-DD");
+                var eventEnd = moment(event.end).format("Y-MM-DD");
                 console.log(eventStart, eventEnd);
 	            $.ajax({
 	                url: '{{ route("calenderCRUD") }}',
