@@ -6,8 +6,8 @@
 			<h3>Add New Product</h3>
 		</div>
 		<div class="col-md-6">
-			<a href="{{route('adminProducts.index')}}" class="btn btn-warning float-right">Cancel Add</a>
-			<a href="{{route('productTable')}}" class="btn btn-info float-right">View Product Table</a>
+			<a href="{{route('admin.products.index')}}" class="btn btn-warning float-right">Back</a>
+			<a href="{{route('admin.productTable')}}" class="btn btn-info float-right">View Product Table</a>
 		</div>
 	</div>
 	@if(session('success'))
@@ -27,7 +27,7 @@
 	</div>
 	@endif
 	<br>
-	<form action="{{route('adminProducts.store')}}" class="billing-form" method="POST" enctype="multipart/form-data">
+	<form action="{{route('admin.products.store')}}" class="billing-form" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<h3 class="mb-4 billing-heading">Product Details</h3>
 		<div class="row align-items-end">

@@ -8,7 +8,7 @@
 @section('content')
 <div class="container">
 	<h3>Product Datatable</h3><br>
-	<a href="{{route('adminProducts.create')}}" class="btn btn-primary">Add Product</a><br><br>
+	<a href="{{route('admin.products.create')}}" class="btn btn-primary">Add Product</a><br><br>
 	@if(session('success'))
 	<div class="alert alert-success alert-dismissible fade show" role="alert">
 		{{session('success')}}
@@ -52,7 +52,7 @@
 			processing: true,
 			serverSide: true,
 			ajax: {
-				url: "{{ route('productTable') }}",
+				url: "{{ route('admin.productTable') }}",
 			},
 			columns: [
 			{

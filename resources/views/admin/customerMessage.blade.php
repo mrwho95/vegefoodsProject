@@ -33,7 +33,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('adminCustomerMessage') }}",
+                url: "{{ route('admin.customerMessage') }}",
             },
             columns: [
             {

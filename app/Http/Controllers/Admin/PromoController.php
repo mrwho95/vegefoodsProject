@@ -52,7 +52,7 @@ class PromoController extends Controller
     	$promotion->expired = $request->expired;
     	$promotion->save();
 
-    	return redirect()->route('adminPromotion')->with('success', 'Promotion Added');
+    	return redirect()->route('admin.promotion')->with('success', 'Promotion Added');
 
     }
 

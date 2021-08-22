@@ -26,13 +26,13 @@
 		<div class="row justify-content-center">
 			<div class="col-md-10 mb-5 text-center">
 				<ul class="product-category">
-					<li><a href="{{route('adminProducts.index')}}" class="{{ Request::is('adminProducts') ? 'active' : '' }}">All</a></li>
-					<li><a href="{{route('adminVege', ['parameter'=>'vegetable']) }}" class="{{ Request::is('adminProducts/vegetable') ? 'active' : '' }}">Vegetables</a></li>
-					<li><a href="{{route('adminVege', ['parameter'=>'fruit']) }}" class="{{ Request::is('adminProducts/fruit') ? 'active' : '' }}">Fruits</a></li>
-					<li><a href="{{route('adminVege', ['parameter'=>'fruit juice']) }}" class="{{ Request::is('adminProducts/fruit juice') ? 'active' : '' }}">Fruit Juice</a></li>
-					<li><a href="{{route('adminVege', ['parameter'=>'meat']) }}" class="{{ Request::is('adminProducts/meat') ? 'active' : '' }}">Meat</a></li>
-					<li><a href="{{route('adminVege', ['parameter'=>'bakery']) }}" class="{{ Request::is('adminProducts/bakery') ? 'active' : '' }}">Bakery</a></li>
-					<li><a href="{{route('adminVege', ['parameter'=>'seafood']) }}" class="{{ Request::is('adminProducts/seafood') ? 'active' : '' }}">Seafood</a></li>
+					<li><a href="{{route('admin.products.index')}}" class="{{ Request::is('admin/products') ? 'active' : '' }}">All</a></li>
+					<li><a href="{{route('admin.vege', ['parameter'=>'vegetable']) }}" class="{{ Request::is('admin/products/vegetable') ? 'active' : '' }}">Vegetables</a></li>
+					<li><a href="{{route('admin.vege', ['parameter'=>'fruit']) }}" class="{{ Request::is('admin/products/fruit') ? 'active' : '' }}">Fruits</a></li>
+					<li><a href="{{route('admin.vege', ['parameter'=>'fruit juice']) }}" class="{{ Request::is('admin/products/fruit juice') ? 'active' : '' }}">Fruit Juice</a></li>
+					<li><a href="{{route('admin.vege', ['parameter'=>'meat']) }}" class="{{ Request::is('admin/products/meat') ? 'active' : '' }}">Meat</a></li>
+					<li><a href="{{route('admin.vege', ['parameter'=>'bakery']) }}" class="{{ Request::is('admin/products/bakery') ? 'active' : '' }}">Bakery</a></li>
+					<li><a href="{{route('admin.vege', ['parameter'=>'seafood']) }}" class="{{ Request::is('admin/products/seafood') ? 'active' : '' }}">Seafood</a></li>
 				</ul>
 			</div>
 		</div>
@@ -70,7 +70,7 @@
 				@foreach($allProduct as $data)
 					<div class="col-md-6 col-lg-3 ftco-animate">
 						<div class="product">
-							<a href="{{route('adminProducts.show', $data->id)}}" class="img-prod"><img class="img-fluid" src="{{asset('uploads/vegeFoodsPhoto/'.$data->photo)}}" alt="Colorlib Template">
+							<a href="{{route('admin.products.show', $data->id)}}" class="img-prod"><img class="img-fluid" src="{{asset('uploads/vegeFoodsPhoto/'.$data->photo)}}" alt="Colorlib Template">
 								<div class="overlay"></div>
 							</a>
 							<div class="text py-3 pb-4 px-3 text-center">

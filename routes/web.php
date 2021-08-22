@@ -14,108 +14,118 @@ use App\product;
 |
 */
 
-Route::get('/', function () {
-	$arr['allProduct'] = product::all()->random(8);
-    return view('user.home', $arr);
-});
-
 Auth::routes();
 
-Route::get('/home', 'User\HomeController@index')->name('home');
+// Route::group(['middleware'=>'auth'], function() {
+// 	Route::get('/home', 'User\HomeController@index')->name('home');
+// });
 
-Route::get('/about', 'User\AboutController@index')->name('about');
+Route::group(['prefix'=>'user','namespace'=>'User'], function() {
+	Route::get('/', function () {
+		$products = product::all()->random(8);
+	    return view('user.home', compact('products'));
+	});
 
-Route::get('/blog', 'User\BlogController@index')->name('blog');
+	Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/singleBlog', 'User\BlogController@singleBlog')->name('singleBlog');
+	Route::get('/about', 'AboutController@index')->name('about');
 
-Route::get('/contact', 'User\ContactController@index')->name('contact');
+	Route::get('/blog', 'BlogController@index')->name('blog');
 
-Route::get('/storeMessage', 'User\ContactController@storeMessage')->name('storeMessage');
+	Route::get('/singleBlog', 'BlogController@singleBlog')->name('singleBlog');
 
-Route::get('/shop', 'User\ShopController@index')->name('shop');
+	Route::get('/contact', 'ContactController@index')->name('contact');
 
-Route::get('/checkout', 'User\ShopController@checkout')->name('checkout');
+	Route::get('/storeMessage', 'ContactController@storeMessage')->name('storeMessage');
 
-Route::get('/wishlist', 'User\ShopController@wishlist')->name('wishlist');
+	Route::get('/shop', 'ShopController@index')->name('shop');
 
-Route::get('/cart', 'User\ShopController@cart')->name('cart');
+	Route::get('/checkout', 'ShopController@checkout')->name('checkout');
 
-Route::post('/cart', 'User\ShopController@checkDeliveryFee')->name('checkDeliveryFee');
+	Route::get('/wishlist', 'ShopController@wishlist')->name('wishlist');
 
-Route::get('/product/{parameter}', 'User\ShopController@showProduct')->name('product');
+	Route::get('/cart', 'ShopController@cart')->name('cart');
 
-Route::get('/order', 'User\OrderController@index')->name('order');
+	Route::post('/cart', 'ShopController@checkDeliveryFee')->name('checkDeliveryFee');
 
-Route::post('/orderProcess', 'User\OrderController@orderProcess')->name('orderProcess');
+	Route::get('/product/{parameter}', 'ShopController@showProduct')->name('product');
 
-Route::post('/promo', 'User\OrderController@promo')->name('promo');
+	Route::get('/order', 'OrderController@index')->name('order');
 
-Route::get('/review', 'User\ReviewController@index')->name('review');
+	Route::post('/orderProcess', 'OrderController@orderProcess')->name('orderProcess');
 
-Route::post('/addReview', 'User\ReviewController@addReview')->name('addReview');
+	Route::post('/promo', 'OrderController@promo')->name('promo');
 
-Route::get('/profile', 'User\ProfileController@index')->name('profile');
+	Route::get('/review', 'ReviewController@index')->name('review');
 
-Route::post('/updateProfile', 'User\ProfileController@updateProfile')->name('updateProfile');
+	Route::post('/addReview', 'ReviewController@addReview')->name('addReview');
 
-Route::resource('/address', 'User\AddressController');
+	Route::get('/profile', 'ProfileController@index')->name('profile');
 
-Route::get('address/delete/{id}', 'User\AddressController@destroy')->name('addressDestroy');
+	Route::post('/updateProfile', 'ProfileController@updateProfile')->name('updateProfile');
 
-Route::get('address/setDefaultAddress/{id}', 'User\AddressController@setDefaultAddress')->name('setDefaultAddress');
+	Route::resource('/address', 'AddressController');
 
-Route::get('/delivery', 'User\DeliveryController@index')->name('delivery');
+	Route::get('address/delete/{id}', 'AddressController@destroy')->name('addressDestroy');
+
+	Route::get('address/setDefaultAddress/{id}', 'AddressController@setDefaultAddress')->name('setDefaultAddress');
+
+	Route::get('/delivery', 'DeliveryController@index')->name('delivery');
+});
+
+
 
 //admin
-Route::get('/adminNews', 'Admin\newsController@index')->name('adminNews');
+Route::group(['prefix'=>'admin','namespace'=>'Admin','as'=>'admin.'], function() {
+	Route::get('/news', 'newsController@index')->name('news');
 
-Route::post('/addNews', 'Admin\newsController@addNews')->name('addNews');
+	Route::post('/addNews', 'newsController@addNews')->name('addNews');
 
-Route::get('/fetchNews/{id}', 'Admin\newsController@fetchNews')->name('fetchNews');
+	Route::get('/fetchNews/{id}', 'newsController@fetchNews')->name('fetchNews');
 
-Route::get('/deleteNews/{id}', 'Admin\newsController@deleteNews')->name('deleteNews');
+	Route::get('/deleteNews/{id}', 'newsController@deleteNews')->name('deleteNews');
 
-Route::post('/updateNews', 'Admin\newsController@updateNews')->name('updateNews');
+	Route::post('/updateNews', 'newsController@updateNews')->name('updateNews');
 
-Route::get('/adminDashboard', 'Admin\DashboardController@index')->name('adminDashboard');
+	Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
-Route::get('/admin/calender', 'Admin\calenderController@index')->name('adminCalender');
+	Route::get('/calender', 'calenderController@index')->name('calender');
 
-Route::post('/admin/calender/crud', 'Admin\calenderController@calenderCRUD')->name('calenderCRUD');
+	Route::post('/calender/crud', 'calenderController@calenderCRUD')->name('calenderCRUD');
 
-Route::get('/adminPromotion', 'Admin\PromoController@index')->name('adminPromotion');
+	Route::get('/promotion', 'PromoController@index')->name('promotion');
 
-Route::post('/addPromotion', 'Admin\PromoController@addPromo')->name('addPromo');
+	Route::post('/addPromotion', 'PromoController@addPromo')->name('addPromo');
 
-Route::get('/fetchPromotion/{id}', 'Admin\PromoController@fetchPromo')->name('fetchPromo');
+	Route::get('/fetchPromotion/{id}', 'PromoController@fetchPromo')->name('fetchPromo');
 
-Route::get('/deletePromotion/{id}', 'Admin\PromoController@deletePromo')->name('deletePromo');
+	Route::get('/deletePromotion/{id}', 'PromoController@deletePromo')->name('deletePromo');
 
-Route::post('/updatePromotion', 'Admin\PromoController@updatePromo')->name('updatePromo');
+	Route::post('/updatePromotion', 'PromoController@updatePromo')->name('updatePromo');
 
-Route::get('/adminCustomer', 'Admin\CustomerController@index')->name('adminCustomer');
+	Route::get('/customer', 'CustomerController@index')->name('customer');
 
-Route::get('/adminCustomerMessage', 'Admin\CustomerController@message')->name('adminCustomerMessage');
+	Route::get('/customerMessage', 'CustomerController@message')->name('customerMessage');
 
-Route::get('/deleteMessage/{id}', 'Admin\CustomerController@deleteMessage')->name('deleteMessage');
+	Route::get('/deleteMessage/{id}', 'CustomerController@deleteMessage')->name('deleteMessage');
 
-Route::resource('/adminProducts', 'Admin\ProductController');
+	Route::resource('/products', 'ProductController');
 
-Route::get('/adminProductsTable', 'Admin\ProductController@productTable')->name('productTable');
+	Route::get('/productsTable', 'ProductController@productTable')->name('productTable');
 
-Route::get('/adminProducts/{parameter}', 'Admin\ProductController@vege')->name('adminVege');
+	Route::get('/products/{parameter}', 'ProductController@vege')->name('vege');
 
-Route::get('adminProducts/delete/{id}', 'Admin\ProductController@destroy')->name('productDestroy');
+	Route::get('products/delete/{id}', 'ProductController@destroy')->name('productDestroy');
 
-Route::get('/adminDelivery', 'Admin\DeliveryController@index')->name('adminDelivery');
+	Route::get('/delivery', 'DeliveryController@index')->name('delivery');
 
-Route::post('/addDelivery', 'Admin\DeliveryController@addDelivery')->name('addDelivery');
+	Route::post('/addDelivery', 'DeliveryController@addDelivery')->name('addDelivery');
 
-Route::get('/fetchDelivery/{id}', 'Admin\DeliveryController@fetchDelivery')->name('fetchDelivery');
+	Route::get('/fetchDelivery/{id}', 'DeliveryController@fetchDelivery')->name('fetchDelivery');
 
-Route::post('/updateDelivery', 'Admin\DeliveryController@updateDelivery')->name('updateDelivery');
+	Route::post('/updateDelivery', 'DeliveryController@updateDelivery')->name('updateDelivery');
 
-Route::get('/deleteDelivery/{id}', 'Admin\DeliveryController@deleteDelivery')->name('deleteDelivery');
+	Route::get('/deleteDelivery/{id}', 'DeliveryController@deleteDelivery')->name('deleteDelivery');
+});
 
 // Auth::routes();

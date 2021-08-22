@@ -51,7 +51,7 @@ class DeliveryController extends Controller
         $deliveryPlace->price = $request->price;
         $deliveryPlace->save();
 
-    	return redirect()->route('adminDelivery')->with('success', 'Delivery Place Added!');
+    	return redirect()->route('admin.delivery')->with('success', 'Delivery Place Added!');
     }
 
     public function fetchDelivery($id){

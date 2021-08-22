@@ -60,7 +60,7 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="{{route('adminDashboard')}}">Vegefoods Admin</a>
+	      <a class="navbar-brand" href="{{route('admin.dashboard')}}">Vegefoods Admin</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -69,29 +69,29 @@
 	        <ul class="navbar-nav ml-auto">
             <!-- request::is('') == url pattern -->
             <!-- request::routeIs('') == route name pattern-->
-	          <li class="nav-item {{ Request::is('adminDashboard*') ? 'active' : '' }}"><a href="{{route('adminDashboard')}}" class="nav-link">Home</a></li>
-	          <li class="nav-item dropdown {{ Request::is('adminProducts*') ? 'active' : '' }}">
-              <a class="nav-link dropdown-toggle" href="{{route('adminProducts.index')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product</a>
+	          <li class="nav-item {{ Request::is('admin/dashboard*') ? 'active' : '' }}"><a href="{{route('admin.dashboard')}}" class="nav-link">Home</a></li>
+	          <li class="nav-item dropdown {{ Request::is('admin/products*') ? 'active' : '' }}">
+              <a class="nav-link dropdown-toggle" href="{{route('admin.products.index')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-              	<a class="dropdown-item " href="{{route('adminProducts.index')}}">Product</a>
-              	<a class="dropdown-item " href="{{route('adminProducts.create')}}">Add Product</a>
-                <a class="dropdown-item " href="{{route('productTable')}}">Product Table</a>
+              	<a class="dropdown-item " href="{{route('admin.products.index')}}">Product</a>
+              	<a class="dropdown-item " href="{{route('admin.products.create')}}">Add Product</a>
+                <a class="dropdown-item " href="{{route('admin.productTable')}}">Product Table</a>
               </div>
             </li>
-            <li class="nav-item dropdown {{ Request::is('adminCustomer*') ? 'active' : '' }}">
-              <a class="nav-link dropdown-toggle" href="{{route('adminCustomer')}}" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customer</a>
+            <li class="nav-item dropdown {{ Request::is('admin/customer*') ? 'active' : '' }}">
+              <a class="nav-link dropdown-toggle" href="{{route('admin.customer')}}" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customer</a>
               <div class="dropdown-menu" aria-labelledby="dropdown07">
-                <a class="dropdown-item " href="{{route('adminCustomer')}}">Order</a>
-                <a class="dropdown-item " href="{{route('adminCustomerMessage')}}">Message</a>
+                <a class="dropdown-item " href="{{route('admin.customer')}}">Order</a>
+                <a class="dropdown-item " href="{{route('admin.customerMessage')}}">Message</a>
               </div>
             </li>
             <li class="nav-item dropdown {{ Request::is('admin*') ? 'active' : '' }}">
-              <a class="nav-link dropdown-toggle" href="{{route('adminPromotion')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+              <a class="nav-link dropdown-toggle" href="{{route('admin.promotion')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                <a class="dropdown-item " href="{{route('adminPromotion')}}">Promotion</a>
-                <a class="dropdown-item " href="{{route('adminNews')}}">News</a>
-                <a class="dropdown-item " href="{{route('adminCalender')}}">Calender</a>
-                <a class="dropdown-item " href="{{route('adminDelivery')}}">Delivery</a>
+                <a class="dropdown-item " href="{{route('admin.promotion')}}">Promotion</a>
+                <a class="dropdown-item " href="{{route('admin.news')}}">News</a>
+                <a class="dropdown-item " href="{{route('admin.calender')}}">Calender</a>
+                <a class="dropdown-item " href="{{route('admin.delivery')}}">Delivery</a>
               </div>
             </li>
             @guest
@@ -150,10 +150,10 @@
             <div class="ftco-footer-widget mb-4 ml-md-5">
               <h2 class="ftco-heading-2">Menu</h2>
               <ul class="list-unstyled">
-                <li><a href="{{route('adminDashboard')}}" class="py-2 d-block">Home</a></li>
-                <li><a href="{{route('adminProducts.index')}}" class="py-2 d-block">Product</a></li>
-                <li><a href="{{route('adminPromotion')}}" class="py-2 d-block">Promotion</a></li>
-                <li><a href="{{route('adminCustomer')}}" class="py-2 d-block">Customer</a></li>
+                <li><a href="{{route('admin.dashboard')}}" class="py-2 d-block">Home</a></li>
+                <li><a href="{{route('admin.products.index')}}" class="py-2 d-block">Product</a></li>
+                <li><a href="{{route('admin.promotion')}}" class="py-2 d-block">Promotion</a></li>
+                <li><a href="{{route('admin.customer')}}" class="py-2 d-block">Customer</a></li>
               </ul>
             </div>
           </div>

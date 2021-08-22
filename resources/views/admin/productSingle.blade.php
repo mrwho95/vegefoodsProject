@@ -33,7 +33,7 @@
 					</div>
 					
 				</div>
-				<p><a href="{{route('adminProducts.index')}}" class="btn btn-black py-3 px-5">Back</a></p>
+				<p><a href="{{route('admin.products.index')}}" class="btn btn-black py-3 px-5">Back</a></p>
 			</div>
 		</div>
 	</div>

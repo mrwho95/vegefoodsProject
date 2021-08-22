@@ -44,7 +44,7 @@
 	</div>
 	<div class="shadow-lg p-3 mb-5 bg-white rounded" style="padding: 5%; margin-top:5%;">
 		<h4>New Delivery Place</h4>
-		<form action="{{route('addDelivery')}}" class="bg-white p-5 contact-form" method="POST">
+		<form action="{{route('admin.addDelivery')}}" class="bg-white p-5 contact-form" method="POST">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="row">
 				<div class="col-md-6">
@@ -146,7 +146,7 @@
 			processing: true,
 			serverSide: true,
 			ajax: {
-				url: "{{ route('adminDelivery') }}",
+				url: "{{ route('admin.delivery') }}",
 			},
 			columns: [
 			{
@@ -178,11 +178,11 @@
 		});
 
 		var delivery_id;
-		var updateDeliveryUrl = '{{route("updateDelivery")}}';
+		var updateDeliveryUrl = '{{route("admin.updateDelivery")}}';
 
         //fetch delivery data into modal form based on id
         $(document).on('click', '.editDelivery', function(){
-        	var fetchDeliveryUrl = '{{route("fetchDelivery", ":id")}}';
+        	var fetchDeliveryUrl = '{{route("admin.fetchDelivery", ":id")}}';
         	delivery_id = $(this).attr('id');
         	fetchDeliveryUrl = fetchDeliveryUrl.replace(':id', delivery_id);
         	$.ajax({  
@@ -205,7 +205,7 @@
 
         //update delivery place
         $(document).on('submit', '#editDeliveryForm', function(event){  
-        	event.preventDefault(); 
+        	event.preventDefault();
         	$.ajax({  
         		url:updateDeliveryUrl,  
         		method:'POST',  
@@ -215,7 +215,7 @@
         		{  
         			$('#editDeliveryModal').modal('hide');  
         			$('#delivery_table').DataTable().ajax.reload();
-        			sweetAlert("Data Edited", "Data is edited successfully!", "success");
+        			sweetAlert("Congratulations", "Delivery Fee is edited successfully!", "success");
         			// alert('Data Updated');
         		}  
         	});  
@@ -224,7 +224,7 @@
         // delete delivery place
         var deliveryDeliveryUrl;
         $(document).on('click', '.deleteDelivery', function(){
-        	deleteDeliveryUrl = '{{ route("deleteDelivery", ":id") }}';
+        	deleteDeliveryUrl = '{{ route("admin.deleteDelivery", ":id") }}';
         	delivery_id = $(this).attr('id');
         	deleteDeliveryUrl = deleteDeliveryUrl.replace(':id', delivery_id);
         	$('#deleteDeliveryModal').modal('show');
@@ -236,7 +236,7 @@
         		{
         			$('#deleteDeliveryModal').modal('hide');
         			$('#delivery_table').DataTable().ajax.reload();
-        			sweetAlert("Data Deleted", "Data is deleted successfully!", "success");
+        			sweetAlert("Congratulations", "Delivery Fee is deleted successfully!", "success");
         			// alert('Data Deleted');
         		}
         	})

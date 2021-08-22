@@ -6,7 +6,7 @@
 			<h3>Edit Product</h3>
 		</div>
 		<div class="col-md-6">
-			<a href="{{route('productTable')}}" class="btn btn-warning float-right">Cancel Edit</a>
+			<a href="{{route('admin.productTable')}}" class="btn btn-warning float-right">Cancel Edit</a>
 		</div>
 	</div>
 	@if(session('success'))
@@ -26,7 +26,7 @@
 	</div>
 	@endif
 	<br>
-	<form action="{{route('adminProducts.update', $data->id)}}" class="billing-form" method="POST" enctype="multipart/form-data">
+	<form action="{{route('admin.products.update', $data->id)}}" class="billing-form" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		@method('PUT')
 		<h3 class="mb-4 billing-heading">Product Details</h3>

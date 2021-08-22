@@ -57,7 +57,7 @@ class newsController extends Controller
             $news->news_photo = $filename;
         }
         $news->save();
-        return redirect()->route('adminNews')->with('success', 'News / Blogs added.');
+        return redirect()->route('admin.news')->with('success', 'News / Blogs added.');
     }
 
     public function fetchNews($id){

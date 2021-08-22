@@ -44,7 +44,7 @@
 	</div>
 	<div class="card" style="padding: 5%;">
 		<h4>New Promotion Code</h4>
-		<form action="{{route('addPromo')}}" class="bg-white p-5 contact-form" method="POST">
+		<form action="{{route('admin.addPromo')}}" class="bg-white p-5 contact-form" method="POST">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="row">
 				<div class="col-md-6">
@@ -145,7 +145,7 @@
 			processing: true,
 			serverSide: true,
 			ajax: {
-				url: "{{ route('adminPromotion') }}",
+				url: "{{ route('admin.promotion') }}",
 			},
 			columns: [
 			{
@@ -177,14 +177,13 @@
 		});
 
 		var promo_id;
-		var updatePromoUrl = '{{route("updatePromo")}}';
+		var updatePromoUrl = '{{route("admin.updatePromo")}}';
 
         //fetch promotion code into modal form based on id
         $(document).on('click', '.editPromo', function(){
-        	var fetchPromoUrl = '{{route("fetchPromo", ":id")}}';
+        	var fetchPromoUrl = '{{route("admin.fetchPromo", ":id")}}';
         	promo_id = $(this).attr('id');
         	fetchPromoUrl = fetchPromoUrl.replace(':id', promo_id);
-        	console.log(fetchPromoUrl);
         	$.ajax({  
         		url:fetchPromoUrl,  
         		method:"GET",  
@@ -192,7 +191,6 @@
         		dataType:"json",  
         		success:function(data)  
         		{  
-        			console.log(data);
         			$('#editPromotionModal').modal('show');
         			$('#name').val(data['name']);  
         			$('#code').val(data['code']);
@@ -207,7 +205,6 @@
         //update promotion code
         $(document).on('submit', '#editPromotionForm', function(event){  
         	event.preventDefault(); 
-        	console.log(updatePromoUrl);
         	$.ajax({  
         		url:updatePromoUrl,  
         		method:'POST',  
@@ -215,10 +212,9 @@
         		dataType:"json", 
         		success:function(data)  
         		{  
-        			console.log(data);
         			$('#editPromotionModal').modal('hide');  
         			$('#promo_table').DataTable().ajax.reload();
-        			sweetAlert("Data Edited", "Data is edited successfully!", "success");
+        			sweetAlert("Congratulations", "Promotion Code is edited successfully!", "success");
         			// alert('Data Updated');
         		}  
         	});  
@@ -227,7 +223,7 @@
         // delete promotion code
         var deletePromoUrl; 
         $(document).on('click', '.deletePromo', function(){
-        	deletePromoUrl = '{{ route("deletePromo", ":id") }}';
+        	deletePromoUrl = '{{ route("admin.deletePromo", ":id") }}';
         	promo_id = $(this).attr('id');
         	deletePromoUrl = deletePromoUrl.replace(':id', promo_id);
         	$('#deletePromotionModal').modal('show');
@@ -239,7 +235,7 @@
         		{
         			$('#deletePromotionModal').modal('hide');
         			$('#promo_table').DataTable().ajax.reload();
-        			sweetAlert("Data Deleted", "Data is deleted successfully!", "success");
+        			sweetAlert("Congratulations", "Promotion code is deleted successfully!", "success");
         			// alert('Data Deleted');
         		}
         	})

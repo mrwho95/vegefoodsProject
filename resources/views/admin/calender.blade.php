@@ -50,7 +50,7 @@
             	center: 'title',
             	right: 'month,agendaWeek,agendaDay'
             },
-            events: '{{ route("adminCalender") }}',
+            events: '{{ route("admin.calender") }}',
 	        selectable: true,
 	        selectHelper: true,
 	        select: function (event_start, event_end, allDay) {
@@ -61,7 +61,7 @@
                     // var eventStart = $.fullCalendar().formatDate(event_start, "Y-MM-DD HH:mm:ss");
                     // var eventEnd = $.fullCalendar().formatDate(event_end, "Y-MM-DD HH:mm:ss");
                     $.ajax({
-                        url: '{{ route("calenderCRUD") }}',
+                        url: '{{ route("admin.calenderCRUD") }}',
                         data: {
                             eventName: eventName,
                             eventStart: eventStart,
@@ -98,7 +98,7 @@
                 var eventEnd = moment(event.end).format("Y-MM-DD");
                 console.log(eventStart, eventEnd);
 	            $.ajax({
-	                url: '{{ route("calenderCRUD") }}',
+	                url: '{{ route("admin.calenderCRUD") }}',
 	                data: {
 	                    // title: event.event_name,
 	                    eventStart: eventStart,
@@ -118,7 +118,7 @@
                 if (eventDelete) {
                     $.ajax({
                         type: "POST",
-                        url: '{{ route("calenderCRUD") }}',
+                        url: '{{ route("admin.calenderCRUD") }}',
                         data: {
                             id: event.id,
                             type: 'delete'

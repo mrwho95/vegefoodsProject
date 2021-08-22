@@ -43,7 +43,7 @@
 	</div>
 	<div class="card" style="padding: 5%;">
 		<h4>Add News / Blogs</h4>
-		<form action="{{route('addNews')}}" class="bg-white p-5 contact-form" method="POST" enctype="multipart/form-data">
+		<form action="{{route('admin.addNews')}}" class="bg-white p-5 contact-form" method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="row">
 				<div class="col-md-12">
@@ -131,7 +131,7 @@
 			processing: true,
 			serverSide: true,
 			ajax: {
-				url: "{{ route('adminNews') }}",
+				url: "{{ route('admin.news') }}",
 			},
 			columns: [
 			{
@@ -161,7 +161,7 @@
 
         //fetch news into modal form based on id
         $(document).on('click', '.editNews', function(){
-        	var url = '{{route("fetchNews", ":id")}}';
+        	var url = '{{route("admin.fetchNews", ":id")}}';
         	var news_id = $(this).data('id');
         	url = url.replace(':id', news_id);
         	$.ajax({  
@@ -171,7 +171,6 @@
         		dataType:"json",  
         		success:function(data)  
         		{  
-        			console.log("data",data);
         			$('#editNewsModal').modal('show');
         			$('#editNewsForm').find('.title').val(data['title']);  
         			$('#editNewsForm').find('.description').val(data['description']);
@@ -215,7 +214,7 @@
         	// The serialize() method creates a URL encoded text string by serializing form values.
         	// The .serializeArray() method creates a JavaScript array of objects, ready to be encoded as a JSON string.
         	$.ajax({  
-        		url:'{{ route("updateNews") }}',  
+        		url:'{{ route("admin.updateNews") }}',  
         		method:'POST',  
         		data:new FormData(this), 
         		dataType:'JSON',
@@ -224,7 +223,6 @@
 			   	processData: false,
         		success:function(data)  
         		{  
-        			console.log("data1111",data);
         			$('#editNewsModal').modal('hide');  
         			$('#news_table').DataTable().ajax.reload();
         			sweetAlert("News / Blogs Updated", "", "success");
@@ -250,7 +248,7 @@
         		$('#deleteNewsModal').modal('hide');
         		return;
         	}
-        	var url = '{{ route("deleteNews", ":id") }}';
+        	var url = '{{ route("admin.deleteNews", ":id") }}';
         	url = url.replace(':id', id);
         	$.ajax({
         		url:url,

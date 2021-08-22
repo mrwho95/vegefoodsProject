@@ -31,18 +31,17 @@ class ProductController extends Controller
             return '<img src="'.$url.'" border="0" width="200" class="img-rounded" align="center" />';
         })
         ->addColumn('action', function($data){
-            $button = '<a href="'.route('adminProducts.edit', $data->id).'" class="edit btn btn-primary btn-sm">Edit</a>';
-            // $button .= '&nbsp;&nbsp;&nbsp;<a href="javascript::void(0)" onclick="$(this).parent().find("form").submit()" class="btn btn-danger">Delete</a> <form action="'.route('adminProducts.destroy', $data->id).'" method="post">
+            $button = '<a href="'.route('admin.products.edit', $data->id).'" class="edit btn btn-primary btn-sm">Edit</a>';
+            // $button .= '&nbsp;&nbsp;&nbsp;<a href="javascript::void(0)" onclick="$(this).parent().find("form").submit()" class="btn btn-danger">Delete</a> <form action="'.route('products.destroy', $data->id).'" method="post">
             //                 @method("DELETE")
             //                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
             //             </form>';
-            $button .= '&nbsp;&nbsp;&nbsp;<a href="'.route('productDestroy', $data->id).'" class="edit btn btn-danger btn-sm delete-confirm">Delete</a>';
+            $button .= '&nbsp;&nbsp;&nbsp;<a href="'.route('admin.productDestroy', $data->id).'" class="edit btn btn-danger btn-sm delete-confirm">Delete</a>';
             return $button;
         })
         ->rawColumns(['photo','action'])
         ->make(true);
     }
-
         return view('admin.productTable');
     }
 
@@ -96,7 +95,7 @@ class ProductController extends Controller
             $product->photo = $filename;
         }
         $product->save();
-        return redirect()->route('adminProducts.index')->with('success', 'Product added.');
+        return redirect()->route('admin.products.index')->with('success', 'Product added.');
     }
 
     /**
@@ -168,7 +167,7 @@ class ProductController extends Controller
             $product->photo = $filename;
         }
         $product->save();
-        return redirect()->route('productTable')->with('success', 'Product edited.');
+        return redirect()->route('admin.productTable')->with('success', 'Product edited.');
     }
 
     /**
@@ -181,6 +180,6 @@ class ProductController extends Controller
     {
         //
         product::destroy($id);
-        return redirect()->route('productTable')->with('success', "Product Deleted.");
+        return redirect()->route('admin.productTable')->with('success', "Product Deleted.");
     }
 }

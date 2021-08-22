@@ -21,7 +21,9 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers {
+        logout as performLogout;
+    }
 
     /**
      * Where to redirect users after login.
@@ -32,9 +34,14 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user){
         if ($user->is_admin) {
-            return redirect('adminDashboard');
+            return redirect('admin/dashboard');
         }
-        return redirect('home');
+        return redirect('user/home');
+    }
+
+    public function logout(Request $request){
+        $this->performLogout($request);
+        return redirect()->route('home');
     }
 
     /**
