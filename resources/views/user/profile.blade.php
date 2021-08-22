@@ -35,7 +35,7 @@
 						<p class="card-title">Phone Number: {{$userData->phonenumber}}</p>
 						@if(empty($address))
 							<p class="card-title">Address: <strong>No default address</strong></p>
-							<a href="{{route('address.create')}}" class="btn btn-primary">Add Default Address</a>
+							<a href="{{route('user.address.create')}}" class="btn btn-primary">Add Default Address</a>
 						@else
 							<p class="card-title">Default Address: {{$address->streetaddress1}} {{$address->streetaddress2}}, {{$address->city}}, {{$address->postcode}} {{$address->state}}, {{$address->country}}</p>
 						@endif
@@ -46,7 +46,7 @@
 	</div>
 	<h4>Edit Customer's Profile</h4>
 	<div class="card" style="padding: 5%;">
-		<form action="{{route('updateProfile')}}" class="billing-form" method="POST" enctype="multipart/form-data">
+		<form action="{{route('user.updateProfile')}}" class="billing-form" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<div class="row align-items-end">
 			<div class="col-md-6">

@@ -104,6 +104,6 @@ class OrderController extends Controller
     }
 
     public function promo(Request $request){
-    	return redirect()->route('cart')->with('success', 'Enjoy the promotion!');
+    	return redirect()->route('user.cart')->with('success', 'Enjoy the promotion!');
     }
 }

@@ -4,7 +4,7 @@
 	<div class="container">
 		<div class="row no-gutters slider-text align-items-center justify-content-center">
 			<div class="col-md-9 ftco-animate text-center">
-				<p class="breadcrumbs"><span class="mr-2"><a href="{{route('home')}}">Home</a></span></p>
+				<p class="breadcrumbs"><span class="mr-2"><a href="{{route('user.home')}}">Home</a></span></p>
 				<h1 class="mb-0 bread">News / Blog</h1>
 			</div>
 		</div>
@@ -20,7 +20,7 @@
 						@foreach($blogs as $blog)
 							<div class="col-md-12 d-flex ftco-animate">
 								<div class="blog-entry align-self-stretch d-md-flex">
-									<a href="{{route('singleBlog')}}" class="block-20" style="background-image: url('{{asset('uploads/vegeFoodsPhoto/'.$blog->news_photo)}}');">
+									<a href="{{route('user.singleBlog')}}" class="block-20" style="background-image: url('{{asset('uploads/vegeFoodsPhoto/'.$blog->news_photo)}}');">
 									</a>
 									<div class="text d-block pl-md-4">
 										<div class="meta mb-3">
@@ -30,7 +30,7 @@
 										</div>
 										<h3 class="heading"><p>{{$blog->title}}</p></h3>
 										<p>{{$blog->description}}</p>
-										<p><a href="{{route('singleBlog')}}" class="btn btn-primary py-2 px-3">Read more</a></p>
+										<p><a href="{{route('user.singleBlog')}}" class="btn btn-primary py-2 px-3">Read more</a></p>
 									</div>
 								</div>
 							</div>
@@ -52,12 +52,12 @@
 				<div class="sidebar-box ftco-animate">
 					<h3 class="heading">Categories</h3>
 					<ul class="categories">
-						<li><a href="{{route('product', ['parameter'=>'vegetable']) }}" class="{{ Request::is('product/vegetable') ? 'active' : '' }}">Vegetables <span>(12)</span></a></li>
-						<li><a href="{{route('product', ['parameter'=>'fruit']) }}" class="{{ Request::is('product/fruit') ? 'active' : '' }}">Fruits <span>(22)</span></a></li>
-						<li><a href="{{route('product', ['parameter'=>'fruit juice']) }}" class="{{ Request::is('product/fruit juice') ? 'active' : '' }}">Fruit Juice <span>(22)</span></a></li>
-						<li><a href="{{route('product', ['parameter'=>'meat']) }}" class="{{ Request::is('product/meat') ? 'active' : '' }}">Meat <span>(37)</span></a></li>
-						<li><a  href="{{route('product', ['parameter'=>'bakery']) }}" class="{{ Request::is('product/bakery') ? 'active' : '' }}">Bakery <span>(42)</span></a></li>
-						<li><a href="{{route('product', ['parameter'=>'seafood']) }}" class="{{ Request::is('product/seafood') ? 'active' : '' }}">Seafood <span>(42)</span></a></li>
+						<li><a href="{{route('user.product', ['parameter'=>'vegetable']) }}" class="{{ Request::is('user/product/vegetable') ? 'active' : '' }}">Vegetables <span>(12)</span></a></li>
+						<li><a href="{{route('user.product', ['parameter'=>'fruit']) }}" class="{{ Request::is('user/product/fruit') ? 'active' : '' }}">Fruits <span>(22)</span></a></li>
+						<li><a href="{{route('user.product', ['parameter'=>'fruit juice']) }}" class="{{ Request::is('user/product/fruit juice') ? 'active' : '' }}">Fruit Juice <span>(22)</span></a></li>
+						<li><a href="{{route('user.product', ['parameter'=>'meat']) }}" class="{{ Request::is('user/product/meat') ? 'active' : '' }}">Meat <span>(37)</span></a></li>
+						<li><a  href="{{route('user.product', ['parameter'=>'bakery']) }}" class="{{ Request::is('user/product/bakery') ? 'active' : '' }}">Bakery <span>(42)</span></a></li>
+						<li><a href="{{route('user.product', ['parameter'=>'seafood']) }}" class="{{ Request::is('user/product/seafood') ? 'active' : '' }}">Seafood <span>(42)</span></a></li>
 					</ul>
 				</div>
 

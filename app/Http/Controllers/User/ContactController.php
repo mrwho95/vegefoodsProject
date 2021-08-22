@@ -31,6 +31,6 @@ class ContactController extends Controller
 	    $customerMessage->message = $request->message;
 	    $customerMessage->save();
 
-    	return redirect()->route('contact')->with('success', 'Message sent! We will contact you as soon as possible.');
+    	return redirect()->route('user.contact')->with('success', 'Message sent! We will contact you as soon as possible.');
     }
 }

@@ -3,7 +3,7 @@
 <div class="container">
 	<h3>Edit Address</h3><br>
 	<div class="card" style="padding: 5%;">
-		<form action="{{route('address.update', $address->id)}}" class="billing-form" method="POST" enctype="multipart/form-data">
+		<form action="{{route('user.address.update', $address->id)}}" class="billing-form" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		@method('PUT')
 		<div class="row align-items-end">

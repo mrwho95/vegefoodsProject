@@ -4,7 +4,7 @@
 	<div class="container">
 		<div class="row no-gutters slider-text align-items-center justify-content-center">
 			<div class="col-md-9 ftco-animate text-center">
-				<p class="breadcrumbs"><span class="mr-2"><a href="{{route('home')}}">Home</a></span> <span>Cart</span></p>
+				<p class="breadcrumbs"><span class="mr-2"><a href="{{route('user.home')}}">Home</a></span> <span>Cart</span></p>
 				<h1 class="mb-0 bread">My Cart</h1>
 			</div>
 		</div>
@@ -55,7 +55,7 @@
 				<div class="cart-total mb-3">
 					<h3>Coupon Code</h3>
 					<p>Enter your promotion code if you have one</p>
-					<form action="{{route('promo')}}" class="info" method="post">
+					<form action="{{route('user.promo')}}" class="info" method="post">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group">
 							<label for="">Promotion code</label>
@@ -69,7 +69,7 @@
 				<div class="cart-total mb-3">
 					<h3>Estimate shipping and tax</h3>
 					<p>Enter your destination to get a shipping estimate</p>
-					<form action="{{route('checkDeliveryFee')}}" class="info" method="post">
+					<form action="{{route('user.checkDeliveryFee')}}" class="info" method="post">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						@if(!empty($defaultAddress))
 						<input type="hidden" id="defaultAddress" value="{{$defaultAddress}}" />
@@ -135,7 +135,7 @@
 						<span>RM0.00</span>
 					</p>
 				</div>
-				<p><a href="{{route('checkout')}}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+				<p><a href="{{route('user.checkout')}}" class="btn btn-primary py-3 px-4 proceed">Proceed to Checkout</a></p>
 			</div>
 		</div>
 	</div>
@@ -258,7 +258,7 @@ function displayCart(){
 			productContainer.append(`
 				<tr class="text-center">
 					<td id="${item.name}" class="product-remove"><a><span class="ion-ios-close"></span></a></td>
-					<td><img src="./public/uploads/vegeFoodsPhoto/${item.photo}" style="width:150px; display=block;"></td>
+					<td><img src="http://localhost/vegefoods/public/uploads/vegeFoodsPhoto/${item.photo}" style="width:150px; display=block;"></td>
 					<td class="product-name">
 						<h3 id="productName">${item.name}</h3>
 					</td>
@@ -407,13 +407,11 @@ $('.body').on('click','.quantity-left-minus',function(e){
     e.preventDefault();
     	var products = localStorage.getItem("productsInCart");
 		products = JSON.parse(products);
-
 		var productNamefromIdAttr = $(this).attr('id');
 		var productName = productNamefromIdAttr.replace('minus','');
 		if (products != null) {
 			console.log("abc");
 			if (products[productName] != null) {
-
 	        	products[productName].inCart -= 1;
 	        	if (products[productName].inCart == 0) {
 	        		delete products[productName];
@@ -421,10 +419,8 @@ $('.body').on('click','.quantity-left-minus',function(e){
 	        		displayCart();
 	        	}
 	        	localStorage.setItem("productsInCart", JSON.stringify(products));
-
 	        	let productNumbers = localStorage.getItem('cartNumbers');
 				productNumbers = parseInt(productNumbers);
-
 				if (productNumbers) {
 					localStorage.setItem('cartNumbers', productNumbers - 1);
 					document.querySelector('.cta a span').textContent = productNumbers - 1;
@@ -433,8 +429,6 @@ $('.body').on('click','.quantity-left-minus',function(e){
 				displayCart();
 				onLoadCartNumbers();
 			}
-
-
 		}else{
 			console.log("minus unsuccessful");
 		}

@@ -66,7 +66,7 @@
 
 <div class="container">
 	<h3>Add Vegefood Review</h3><br>
-	<form action="{{route('addReview')}}" class="billing-form" method="POST" enctype="multipart/form-data">
+	<form action="{{route('user.addReview')}}" class="billing-form" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<div class="row align-items-end">
 			@if(!empty($userData))

@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="row no-gutters slider-text align-items-center justify-content-center">
 			<div class="col-md-9 ftco-animate text-center">
-				<p class="breadcrumbs"><span class="mr-2"><a href="{{route('home')}}">Home</a></span> <span>Checkout</span></p>
+				<p class="breadcrumbs"><span class="mr-2"><a href="{{route('user.home')}}">Home</a></span> <span>Checkout</span></p>
 				<h1 class="mb-0 bread">Checkout</h1>
 			</div>
 		</div>
@@ -19,7 +19,7 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-xl-7 ftco-animate">
-				<form action="{{route('orderProcess')}}" id="orderForm" class="billing-form" method="POST">
+				<form action="{{route('user.orderProcess')}}" id="orderForm" class="billing-form" method="POST">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<h3 class="mb-4 billing-heading">Billing Details</h3>
 					<div class="row align-items-end">
@@ -201,8 +201,8 @@
 	let deliveryFee = localStorage.getItem("deliveryFee");
 	let overallCost = localStorage.getItem("overallCost");
 	// console.log("productsInCart:" + productsInCart);
-	var url = "{{route('orderProcess')}}";
-	var orderPage = "{{route('order')}}";
+	var url = "{{route('user.orderProcess')}}";
+	var orderPage = "{{route('user.order')}}";
 	$(document).on('submit', '#orderForm', function(event){  
         	event.preventDefault(); 
         	var fd = new FormData();
@@ -221,7 +221,7 @@
 				contentType: false, 
         		success:function(data)  
         		{  
-        			sweetAlert("Congratulation", "Your order is taken place!", "success");
+        			sweetAlert("Congratulations", "Your order is taken place!", "success");
         			
         			localStorage.clear();
 

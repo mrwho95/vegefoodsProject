@@ -10,8 +10,8 @@ use App\user;
 class AboutController extends Controller
 {
     public function index(){
-    	$arr['user'] = user::where('is_admin', '0')->get();
-    	$arr['reviews'] = review::all();
-    	return view('user.about', $arr);
+    	$user = user::where('is_admin', '0')->get();
+    	$reviews = review::all();
+    	return view('user.about', compact('user','reviews'));
     }
 }

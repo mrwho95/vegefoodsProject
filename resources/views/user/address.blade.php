@@ -10,7 +10,7 @@
 			@endif
 		</div>
 		<div class="col-md-6">
-			<a href="{{route('address.create')}}" class="btn btn-primary float-right">Add New Address</a>
+			<a href="{{route('user.address.create')}}" class="btn btn-primary float-right">Add New Address</a>
 		</div>
 	</div>
 	
@@ -51,10 +51,10 @@
 								@if($data->defaultaddress == "1")
 									<p class="card-title float-right"><strong>Default Address</strong></p><br>
 								@else
-									<a href="{{route('setDefaultAddress', $data->id)}}" class="btn btn-info float-right">Set As Default Address</a><br><br>
+									<a href="{{route('user.setDefaultAddress', $data->id)}}" class="btn btn-info float-right">Set As Default Address</a><br><br>
 								@endif
-								<a href="{{route('address.edit', $data->id)}}" class="btn btn-warning float-right">Edit Address</a><br><br>
-								<a href="{{route('addressDestroy', $data->id)}}" class="btn btn-danger float-right">Delete Address</a>
+								<a href="{{route('user.address.edit', $data->id)}}" class="btn btn-warning float-right">Edit Address</a><br><br>
+								<a href="{{route('user.addressDestroy', $data->id)}}" class="btn btn-danger float-right">Delete Address</a>
 							</div>
 						</div>
 					</div>

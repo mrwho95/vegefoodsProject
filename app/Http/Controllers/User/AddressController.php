@@ -76,7 +76,7 @@ class AddressController extends Controller
         $address->defaultaddress = $request->defaultaddress;
         $address->save();
 
-        return redirect()->route('address.index')->with('success', 'Address added!');
+        return redirect()->route('user.address.index')->with('success', 'Address added!');
     }
 
     /**
@@ -141,7 +141,7 @@ class AddressController extends Controller
         $address->defaultaddress = $request->defaultaddress;
         $address->save();
 
-        return redirect()->route('address.index')->with('success', 'Address Edited!');
+        return redirect()->route('user.address.index')->with('success', 'Address Edited!');
     }
 
     /**
@@ -154,7 +154,7 @@ class AddressController extends Controller
     {
         //
         address::destroy($id);
-        return redirect()->route('address.index')->with('success', 'Address Deleted!');
+        return redirect()->route('user.address.index')->with('success', 'Address Deleted!');
     }
 
     public function setDefaultAddress($id){
@@ -166,6 +166,6 @@ class AddressController extends Controller
         $address->defaultaddress = 1;
         $address->save();
 
-        return redirect()->route('address.index')->with('success', 'Set Default Address Successful!');
+        return redirect()->route('user.address.index')->with('success', 'Set Default Address Successful!');
     }
 }

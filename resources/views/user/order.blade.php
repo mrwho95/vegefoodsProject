@@ -46,8 +46,8 @@
 				</div>
 				<div class="row justify-content-between">
 					<div class="col-lg-8">
-						 <a href="{{route('shop')}}" class="btn btn-primary py-2 px-3">Buy Again</a>
-						 <a href="{{route('shop')}}" class="btn btn-primary py-2 px-3">Check Delivery</a>
+						 <a href="{{route('user.shop')}}" class="btn btn-primary py-2 px-3">Buy Again</a>
+						 <a href="{{route('user.shop')}}" class="btn btn-primary py-2 px-3">Check Delivery</a>
 					</div>
 					<div class="col-lg-4">
 						 <strong style="font-size: 20pt; color: #1f7a1f">Total Cost: RM{{$elements['totalprice']}}</strong><br>

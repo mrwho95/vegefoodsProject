@@ -59,7 +59,7 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="{{route('home')}}">Vegefoods</a>
+	      <a class="navbar-brand" href="{{route('user.home')}}">Vegefoods</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -68,24 +68,24 @@
 	        <ul class="navbar-nav ml-auto">
             <!-- request::is('') == url pattern -->
             <!-- request::routeIs('') == route name pattern-->
-	          <li class="nav-item {{ Request::is('home*') ? 'active' : '' }}"><a href="{{route('home')}}" class="nav-link">Home</a></li>
-	          <li class="nav-item {{ Request::is('about*') ? 'active' : '' }}"><a href="{{route('about')}}" class="nav-link">About</a></li>
-	          <li class="nav-item {{ Request::is('contact*') ? 'active' : '' }}"><a href="{{route('contact')}}" class="nav-link">Contact</a></li>
-            <li class="nav-item dropdown {{ Request::is('shop*') ? 'active' : '' }}">
-              <a class="nav-link dropdown-toggle" href="{{route('shop')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
+	          <li class="nav-item {{ Request::is('user/home*') ? 'active' : '' }}"><a href="{{route('user.home')}}" class="nav-link">Home</a></li>
+	          <li class="nav-item {{ Request::is('user/about*') ? 'active' : '' }}"><a href="{{route('user.about')}}" class="nav-link">About</a></li>
+	          <li class="nav-item {{ Request::is('user/contact*') ? 'active' : '' }}"><a href="{{route('user.contact')}}" class="nav-link">Contact</a></li>
+            <li class="nav-item dropdown {{ Request::is('user/shop*') ? 'active' : '' }}">
+              <a class="nav-link dropdown-toggle" href="{{route('user.shop')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                <a class="dropdown-item {{ Request::is('shop*') ? 'active' : '' }}" href="{{route('shop')}}">Shop</a>
-                <a class="dropdown-item {{ Request::is('review*') ? 'active' : '' }}" href="{{route('review')}}">Review</a>
-                <a class="dropdown-item {{ Request::is('wishlist*') ? 'active' : '' }}" href="{{route('wishlist')}}">Wishlist</a>
-                <a class="dropdown-item {{ Request::is('cart*') ? 'active' : '' }}" href="{{route('cart')}}">Cart</a>
-                <a class="dropdown-item {{ Request::is('checkout*') ? 'active' : '' }}" href="{{route('checkout')}}">Checkout</a>
+                <a class="dropdown-item {{ Request::is('user/shop*') ? 'active' : '' }}" href="{{route('user.shop')}}">Shop</a>
+                <a class="dropdown-item {{ Request::is('user/review*') ? 'active' : '' }}" href="{{route('user.review')}}">Review</a>
+                <a class="dropdown-item {{ Request::is('user/wishlist*') ? 'active' : '' }}" href="{{route('user.wishlist')}}">Wishlist</a>
+                <a class="dropdown-item {{ Request::is('user/cart*') ? 'active' : '' }}" href="{{route('user.cart')}}">Cart</a>
+                <a class="dropdown-item {{ Request::is('user/checkout*') ? 'active' : '' }}" href="{{route('user.checkout')}}">Checkout</a>
               </div>
             </li>
-            <li class="nav-item dropdown {{ Request::is('blog*') ? 'active' : '' }}">
-              <a class="nav-link dropdown-toggle" href="{{route('blog')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+            <li class="nav-item dropdown {{ Request::is('user/blog*') ? 'active' : '' }}">
+              <a class="nav-link dropdown-toggle" href="{{route('user.blog')}}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                <a class="dropdown-item {{ Request::is('blog*') ? 'active' : '' }}" href="{{route('blog')}}">Blog</a>
-                <a class="dropdown-item {{ Request::is('delivery*') ? 'active' : '' }}" href="{{route('delivery')}}">Delivery</a>
+                <a class="dropdown-item {{ Request::is('user/blog*') ? 'active' : '' }}" href="{{route('user.blog')}}">Blog</a>
+                <a class="dropdown-item {{ Request::is('user/delivery*') ? 'active' : '' }}" href="{{route('user.delivery')}}">Delivery</a>
               </div>
             </li>
             @guest
@@ -102,15 +102,15 @@
                <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="{{route('login')}}" id="dropdown06" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown06">
-                  <a class="dropdown-item {{ Request::is('profile') ? 'active' : '' }}" href="{{route('profile')}}">My profile</a>
-                  <a class="dropdown-item {{ Request::is('address') ? 'active' : '' }}" href="{{route('address.index')}}">My address</a>
-                  <a class="dropdown-item {{ Request::is('order*') ? 'active' : '' }}" href="{{route('order')}}">My purchase</a>
+                  <a class="dropdown-item {{ Request::is('user/profile') ? 'active' : '' }}" href="{{route('user.profile')}}">My profile</a>
+                  <a class="dropdown-item {{ Request::is('user/address') ? 'active' : '' }}" href="{{route('user.address.index')}}">My address</a>
+                  <a class="dropdown-item {{ Request::is('user/order*') ? 'active' : '' }}" href="{{route('user.order')}}">My purchase</a>
                   <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
                 </div>
               </li>
             @endguest
-	          <li class="nav-item cta cta-colored"><a href="{{route('cart')}}" class="nav-link"><span class="icon-shopping_cart">[0]</span></a></li>
+	          <li class="nav-item cta cta-colored"><a href="{{route('user.cart')}}" class="nav-link"><span class="icon-shopping_cart">[0]</span></a></li>
 	        </ul>
 	      </div>
 	    </div>
@@ -148,10 +148,10 @@
             <div class="ftco-footer-widget mb-4 ml-md-5">
               <h2 class="ftco-heading-2">Menu</h2>
               <ul class="list-unstyled">
-                <li><a href="{{route('shop')}}" class="py-2 d-block">Shop</a></li>
-                <li><a href="{{route('about')}}" class="py-2 d-block">About</a></li>
-                <li><a href="{{route('review')}}" class="py-2 d-block">Review</a></li>
-                <li><a href="{{route('contact')}}" class="py-2 d-block">Contact Us</a></li>
+                <li><a href="{{route('user.shop')}}" class="py-2 d-block">Shop</a></li>
+                <li><a href="{{route('user.about')}}" class="py-2 d-block">About</a></li>
+                <li><a href="{{route('user.review')}}" class="py-2 d-block">Review</a></li>
+                <li><a href="{{route('user.contact')}}" class="py-2 d-block">Contact Us</a></li>
               </ul>
             </div>
           </div>
@@ -167,7 +167,7 @@
 	              </ul>
 	              <ul class="list-unstyled">
 	                <li><a href="#" class="py-2 d-block">FAQs</a></li>
-	                <li><a href="{{route('contact')}}" class="py-2 d-block">Contact</a></li>
+	                <li><a href="{{route('user.contact')}}" class="py-2 d-block">Contact</a></li>
 	              </ul>
 	            </div>
             </div>

@@ -19,7 +19,7 @@
 		</div>
 	@endif
 	<div class="card" style="padding: 5%;">
-		<form action="{{route('address.store')}}" class="billing-form" method="POST" enctype="multipart/form-data">
+		<form action="{{route('user.address.store')}}" class="billing-form" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<div class="row align-items-end">
 			<div class="col-md-6">

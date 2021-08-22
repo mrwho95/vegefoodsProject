@@ -23,7 +23,7 @@ class ShopController extends Controller
         if (Auth::check()) {
             $arr['address'] = address::where([['user_id', Auth::id()], ['defaultaddress', '1']])->first();
             if (empty($arr['address'])) {
-                return redirect()->route('address.create')->with('warning', "Sorry, your default address not found. Please create an address.");
+                return redirect()->route('user.address.create')->with('warning', "Sorry, your default address not found. Please create an address.");
             }
             $arr['defaultAddress'] = address::where([['user_id', Auth::id()], ['defaultaddress', '1']])->first();
             $address = json_decode(json_encode($arr['address']), true);
@@ -57,7 +57,7 @@ class ShopController extends Controller
 
         $arr['deliveryfee'] = deliveryplace::where([['city', $city], ['state', $state], ['postcode', $postcode], ['country', $country]])->value('price');
 
-        if (empty($arr['deliveryfee'])) return redirect()->route('cart')->with('warning', "delivery fee of that place not found.");
+        if (empty($arr['deliveryfee'])) return redirect()->route('user.cart')->with('warning', "delivery fee of that place not found.");
 
         $arr['address'] = array(
             'city' => $city,
@@ -66,7 +66,7 @@ class ShopController extends Controller
             'country' => $country
         );
 
-        // return redirect()->route('cart')->with('deliveryfee', $deliveryfee);
+        // return redirect()->route('user.cart')->with('deliveryfee', $deliveryfee);
         return view('user.cart', $arr)->with('success', 'Estimate successful!');
     }
 

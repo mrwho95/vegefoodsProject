@@ -45,6 +45,6 @@ class ProfileController extends Controller
             $user->photo = $filename;
         }
         $user->save();
-        return redirect()->route('profile')->with('success', "Profile edited successful!");
+        return redirect()->route('user.profile')->with('success', "Profile edited successful!");
     }
 }

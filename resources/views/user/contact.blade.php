@@ -4,7 +4,7 @@
 	<div class="container">
 		<div class="row no-gutters slider-text align-items-center justify-content-center">
 			<div class="col-md-9 ftco-animate text-center">
-				<p class="breadcrumbs"><span class="mr-2"><a href="{{route('home')}}">Home</a></span> <span>Contact us</span></p>
+				<p class="breadcrumbs"><span class="mr-2"><a href="{{route('user.home')}}">Home</a></span> <span>Contact us</span></p>
 				<h1 class="mb-0 bread">Contact us</h1>
 			</div>
 		</div>
@@ -38,7 +38,7 @@
 		</div> -->
 		<div class="row block-9">
 			<div class="col-md-6 order-md-last d-flex">
-				<form action="{{route('storeMessage')}}" class="bg-white p-5 contact-form">
+				<form action="{{route('user.storeMessage')}}" class="bg-white p-5 contact-form">
 					@if(session('success'))
 						<div class="alert alert-success alert-dismissible fade show" role="alert">
 							{{session('success')}}

@@ -47,6 +47,6 @@ class ReviewController extends Controller
         $review->message = $request->message;
         $review->save();
 
-    	return redirect()->route('review')->with('success', 'Review submitted!');
+    	return redirect()->route('user.review')->with('success', 'Review submitted!');
     }
 }

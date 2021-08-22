@@ -9,7 +9,7 @@
 	<div class="container">
 		<div class="row no-gutters slider-text align-items-center justify-content-center">
 			<div class="col-md-9 ftco-animate text-center">
-				<p class="breadcrumbs"><span class="mr-2"><a href="{{route('home')}}">Home</a></span> <span class="mr-2"><a href="{{route('shop')}}">Product</a></span> <span>Product Single</span></p>
+				<p class="breadcrumbs"><span class="mr-2"><a href="{{route('user.home')}}">Home</a></span> <span class="mr-2"><a href="{{route('user.shop')}}">Product</a></span> <span>Product Single</span></p>
 				<h1 class="mb-0 bread">Product Single</h1>
 			</div>
 		</div>
@@ -82,7 +82,7 @@
 						<p><a id="{{$singleProduct->id}}" class="add-item btn btn-primary py-3 px-5">Add to Cart</a></p>
 					</div>
 					<div class="col-md-6">
-						<p><a href="{{route('shop')}}" class="btn btn-secondary py-3 px-5 float-right">Back to Shop</a></p>
+						<p><a href="{{route('user.shop')}}" class="btn btn-secondary py-3 px-5 float-right">Back to Shop</a></p>
 					</div>
 				</div>
 			</div>
@@ -135,7 +135,7 @@
 			@foreach($relatedProduct as $data)
 			<div class="col-md-6 col-lg-3 ftco-animate">
 				<div class="product">
-					<a href="{{route('product', $data->id)}}" class="img-prod"><img class="img-fluid" src="{{asset('uploads/vegeFoodsPhoto/'.$data->photo)}}" alt="Colorlib Template">
+					<a href="{{route('user.product', $data->id)}}" class="img-prod"><img class="img-fluid" src="{{asset('uploads/vegeFoodsPhoto/'.$data->photo)}}" alt="Colorlib Template">
 						<div class="overlay"></div>
 					</a>
 					<div class="text py-3 pb-4 px-3 text-center">

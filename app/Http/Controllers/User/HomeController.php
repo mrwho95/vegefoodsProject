@@ -24,7 +24,7 @@ class HomeController extends Controller
 // Log::info($message);
 // Log::debug($message);
 
-    	$arr['allProduct'] = product::all()->random(8);
+    	$products = product::all()->random(8);
 
     	// $today = Carbon::now()->format('Y-m-d');
         $today = now()->format('Y-m-d');
@@ -67,6 +67,9 @@ class HomeController extends Controller
 
         }
 
-    	return view('user.home', $arr);
+    	// return view('user.home', compact('products'));
+        // return view('user.home')->with('products',$products);
+        return view('user.home')->with(['products'=>$products]);
+
     }
 }

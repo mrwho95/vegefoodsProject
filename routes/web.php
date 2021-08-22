@@ -20,7 +20,7 @@ Auth::routes();
 // 	Route::get('/home', 'User\HomeController@index')->name('home');
 // });
 
-Route::group(['prefix'=>'user','namespace'=>'User'], function() {
+Route::group(['prefix'=>'user','namespace'=>'User','as'=>'user.'], function() {
 	Route::get('/', function () {
 		$products = product::all()->random(8);
 	    return view('user.home', compact('products'));

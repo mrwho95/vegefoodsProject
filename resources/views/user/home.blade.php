@@ -10,7 +10,7 @@
 					<div class="col-md-12 ftco-animate text-center">
 						<h1 class="mb-2">We serve Fresh Vegestables &amp; Fruits</h1>
 						<h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
-						<p><a href="{{route('about')}}" class="btn btn-primary">View Details</a></p>
+						<p><a href="{{route('user.about')}}" class="btn btn-primary">View Details</a></p>
 					</div>
 
 				</div>
@@ -95,24 +95,24 @@
 							<div class="text text-center">
 								<h2>Products</h2>
 								<p>Protect the health of every home</p>
-								<p><a href="{{route('shop')}}" class="btn btn-primary">Shop now</a></p>
+								<p><a href="{{route('user.shop')}}" class="btn btn-primary">Shop now</a></p>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url('{{asset('images/category-1.jpg')}}');">
 							<div class="text px-3 py-1">
-								<h2 class="mb-0"><a href="{{route('product', ['parameter'=>'vegetable']) }}">Vegetables</a></h2>
+								<h2 class="mb-0"><a href="{{route('user.product', ['parameter'=>'vegetable']) }}">Vegetables</a></h2>
 							</div>
 						</div>
 						<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url('{{asset('images/category-6.jpg')}}');">
 							<div class="text px-3 py-1">
-								<h2 class="mb-0"><a href="{{route('product', ['parameter'=>'meat']) }}">Meat</a></h2>
+								<h2 class="mb-0"><a href="{{route('user.product', ['parameter'=>'meat']) }}">Meat</a></h2>
 							</div>
 						</div>
 						<div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url('{{asset('images/category-2.jpg')}}');">
 							<div class="text px-3 py-1">
-								<h2 class="mb-0"><a href="{{route('product', ['parameter'=>'fruit']) }}">Fruits</a></h2>
+								<h2 class="mb-0"><a href="{{route('user.product', ['parameter'=>'fruit']) }}">Fruits</a></h2>
 							</div>
 						</div>
 					</div>
@@ -122,17 +122,17 @@
 			<div class="col-md-4">
 				<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url('{{asset('images/category-7.jpg')}}');">
 					<div class="text px-3 py-1">
-						<h2 class="mb-0"><a href="{{route('product', ['parameter'=>'bakery juice']) }}">Bakery</a></h2>
+						<h2 class="mb-0"><a href="{{route('user.product', ['parameter'=>'bakery juice']) }}">Bakery</a></h2>
 					</div>		
 				</div>
 				<div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url('{{asset('images/category-5.jpg')}}');">
 					<div class="text px-3 py-1">
-						<h2 class="mb-0"><a href="{{route('product', ['parameter'=>'seafood']) }}">Seafood</a></h2>
+						<h2 class="mb-0"><a href="{{route('user.product', ['parameter'=>'seafood']) }}">Seafood</a></h2>
 					</div>
 				</div>
 				<div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url('{{asset('images/category-3.jpg')}}');">
 					<div class="text px-3 py-1">
-						<h2 class="mb-0"><a href="{{route('product', ['parameter'=>'fruit juice']) }}">Juices</a></h2>
+						<h2 class="mb-0"><a href="{{route('user.product', ['parameter'=>'fruit juice']) }}">Juices</a></h2>
 					</div>
 				</div>
 			</div>
@@ -181,11 +181,11 @@
 					</div>
 				</div>
 			</div> -->
-			@if(count($allProduct) > 0)
-				@foreach($allProduct as $data)
+			@if(count($products) > 0)
+				@foreach($products as $data)
 					<div class="col-md-6 col-lg-3 ftco-animate">
 						<div class="product">
-							<a href="{{route('product', $data->id)}}" class="img-prod"><img class="img-fluid" src="{{asset('uploads/vegeFoodsPhoto/'.$data->photo)}}" alt="Colorlib Template">
+							<a href="{{route('user.product', $data->id)}}" class="img-prod"><img class="img-fluid" src="{{asset('uploads/vegeFoodsPhoto/'.$data->photo)}}" alt="Colorlib Template">
 								<div class="overlay"></div>
 							</a>
 							<div class="text py-3 pb-4 px-3 text-center">
