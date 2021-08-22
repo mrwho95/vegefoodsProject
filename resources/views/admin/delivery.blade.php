@@ -185,7 +185,6 @@
         	var fetchDeliveryUrl = '{{route("fetchDelivery", ":id")}}';
         	delivery_id = $(this).attr('id');
         	fetchDeliveryUrl = fetchDeliveryUrl.replace(':id', delivery_id);
-        	console.log(fetchDeliveryUrl);
         	$.ajax({  
         		url:fetchDeliveryUrl,  
         		method:"GET",  
@@ -193,7 +192,6 @@
         		dataType:"json",  
         		success:function(data)  
         		{  
-        			console.log(data);
         			$('#editDeliveryModal').modal('show');
         			$('#city').val(data['city']);  
         			$('#state').val(data['state']);
@@ -208,7 +206,6 @@
         //update delivery place
         $(document).on('submit', '#editDeliveryForm', function(event){  
         	event.preventDefault(); 
-        	console.log(updateDeliveryUrl);
         	$.ajax({  
         		url:updateDeliveryUrl,  
         		method:'POST',  
@@ -216,7 +213,6 @@
         		dataType:"json", 
         		success:function(data)  
         		{  
-        			console.log(data);
         			$('#editDeliveryModal').modal('hide');  
         			$('#delivery_table').DataTable().ajax.reload();
         			sweetAlert("Data Edited", "Data is edited successfully!", "success");

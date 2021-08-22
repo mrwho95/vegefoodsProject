@@ -71,9 +71,8 @@
     <!-- Chartisan -->
     <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
     <!-- Your application script -->
-    <script>
-
-      const vegetableChart = new Chartisan({
+    <script> 
+   	const vegetableChart = new Chartisan({
         el: '#vegetableChart',
         url: "@chart('product_chart')",
         loader: {

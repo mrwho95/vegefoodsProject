@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\order;
 use App\orderdetails;
 use App\product;
+use App\CrudEvents;
 use Auth;
 use App\Jobs\SendMailJob;
 
@@ -58,8 +59,9 @@ class OrderController extends Controller
                 $userDetails = json_decode($request['user_details'], true);
                 $address = $userDetails[4]['value'].$userDetails[5]['value'].", ".$userDetails[7]['value']." ".$userDetails[6]['value'].", ".$userDetails[8]['value']." ".$userDetails[9]['value'];
 
+                $orderID = "#".uniqid();
                 $order->user_id = Auth::id();
-                $order->orderunique_id = "#".uniqid();
+                $order->orderunique_id = $orderID;
                 $order->fullname = $userDetails[1]['value'];
                 $order->phonenumber = $userDetails[2]['value'];
                 $order->address = $address;
@@ -84,6 +86,13 @@ class OrderController extends Controller
             }
             $i++;
         }
+
+        $deliveryDate = date('Y-m-d',strtotime("+4 day", strtotime(now())));
+        CrudEvents::create([
+            'name' => "Delivery order: ".$orderID,
+            'start' => $deliveryDate." 00:00:00",
+            'end' => $deliveryDate." 23:59:59"
+        ]);
 
         //dispatch job email
         $message = "Congratulation, your order is taken place!";
