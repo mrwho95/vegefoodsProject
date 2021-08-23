@@ -43,7 +43,7 @@ class OrderController extends Controller
             $tmp =  [
                 'product_id' => $p['id'],
                 'productName' => $p['name'],
-                'productPrice' => $p['price'],
+                'productPrice' => bcmul($p['inCart'], $p['price']),
                 'wishQuantity' => $p['inCart'],
                 'created_at' => $orderDetails->freshTimestamp(),
                 'updated_at' => $orderDetails->freshTimestamp()

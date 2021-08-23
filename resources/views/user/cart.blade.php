@@ -42,7 +42,7 @@
 								<th>Total</th>
 							</tr>
 						</thead>
-						<tbody class="body">
+						<tbody class="products">
 							<!-- html from main2.js -->
 						</tbody>
 					</table>
@@ -72,7 +72,7 @@
 					<form action="{{route('user.checkDeliveryFee')}}" class="info" method="post">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						@if(!empty($defaultAddress))
-						<input type="hidden" id="defaultAddress" value="{{$defaultAddress}}" />
+						<input type="hidden" id="defaultAddress" name="defaultAddress" value="{{$defaultAddress}}" />
 						@endif
 						<div class="form-group">
 							<label for="city">Town/City</label>
@@ -119,20 +119,20 @@
 					<h3>Cart Totals</h3>
 					<p class="d-flex">
 						<span>Subtotal</span>
-						<span>RM0.00</span>
+						<span class="subTotal">RM0.00</span>
 					</p>
 					<p class="d-flex">
 						<span>Delivery</span>
-						<span>RM0.00</span>
+						<span class="deliveryFee">RM0.00</span>
 					</p>
 					<p class="d-flex">
 						<span>Discount</span>
-						<span>RM0.00</span>
+						<span class="discount">RM0.00</span>
 					</p>
 					<hr>
 					<p class="d-flex total-price">
 						<span>Total</span>
-						<span>RM0.00</span>
+						<span class="total">RM0.00</span>
 					</p>
 				</div>
 				<p><a href="{{route('user.checkout')}}" class="btn btn-primary py-3 px-4 proceed">Proceed to Checkout</a></p>
@@ -162,12 +162,7 @@
 @endsection
 
 @section('javascripts')
-<script type="text/javascript">
-
-
-	console.log("Cart Page running ");
-	
-	
+<script type="text/javascript">	
 	let defaultAddress = $('#defaultAddress').val();
 	localStorage.setItem("defaultAddress", defaultAddress);
 	defaultAddress = JSON.parse(defaultAddress);
@@ -183,106 +178,38 @@
 	
 	let deliveryFee = $('#deliveryFee').val();
 	deliveryFee = parseInt(deliveryFee);
-	// console.log(typeof deliveryFee);
 
 	localStorage.setItem("deliveryFee", deliveryFee);
 
 function displayCart(){
 	let cartItems = localStorage.getItem("productsInCart");
 	cartItems = JSON.parse(cartItems);
-	let productContainer = $(".body");
+	let productContainer = $(".products");
 
 	console.log(cartItems);
-	let cartCost = localStorage.getItem("totalCost"); 
-	cartCost = JSON.parse(cartCost);
-	let deliveryCost = localStorage.getItem("deliveryFee");
-	deliveryCost = JSON.parse(deliveryCost);
-		// console.log(typeof deliveryCost);
+	let subTotal = JSON.parse(localStorage.getItem("totalCost")); 
+	let deliveryFee = JSON.parse(localStorage.getItem("deliveryFee"));
 
-	let overallCost = cartCost + deliveryCost;
-	localStorage.setItem("overallCost", overallCost);
-	
-	let cartTotal = document.querySelector("#cartTotal");
-	if (cartItems && cartTotal) {
-		cartTotal.innerHTML = '';
-		Object.values(cartItems).map(item => {
-			cartTotal.innerHTML = `
-				<h3>Cart Totals</h3>
-					<p class="d-flex">
-						<span>Subtotal</span>
-						<span>RM${cartCost}</span>
-					</p>
-					<p class="d-flex">
-						<span>Delivery</span>
-						<span>RM${deliveryCost}</span>
-					</p>
-					<p class="d-flex">
-						<span>Discount</span>
-						<span>RM0.00</span>
-					</p>
-					<hr>
-					<p class="d-flex total-price">
-						<span>Total</span>
-						<span>RM${overallCost}</span>
-					</p>
-			`;
-		});
-	}else{
-		cartTotal.innerHTML = '';
-		cartTotal.innerHTML = `
-				<h3>Cart Totals</h3>
-					<p class="d-flex">
-						<span>Subtotal</span>
-						<span>RM0.00</span>
-					</p>
-					<p class="d-flex">
-						<span>Delivery</span>
-						<span>RM0.00</span>
-					</p>
-					<p class="d-flex">
-						<span>Discount</span>
-						<span>RM0.00</span>
-					</p>
-					<hr>
-					<p class="d-flex total-price">
-						<span>Total</span>
-						<span>RM0.00</span>
-					</p>
-			`;
+	let total = subTotal + deliveryFee;
+	localStorage.setItem("overallCost", total);
+
+	productContainer.html('');
+	appendCart(cartItems);
+	// let cartTotal = document.querySelector("#cartTotal");
+	$('.cart-total').find('.d-flex .subTotal').text("RM"+subTotal);
+	$('.cart-total').find('.d-flex .deliveryFee').text("RM"+deliveryFee);
+	// $('.cart-total').find('.d-flex .discount').text("RM"+subTotal);
+	$('.cart-total').find('.d-flex .total').text("RM"+total);
+
+	// console.log("abdddc",abc);
+	if (jQuery.isEmptyObject(cartItems)) {
+		productContainer.html('<p>No cart</p>');
+		$('.cart-total').find('.d-flex .subTotal').text("RM0.00");
+		$('.cart-total').find('.d-flex .deliveryFee').text("RM0.00");
+		$('.cart-total').find('.d-flex .discount').text("RM0.00");
+		$('.cart-total').find('.d-flex .total').text("RM0.00");
+		$('.proceed').attr("href", "{{route('user.shop')}}").text("Back to Shop");
 	}
-
-	if (cartItems && productContainer) {
-		// console.log('abc');
-		productContainer.html('');
-		Object.values(cartItems).map(item => {
-			productContainer.append(`
-				<tr class="text-center">
-					<td id="${item.name}" class="product-remove"><a><span class="ion-ios-close"></span></a></td>
-					<td><img src="http://localhost/vegefoods/public/uploads/vegeFoodsPhoto/${item.photo}" style="width:150px; display=block;"></td>
-					<td class="product-name">
-						<h3 id="productName">${item.name}</h3>
-					</td>
-					<td class="price">RM${item.price}</td>
-					<td class="quantity">
-						<div class="input-group mb-3">
-							<button type="button" id="${item.name}minus" class="quantity-left-minus btn"  data-type="minus" data-field="">
-								<i class="ion-ios-remove"></i>
-							</button>
-							<input type="text" name="quantity" id="${item.name}quantity" class="quantity form-control input-number" value="${item.inCart}" min="1" max="100">
-							<button type="button" id="${item.name}plus" class="quantity-right-plus btn" data-type="plus" data-field="">
-								<i class="ion-ios-add"></i>
-							</button>
-						</div>
-					</td>
-
-					<td class="total">RM${item.price * item.inCart}</td>
-				</tr>
-			`);
-		});
-	}else{
-		productContainer.innerHTML ='';
-		productContainer.innerHTML += `<p>No cart</p>`;
-	}	
 }
 
 function onLoadCartNumbers(){
@@ -305,34 +232,49 @@ function cartNumbers(){
 		localStorage.setItem('cartNumbers', 1);
 		document.querySelector('.cta a span').textContent = 1;
 	}	
+}
 
+function appendCart(cartItems) {
+	let productContainer = $(".products");
+	Object.values(cartItems).map(item => {
+		productContainer.append(`
+			<tr class="text-center">
+				<td id="${item.name}" class="product-remove"><a><span class="ion-ios-close"></span></a></td>
+				<td><img src="http://localhost/vegefoods/public/uploads/vegeFoodsPhoto/${item.photo}" style="width:150px; display=block;"></td>
+				<td class="product-name">
+					<h3 id="productName">${item.name}</h3>
+				</td>
+				<td class="price">RM${item.price}</td>
+				<td class="quantity">
+					<div class="input-group mb-3">
+						<button type="button" id="${item.name}minus" class="quantity-left-minus btn"  data-type="minus" data-field="">
+							<i class="ion-ios-remove"></i>
+						</button>
+						<input type="text" name="quantity" id="${item.name}quantity" class="quantity form-control input-number" value="${item.inCart}" min="1" max="100">
+						<button type="button" id="${item.name}plus" class="quantity-right-plus btn" data-type="plus" data-field="">
+							<i class="ion-ios-add"></i>
+						</button>
+					</div>
+				</td>
+
+				<td class="total">RM${item.price * item.inCart}</td>
+			</tr>
+		`);
+	});
 }
 
 
 onLoadCartNumbers();
 displayCart();
 
-
-// $('.testing').click(function(){
-// 	console.log('okkkkk');
-// });
-
-
 //remove product when click
 //generate from javascript innerhtml or jquery append function will no have event
 //code html will have event when the tag ready to create event
-$('.body').on('click','.product-remove',function(){
+$('.products').on('click','.product-remove',function(){
 	console.log('test')
 	var products = localStorage.getItem("productsInCart");
 	products = JSON.parse(products);
-		//console.log(products);
 		var productNamefromIdAttr = $(this).attr('id');
-
-		//console.log("remove product " + productNamefromIdAttr);
-
-		// var productName = $('#productName').text();
-		// console.log("remove product 2 " + productName);
-		// localStorage.removeItem('productsInCart');
 
 		if (products != null) {
 			if (products[productNamefromIdAttr] != null) {
@@ -343,11 +285,15 @@ $('.body').on('click','.product-remove',function(){
 					productNumbers = productNumbers - products[productNamefromIdAttr].inCart;
 					localStorage.setItem('cartNumbers', productNumbers);
 				}
-
+				var command = 'minus';
+				var price = products[productNamefromIdAttr].price;
+				if (products[productNamefromIdAttr].inCart > 1) {
+					price = products[productNamefromIdAttr].price * products[productNamefromIdAttr].inCart
+				}
+				totalCost(price, command);
 				delete products[productNamefromIdAttr];
 				localStorage.setItem("productsInCart", JSON.stringify(products));
 				//console.log("delete successful " + products[productNamefromIdAttr]);
-				console.log(products);
 				displayCart();
 				onLoadCartNumbers();
 			}else{
@@ -358,7 +304,7 @@ $('.body').on('click','.product-remove',function(){
 	});
 
 
-$('.body').on('click','.quantity-right-plus',function(e){
+$('.products').on('click','.quantity-right-plus',function(e){
 	// Stop acting like a button
 	e.preventDefault();
 		console.log('plus');
@@ -380,8 +326,6 @@ $('.body').on('click','.quantity-right-plus',function(e){
 				    // Increment
 				products[productName].inCart += 1;
 				localStorage.setItem("productsInCart", JSON.stringify(products));
-				
-				console.log('plusend');
 			}
 
 			let productNumbers = localStorage.getItem('cartNumbers');
@@ -401,7 +345,7 @@ $('.body').on('click','.quantity-right-plus',function(e){
 	
 });
 
-$('.body').on('click','.quantity-left-minus',function(e){
+$('.products').on('click','.quantity-left-minus',function(e){
     // Stop acting like a button
     var command = "minus";
     e.preventDefault();
@@ -410,17 +354,24 @@ $('.body').on('click','.quantity-left-minus',function(e){
 		var productNamefromIdAttr = $(this).attr('id');
 		var productName = productNamefromIdAttr.replace('minus','');
 		if (products != null) {
-			console.log("abc");
 			if (products[productName] != null) {
 	        	products[productName].inCart -= 1;
+	        	let productNumbers = parseInt(localStorage.getItem('cartNumbers'));
 	        	if (products[productName].inCart == 0) {
+	        		totalCost(products[productName].price, command);
 	        		delete products[productName];
+	        		if (productNumbers) {
+						localStorage.setItem('cartNumbers', productNumbers - 1);
+						document.querySelector('.cta a span').textContent = productNumbers - 1;
+					}
 	        		localStorage.setItem("productsInCart", JSON.stringify(products));
 	        		displayCart();
+	        		onLoadCartNumbers();
+	        		return;
 	        	}
+
 	        	localStorage.setItem("productsInCart", JSON.stringify(products));
-	        	let productNumbers = localStorage.getItem('cartNumbers');
-				productNumbers = parseInt(productNumbers);
+	        	
 				if (productNumbers) {
 					localStorage.setItem('cartNumbers', productNumbers - 1);
 					document.querySelector('.cta a span').textContent = productNumbers - 1;
@@ -435,20 +386,17 @@ $('.body').on('click','.quantity-left-minus',function(e){
 });
 
 function totalCost(productPrice, command){
-	// console.log("The product price is", product.price);
-	let cartCost = localStorage.getItem('totalCost');
-	cartCost = parseInt(cartCost);
-
+	let cartCost = parseInt(localStorage.getItem('totalCost'));
 	let price = parseInt(productPrice);
-	
-	// console.log("my cart cost is", cartCost);
-	// console.log(typeof cartCost); //show datatype
 
 	if (cartCost != null) {
-		if (command == "minus") {
-			localStorage.setItem("totalCost", cartCost - price);
-		}else if(command == "plus"){
-			localStorage.setItem("totalCost", cartCost + price);
+		switch(command) {
+		  case 'minus':
+		    	localStorage.setItem("totalCost", cartCost - price);
+		    break;
+		  case 'plus':
+		    	localStorage.setItem("totalCost", cartCost + price);
+		    break;
 		}
 	}
 }
